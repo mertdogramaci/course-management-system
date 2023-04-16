@@ -5,6 +5,10 @@ CREATE TABLE IF NOT EXISTS users (
     PRIMARY KEY (ID)
 );
 
-insert into users (ID, name, surname) values (1, 'Mert', 'Doğramacı');
-select * from users;
-delete from users where id = 1;
+CREATE TABLE IF NOT EXISTS student (
+    studentID INT NOT NULL
+) INHERITS (users);
+
+insert into student (ID, name, surname, studentID) values (1, 'Mert', 'Doğramacı', 21946055);
+select * from student;
+delete from student where id = 1;
