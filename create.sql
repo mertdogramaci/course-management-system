@@ -1,6 +1,17 @@
+-- Drop all tables for being able to re-run this query
+DROP TABLE IF EXISTS contact_info;
 DROP TABLE IF EXISTS student;
 DROP TABLE IF EXISTS instructor;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS faculty;
+DROP TABLE IF EXISTS department;
+
+
+CREATE TABLE faculty (
+    ID INT NOT NULL,
+    name VARCHAR(255),
+    PRIMARY KEY (ID)
+);
 
 CREATE TABLE users (
     ID INT NOT NULL,
@@ -9,16 +20,25 @@ CREATE TABLE users (
     PRIMARY KEY (ID)
 );
 
-
-CREATE TABLE IF NOT EXISTS student (
+CREATE TABLE student (
     studentID INT NOT NULL,
     schoolEnrollmentDate DATE NOT NULL,
-    semesterECTS INT
+    semesterECTS INT,
+    PRIMARY KEY (ID)
 ) INHERITS (users);
 
-insert into student (ID, name, surname, studentID, schoolEnrollmentDate, semesterECTS) values (1, 'Mert', 'Doğramacı', 21946055, '21/03/2023', 0);
-select * from student;
-delete from student where id = 1;
+CREATE TABLE instructor (
+    PRIMARY KEY (ID)
+) INHERITS (users);
 
+CREATE TABLE contact_info (
+    ID INT NOT NULL,
+    phone INT,
+    email VARCHAR(255),
+    address VARCHAR(255),
+    userID int,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (userID) REFERENCES users(ID)
+);
 
-CREATE TABLE IF NOT EXISTS instructor () INHERITS (users);
+SELECT * from contact_info;
