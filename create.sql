@@ -62,7 +62,7 @@ CREATE TABLE contact_info (
 
 CREATE TABLE login_credentials(
     ID INT NOT NULL,
-    -- username = int de olabilir ben instructor username adı.soyadı şeklinde olacak diye düşündüm
+    -- username = int de olabilir ben instructor username adı.soyadı şeklinde olacak diye düşündüm // bence de varchar tutalım
     username VARCHAR(255),
     password VARCHAR(255) NOT NULL,
     userID INT NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE course(
     ID INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     ects INT NOT NULL,
-    -- type için belki boolean gibi bir şey kullanılabilir
+    -- type için belki boolean gibi bir şey kullanılabilir  // type yerine isCompulsory yazabiliriz
     type VARCHAR(255) NOT NULL,
     description TEXT,
     departmentID INT NOT NULL,
@@ -84,10 +84,10 @@ CREATE TABLE course(
 
 CREATE TABLE section(
     ID INT NOT NULL,
-    -- semester için belki boolean gibi bir şey kullanılabilir veya int daha iyi bool yerine
+    -- semester için belki boolean gibi bir şey kullanılabilir veya int daha iyi bool yerine  // evet bool yapalım
     semester VARCHAR(255) NOT NULL,
     year INT NOT NULL,
-    classroomInfo TEXT, 
+    classroomInfo TEXT,
     quota INT NOT NULL,
     courseID INT NOT NULL,
     instructorID INT NOT NULL,
@@ -120,7 +120,7 @@ CREATE TABLE submission(
 
 CREATE TABLE time_slot(
     ID INT NOT NULL,
-    -- semester için belki int gibi bir şey kullanılabilir
+    -- semester için belki int gibi bir şey kullanılabilir  // burası sanırım copy paste'ten kalmış
     day VARCHAR(255) NOT NULL,
     startTime TIMESTAMP NOT NULL,
     endTime TIMESTAMP NOT NULL,
