@@ -50,7 +50,30 @@ INSERT INTO student (ID, name, surname, departmentID, studentID, schoolEnrollmen
 INSERT INTO student (ID, name, surname, departmentID, studentID, schoolEnrollmentDate, semesterECTS) VALUES (19, 'Almila', 'Dağlar', 17, 2200895678, '2020-08-12', 30);
 
 
-INSERT INTO instructor (ID, name, surname)
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (20, 'Engin', 'Demir', 1);
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (21, 'Mehmet Erkut', 'Erdem', 1);
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (22, 'Adnan', 'Özsoy', 1);
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (23, 'Fuat', 'Akal', 1);
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (24, 'Ebru', 'Akçapınar Sezer', 1);
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (25, 'Harun', 'Artuner', 2);
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (26, 'Murat', 'Aydos', 3);
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (27, 'Ahmet Selman', 'Bozkır', 4);
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (28, 'Ahmet Burak', 'Can', 5);
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (29, 'İlyas', 'Çiçekli', 6);
+INSERT INTO instructor (ID, name, surname, departmentID) VALUES (30, 'Tunca', 'Doğan', 7);
+
+
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (1, 05425252477, 'mertdogramaci@gmail.com', 'Yenibağlar Mah Eti Cad Görenek Sok Final Sit D/8 Tepebaşı/Eskişehir', 1);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (2, 05555555555, 'ozgunakyuz@gmail.com', 'Ankara', 2);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (3, 02134567899, 'emreakdeniz@gmail.com', 'Eskişehir', 3);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (4, 01234567899, 'eservatansever@gmail.com', 'İstanbul', 4);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (5, 05421234567, 'abdurrahman@gmail.com', 'Ankara', 5);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (6, 05987654321, 'efecelik@gmail.com', 'Ankara', 6);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (7, 09638527411, 'tugcedonmez@gmail.com', 'Ankara', 7);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (8, 07418529633, 'aysebuketyagiz@gmail.com', 'Kocaeli', 8);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (9, 08527419633, 'iremyagiz@gmail.com', 'Tokat', 9);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (10, 08529637411, 'osmanportakal@gmail.com', 'Mersin', 10);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (11, 08529637411, 'damlaozdag@gmail.com', 'Ankara', 11);
 
 select * 
 from student join department on (student.departmentID = department.ID) 
