@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS faculty_has_department;
 DROP TABLE IF EXISTS instructor_belongs_department;
 DROP TABLE IF EXISTS instructor_advisor_student;
 DROP TABLE IF EXISTS instructor_teaches_section;
-DROP TABLE IF EXISTS student_has_submission
+DROP TABLE IF EXISTS student_has_submission;
 DROP TABLE IF EXISTS student_belongs_department;
 DROP TABLE IF EXISTS student_enrolls_section;
 DROP TABLE IF EXISTS user_has_login_credentials;
@@ -143,7 +143,7 @@ CREATE TABLE user_has_contact_info (
     userID INT NOT NULL,
     contact_infoID INT NOT NULL,
     PRIMARY KEY (userID, contact_infoID),
-    FOREIGN KEY (userID) REFERENCES users(ID)
+    FOREIGN KEY (userID) REFERENCES users(ID),
     FOREIGN KEY (contact_infoID) REFERENCES contact_info(ID)
 );
 
@@ -152,7 +152,7 @@ CREATE TABLE user_has_login_credentials(
     userID INT NOT NULL,
     PRIMARY KEY (loginCredentialsID, userID),
     FOREIGN KEY (userID) REFERENCES users(ID),
-    FOREIGN KEY (login_credentialsID) REFERENCES login_credentials(ID)
+    FOREIGN KEY (loginCredentialsID) REFERENCES login_credentials(ID)
 );
 
 CREATE TABLE student_enrolls_section(
