@@ -52,7 +52,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE student (
-    studentID INT NOT NULL,
+    studentID BIGINT NOT NULL,
     schoolEnrollmentDate DATE NOT NULL,
     semesterECTS INT,
     PRIMARY KEY (ID),
