@@ -74,7 +74,12 @@ INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (8, 07418529
 INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (9, 08527419633, 'iremyagiz@gmail.com', 'Tokat', 9);
 INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (10, 08529637411, 'osmanportakal@gmail.com', 'Mersin', 10);
 INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (11, 08529637411, 'damlaozdag@gmail.com', 'Ankara', 11);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (12, 08527419633, 'iremyagiz@gmail.com', 'Tokat', 9);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (13, 08529637411, 'osmanportakal@gmail.com', 'Mersin', 10);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (14, 08529637411, 'damlaozdag@gmail.com', 'Ankara', 11);
+
 
 select * 
-from student join department on (student.departmentID = department.ID) 
-join faculty on (faculty.ID = department.facultyID);
+from student join department on (student.departmentID = department.ID)
+join faculty on (faculty.ID = department.facultyID)
+where faculty.name = 'Engineering';

@@ -66,14 +66,14 @@ CREATE TABLE instructor (
 
 CREATE TABLE contact_info (
     ID INT PRIMARY KEY NOT NULL,
-    phone INT,
+    phone BIGINT,
     email VARCHAR(255),
     address VARCHAR(255),
     userID INT NOT NULL,
     FOREIGN KEY (userID) REFERENCES users(ID)
 );
 
-CREATE TABLE login_credentials(
+CREATE TABLE login_credentials (
     ID INT PRIMARY KEY NOT NULL,
     username VARCHAR(255),
     password VARCHAR(255) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE login_credentials(
     FOREIGN KEY (userID) REFERENCES users(ID)
 );
 
-CREATE TABLE course(
+CREATE TABLE course (
     ID INT PRIMARY KEY NOT NULL,
     title VARCHAR(255) NOT NULL,
     ects INT NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE course(
     FOREIGN KEY (departmentID) REFERENCES department(ID)
 );
 
-CREATE TABLE section(
+CREATE TABLE section (
     ID INT PRIMARY KEY NOT NULL,
     semester BOOLEAN NOT NULL,
     year INT NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE section(
     FOREIGN KEY (instructorID) REFERENCES instructor(ID)
 );
 
-CREATE TABLE homework(
+CREATE TABLE homework (
     ID INT PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
     content BYTEA,
@@ -114,7 +114,7 @@ CREATE TABLE homework(
     FOREIGN KEY (sectionID) REFERENCES section(ID)
 );
 
-CREATE TABLE submission(
+CREATE TABLE submission (
     ID INT PRIMARY KEY NOT NULL,
     marks INT,
     content BYTEA,
@@ -124,7 +124,7 @@ CREATE TABLE submission(
     FOREIGN KEY (homeworkID) REFERENCES homework(ID)
 );
 
-CREATE TABLE time_slot(
+CREATE TABLE time_slot (
     ID INT PRIMARY KEY NOT NULL,
     -- day için belki int gibi bir şey kullanılabilir
     day VARCHAR(255) NOT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE user_has_contact_info (
     FOREIGN KEY (contact_infoID) REFERENCES contact_info(ID)
 );
 
-CREATE TABLE user_has_login_credentials(
+CREATE TABLE user_has_login_credentials (
     loginCredentialsID INT NOT NULL,
     userID INT NOT NULL,
     PRIMARY KEY (loginCredentialsID, userID),
@@ -155,7 +155,7 @@ CREATE TABLE user_has_login_credentials(
     FOREIGN KEY (loginCredentialsID) REFERENCES login_credentials(ID)
 );
 
-CREATE TABLE student_enrolls_section(
+CREATE TABLE student_enrolls_section (
     studentID INT NOT NULL,
     sectionID INT NOT NULL,
     grade INT,
@@ -166,7 +166,7 @@ CREATE TABLE student_enrolls_section(
     FOREIGN KEY (sectionID) REFERENCES section(ID)
 );
 
-CREATE TABLE student_belongs_department(
+CREATE TABLE student_belongs_department (
     studentID INT NOT NULL,
     departmentID INT NOT NULL,
     PRIMARY KEY (studentID, departmentID),
@@ -174,7 +174,7 @@ CREATE TABLE student_belongs_department(
     FOREIGN KEY (departmentID) REFERENCES department(ID)
 );
 
-CREATE TABLE student_has_submission(
+CREATE TABLE student_has_submission (
     studentID INT NOT NULL,
     submissionID INT NOT NULL,
     PRIMARY KEY (studentID, submissionID),
@@ -182,7 +182,7 @@ CREATE TABLE student_has_submission(
     FOREIGN KEY (submissionID) REFERENCES submission(ID)
 );
 
-CREATE TABLE instructor_teaches_section(
+CREATE TABLE instructor_teaches_section (
     instructorID INT NOT NULL,
     sectionID INT NOT NULL,
     PRIMARY KEY (instructorID, sectionID),
@@ -190,7 +190,7 @@ CREATE TABLE instructor_teaches_section(
     FOREIGN KEY (sectionID) REFERENCES section(ID)
 );
 
-CREATE TABLE instructor_advisor_student(
+CREATE TABLE instructor_advisor_student (
     instructorID INT NOT NULL,
     studentID INT NOT NULL,
     PRIMARY KEY (instructorID, studentID),
@@ -198,7 +198,7 @@ CREATE TABLE instructor_advisor_student(
     FOREIGN KEY (studentID) REFERENCES student(ID)
 );
 
-CREATE TABLE instructor_belongs_department(
+CREATE TABLE instructor_belongs_department (
     instructorID INT NOT NULL,
     departmentID INT NOT NULL,
     PRIMARY KEY (instructorID, departmentID),
@@ -206,7 +206,7 @@ CREATE TABLE instructor_belongs_department(
     FOREIGN KEY (departmentID) REFERENCES department(ID)
 );
 
-CREATE TABLE faculty_has_department(
+CREATE TABLE faculty_has_department (
     facultyID INT NOT NULL,
     departmentID INT NOT NULL,
     PRIMARY KEY (facultyID, departmentID),
@@ -214,7 +214,7 @@ CREATE TABLE faculty_has_department(
     FOREIGN KEY (departmentID) REFERENCES department(ID)
 );
 
-CREATE TABLE course_requires_course(
+CREATE TABLE course_requires_course (
     prereqCourseID INT NOT NULL,
     mainCourseID INT NOT NULL,
     PRIMARY KEY (prereqCourseID, mainCourseID),
@@ -222,7 +222,7 @@ CREATE TABLE course_requires_course(
     FOREIGN KEY (mainCourseID) REFERENCES course(ID)
 );
 
-CREATE TABLE course_belongs_department(
+CREATE TABLE course_belongs_department (
     courseID INT NOT NULL,
     departmentID INT NOT NULL,
     PRIMARY KEY (courseID, departmentID),
@@ -230,7 +230,7 @@ CREATE TABLE course_belongs_department(
     FOREIGN KEY (departmentID) REFERENCES department(ID)
 );
 
-CREATE TABLE section_belongs_course(
+CREATE TABLE section_belongs_course (
     sectionID INT NOT NULL,
     courseID INT NOT NULL,
     PRIMARY KEY (sectionID, courseID),
@@ -238,7 +238,7 @@ CREATE TABLE section_belongs_course(
     FOREIGN KEY (courseID) REFERENCES course(ID)
 );
 
-CREATE TABLE section_has_time_slot(
+CREATE TABLE section_has_time_slot (
     sectionID INT NOT NULL,
     time_slotID INT NOT NULL,
     PRIMARY KEY (sectionID, time_slotID),
@@ -246,7 +246,7 @@ CREATE TABLE section_has_time_slot(
     FOREIGN KEY (time_slotID) REFERENCES time_slot(ID)
 );
 
-CREATE TABLE homework_belongs_section(
+CREATE TABLE homework_belongs_section (
     homeworkID INT NOT NULL,
     sectionID INT NOT NULL,
     PRIMARY KEY (homeworkID, sectionID),
@@ -254,7 +254,7 @@ CREATE TABLE homework_belongs_section(
     FOREIGN KEY (sectionID) REFERENCES section(ID)
 );
 
-CREATE TABLE homework_has_submission(
+CREATE TABLE homework_has_submission (
     homeworkID INT NOT NULL,
     submissionID INT NOT NULL,
     PRIMARY KEY (homeworkID, submissionID),
