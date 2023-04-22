@@ -85,8 +85,7 @@ CREATE TABLE course (
     ID INT PRIMARY KEY NOT NULL,
     title VARCHAR(255) NOT NULL,
     ects INT NOT NULL,
-    -- type için belki boolean gibi bir şey kullanılabilir  // type yerine isCompulsory yazabiliriz
-    type VARCHAR(255) NOT NULL,
+    isCompulsory BOOLEAN NOT NULL,
     description TEXT,
     departmentID INT NOT NULL,
     FOREIGN KEY (departmentID) REFERENCES department(ID)
