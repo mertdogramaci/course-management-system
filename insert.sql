@@ -63,23 +63,45 @@ INSERT INTO instructor (ID, name, surname, departmentID) VALUES (29, 'İlyas', '
 INSERT INTO instructor (ID, name, surname, departmentID) VALUES (30, 'Tunca', 'Doğan', 7);
 
 
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (1, 05425252477, 'mertdogramaci@gmail.com', 'Yenibağlar Mah Eti Cad Görenek Sok Final Sit D/8 Tepebaşı/Eskişehir', 1);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (2, 05555555555, 'ozgunakyuz@gmail.com', 'Ankara', 2);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (3, 02134567899, 'emreakdeniz@gmail.com', 'Eskişehir', 3);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (4, 01234567899, 'eservatansever@gmail.com', 'İstanbul', 4);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (5, 05421234567, 'abdurrahman@gmail.com', 'Ankara', 5);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (6, 05987654321, 'efecelik@gmail.com', 'Ankara', 6);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (7, 09638527411, 'tugcedonmez@gmail.com', 'Ankara', 7);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (8, 07418529633, 'aysebuketyagiz@gmail.com', 'Kocaeli', 8);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (9, 08527419633, 'iremyagiz@gmail.com', 'Tokat', 9);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (10, 08529637411, 'osmanportakal@gmail.com', 'Mersin', 10);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (11, 08529637411, 'damlaozdag@gmail.com', 'Ankara', 11);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (12, 08527419633, 'iremyagiz@gmail.com', 'Tokat', 9);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (13, 08529637411, 'osmanportakal@gmail.com', 'Mersin', 10);
-INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (14, 08529637411, 'damlaozdag@gmail.com', 'Ankara', 11);
+-- TODO: FOREIGN KEY ERROR ALIYORUZ BUNA BİR ÇÖZÜM LAZIM
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (1, '05425252477', 'mertdogramaci@gmail.com', 'Yenibağlar Mah Eti Cad Görenek Sok Final Sit D/8 Tepebaşı/Eskişehir', 1);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (2, '05555555555', 'ozgunakyuz@gmail.com', 'Ankara', 2);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (3, '02134567899', 'emreakdeniz@gmail.com', 'Eskişehir', 3);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (4, '01234567899', 'eservatansever@gmail.com', 'İstanbul', 4);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (5, '05421234567', 'abdurrahman@gmail.com', 'Ankara', 5);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (6, '05987654321', 'efecelik@gmail.com', 'Ankara', 6);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (7, '09638527411', 'tugcedonmez@gmail.com', 'Ankara', 7);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (8, '07418529633', 'aysebuketyagiz@gmail.com', 'Kocaeli', 8);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (9, '08527419633', 'iremyagiz@gmail.com', 'Tokat', 9);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (10, '08529637411', 'osmanportakal@gmail.com', 'Mersin', 10);
+INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (11, '08529637411', 'damlaozdag@gmail.com', 'Ankara', 11);
+-- INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (12, 08527419633, 'iremyagiz@gmail.com', 'Tokat', );
+-- INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (13, 08529637411, 'osmanportakal@gmail.com', 'Mersin', 10);
+-- INSERT INTO contact_info (ID, phone, email, address, userID) VALUES (14, 08529637411, 'damlaozdag@gmail.com', 'Ankara', 11);
+
+
+-- TODO: FOREIGN KEY ERROR ALIYORUZ BUNA BİR ÇÖZÜM LAZIM
+-- INSERT INTO login_credentials (ID, username, password, userID) VALUES (1, '21946055', 'şifre251', 1);
+
+
+INSERT INTO course (ID, title, ects, isCompulsory, description, departmentID) VALUES (1, 'BBM101', 6, TRUE, 'Introducion to Programming I', 1);
+INSERT INTO course (ID, title, ects, isCompulsory, description, departmentID) VALUES (2, 'BBM103', 4, TRUE, 'Introducion to Programming Lab I', 1);
+INSERT INTO course (ID, title, ects, isCompulsory, description, departmentID) VALUES (3, 'BBM471', 6, FALSE, 'Database Management Systems', 1);
+INSERT INTO course (ID, title, ects, isCompulsory, description, departmentID) VALUES (4, 'BBM473', 4, FALSE, 'Database Management Systems Lab', 1);
+INSERT INTO course (ID, title, ects, isCompulsory, description, departmentID) VALUES (5, 'BBM406', 6, FALSE, 'Fundamentals of Artificial Intelligence', 1);
+
+
+INSERT INTO section (ID, semester, year, classroomInfo, quota, courseID, instructorID) VALUES (1, FALSE, 2023, 'D1', 40, 1, 20);
+INSERT INTO section (ID, semester, year, classroomInfo, quota, courseID, instructorID) VALUES (2, FALSE, 2023, 'D2', 40, 1, 21);
+INSERT INTO section (ID, semester, year, classroomInfo, quota, courseID, instructorID) VALUES (3, TRUE, 2023, 'Seminer Hall', 60, 3, 20);
+
+
+-- TODO: bu da error alıyor
+INSERT INTO student_enrolls_section (studentID, sectionID, grade, nonAttendanceCount, isApproved) VALUES (21946055, 3, 85, 3, TRUE);
+
 
 
 select * 
 from student join department on (student.departmentID = department.ID)
 join faculty on (faculty.ID = department.facultyID)
-where faculty.name = 'Engineering';
+join contact_info on (student.ID = contact_info.userID);
