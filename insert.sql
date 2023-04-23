@@ -184,14 +184,28 @@ CALL insert_student_has_contact_info(9, 9);
 CALL insert_student_has_contact_info(10, 10);
 CALL insert_student_has_contact_info(11, 11);
 
-INSERT INTO student_enrolls_section VALUES (1, 3, 85, 3, TRUE);
 
-INSERT INTO instructor_teaches_section VALUES (1, 3);
+CALL insert_student_has_login_credentials(1, 1);
+CALL insert_student_has_login_credentials(2, 2);
+CALL insert_student_has_login_credentials(3, 3);
+CALL insert_student_has_login_credentials(4, 4);
+CALL insert_student_has_login_credentials(5, 5);
+CALL insert_student_has_login_credentials(6, 6);
+CALL insert_student_has_login_credentials(7, 7);
+CALL insert_student_has_login_credentials(8, 8);
+CALL insert_student_has_login_credentials(9, 9);
+CALL insert_student_has_login_credentials(10, 10);
+CALL insert_student_has_login_credentials(11, 11);
 
 
-
-select *
-from student join student_enrolls_section on (student_enrolls_section.studentID = student.ID)
-join section on (section.ID = student_enrolls_section.sectionID)
-join course on (course.ID = section.courseID)
-join instructor on (section.instructorID = instructor.ID);
+CALL insert_instructor_has_contact_info(1, 1);
+CALL insert_instructor_has_contact_info(2, 2);
+CALL insert_instructor_has_contact_info(3, 3);
+CALL insert_instructor_has_contact_info(4, 4);
+CALL insert_instructor_has_contact_info(5, 5);
+CALL insert_instructor_has_contact_info(6, 6);
+CALL insert_instructor_has_contact_info(7, 7);
+CALL insert_instructor_has_contact_info(8, 8);
+CALL insert_instructor_has_contact_info(9, 9);
+CALL insert_instructor_has_contact_info(10, 10);
+CALL insert_instructor_has_contact_info(11, 11);
