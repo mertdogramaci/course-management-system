@@ -31,15 +31,15 @@ CALL insert_department('Radio, TV and Film', 10);
 
 CALL insert_student('Mert', 'Doğramacı', 21946055, '2019-08-21', 40, 1);
 CALL insert_student('Özgün', 'Akyüz', 21827005, '2018-08-10', 40, 1);
-CALL insert_student('Emre', 'Akdeniz', 21945102, '2019-08-10', 40, 4);
-CALL insert_student('Eser', 'Vatansever', 21947727, '2019-08-10', 40, 2);
-CALL insert_student('Abdurrahman', 'Özçağlayan', 21296013, '2012-08-10', 40, 4);
-CALL insert_student('Efe', 'Çelik', 2200356833, '2020-07-28', 30, 3);
-CALL insert_student('Tuğçe', 'Dönmez', 2212345678, '2021-07-15', 30, 5);
-CALL insert_student('Ayşe Buket', 'Yağız', 2214545678, '2021-08-18', 30, 6);
-CALL insert_student('İrem', 'Yağız', 2202345679, '2020-07-15', 30, 15);
-CALL insert_student('Osman', 'Portakal', 2222345678, '2022-08-21', 30, 7);
-CALL insert_student('Damla', 'Özdağ', 2202345678, '2020-08-21', 30, 8);
+CALL insert_student('Emre', 'Akdeniz', 21945102, '2019-08-10', 40, 1);
+CALL insert_student('Eser', 'Vatansever', 21947727, '2019-08-10', 40, 1);
+CALL insert_student('Abdurrahman', 'Özçağlayan', 21296013, '2012-08-10', 40, 1);
+CALL insert_student('Efe', 'Çelik', 2200356833, '2020-07-28', 30, 2);
+CALL insert_student('Tuğçe', 'Dönmez', 2212345678, '2021-07-15', 30, 2);
+CALL insert_student('Ayşe Buket', 'Yağız', 2214545678, '2021-08-18', 30, 2);
+CALL insert_student('İrem', 'Yağız', 2202345679, '2020-07-15', 30, 2);
+CALL insert_student('Osman', 'Portakal', 2222345678, '2022-08-21', 30, 2);
+CALL insert_student('Damla', 'Özdağ', 2202345678, '2020-08-21', 30, 2);
 
 
 CALL insert_student_contact_info('05425252477', 'mertdogramaci@gmail.com', 'Yenibağlar Mah Eti Cad Görenek Sok Final Sit D/8 Tepebaşı/Eskişehir', 1);
@@ -224,4 +224,27 @@ CALL insert_instructor_has_login_credentials(10, 10);
 CALL insert_instructor_has_login_credentials(11, 11);
 
 
-CALL insert_student_enrolls_section
+CALL insert_student_enrolls_section(1, 1, 0, 0, TRUE);
+CALL insert_student_enrolls_section(2, 1, 0, 0, TRUE);
+CALL insert_student_enrolls_section(3, 1, 0, 0, TRUE);
+CALL insert_student_enrolls_section(4, 2, 0, 0, TRUE);
+CALL insert_student_enrolls_section(5, 2, 0, 0, FALSE);
+CALL insert_student_enrolls_section(6, 7, 0, 0, FALSE);
+CALL insert_student_enrolls_section(7, 9, 0, 0, FALSE);
+CALL insert_student_enrolls_section(8, 6, 0, 0, FALSE);
+CALL insert_student_enrolls_section(9, 10, 0, 0, TRUE);
+CALL insert_student_enrolls_section(10, 8, 0, 0, TRUE);
+CALL insert_student_enrolls_section(11, 8, 0, 0, TRUE);
+
+
+CALL insert_student_belongs_department(1, 1);
+CALL insert_student_belongs_department(2, 1);
+CALL insert_student_belongs_department(3, 1);
+CALL insert_student_belongs_department(4, 1);
+CALL insert_student_belongs_department(5, 1);
+CALL insert_student_belongs_department(6, 2);
+CALL insert_student_belongs_department(7, 2);
+CALL insert_student_belongs_department(8, 2);
+CALL insert_student_belongs_department(9, 2);
+CALL insert_student_belongs_department(10, 2);
+CALL insert_student_belongs_department(11, 2);
