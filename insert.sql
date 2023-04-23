@@ -224,19 +224,6 @@ CALL insert_instructor_has_login_credentials(10, 10);
 CALL insert_instructor_has_login_credentials(11, 11);
 
 
-CALL insert_student_enrolls_section(1, 1);
-CALL insert_student_enrolls_section(2, 2);
-CALL insert_student_enrolls_section(3, 3);
-CALL insert_student_enrolls_section(4, 4);
-CALL insert_student_enrolls_section(5, 5);
-CALL insert_student_enrolls_section(6, 6);
-CALL insert_student_enrolls_section(7, 7);
-CALL insert_student_enrolls_section(8, 8);
-CALL insert_student_enrolls_section(9, 9);
-CALL insert_student_enrolls_section(10, 10);
-CALL insert_student_enrolls_section(11, 11);
-
-
 CALL insert_section_has_time_slot(1, 1);
 CALL insert_section_has_time_slot(2, 2);
 CALL insert_section_has_time_slot(3, 3);
@@ -274,6 +261,7 @@ CALL insert_homework_has_submission(6, 8);
 CALL insert_homework_has_submission(7, 9);
 CALL insert_homework_has_submission(7, 10);
 CALL insert_homework_has_submission(8, 11);
+
 
 CALL insert_student_enrolls_section(1, 1, 0, 0, TRUE);
 CALL insert_student_enrolls_section(2, 1, 0, 0, TRUE);
