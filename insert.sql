@@ -224,4 +224,53 @@ CALL insert_instructor_has_login_credentials(10, 10);
 CALL insert_instructor_has_login_credentials(11, 11);
 
 
-CALL insert_student_enrolls_section
+CALL insert_student_enrolls_section(1, 1);
+CALL insert_student_enrolls_section(2, 2);
+CALL insert_student_enrolls_section(3, 3);
+CALL insert_student_enrolls_section(4, 4);
+CALL insert_student_enrolls_section(5, 5);
+CALL insert_student_enrolls_section(6, 6);
+CALL insert_student_enrolls_section(7, 7);
+CALL insert_student_enrolls_section(8, 8);
+CALL insert_student_enrolls_section(9, 9);
+CALL insert_student_enrolls_section(10, 10);
+CALL insert_student_enrolls_section(11, 11);
+
+
+CALL insert_section_has_time_slot(1, 1);
+CALL insert_section_has_time_slot(2, 2);
+CALL insert_section_has_time_slot(3, 3);
+CALL insert_section_has_time_slot(4, 4);
+CALL insert_section_has_time_slot(5, 5);
+CALL insert_section_has_time_slot(6, 6);
+CALL insert_section_has_time_slot(7, 7);
+CALL insert_section_has_time_slot(8, 8);
+CALL insert_section_has_time_slot(9, 9);
+CALL insert_section_has_time_slot(10, 10);
+CALL insert_section_has_time_slot(11, 11);
+
+
+CALL insert_homework_belongs_section(1, 1);
+CALL insert_homework_belongs_section(2, 2);
+CALL insert_homework_belongs_section(3, 3);
+CALL insert_homework_belongs_section(4, 4);
+CALL insert_homework_belongs_section(5, 5);
+CALL insert_homework_belongs_section(6, 6);
+CALL insert_homework_belongs_section(7, 7);
+CALL insert_homework_belongs_section(8, 8);
+CALL insert_homework_belongs_section(9, 9);
+CALL insert_homework_belongs_section(10, 10);
+CALL insert_homework_belongs_section(11, 11);
+
+
+CALL insert_homework_has_submission(1, 1);
+CALL insert_homework_has_submission(1, 2);
+CALL insert_homework_has_submission(3, 3);
+CALL insert_homework_has_submission(1, 4);
+CALL insert_homework_has_submission(1, 5);
+CALL insert_homework_has_submission(1, 6);
+CALL insert_homework_has_submission(5, 7);
+CALL insert_homework_has_submission(6, 8);
+CALL insert_homework_has_submission(7, 9);
+CALL insert_homework_has_submission(7, 10);
+CALL insert_homework_has_submission(8, 11);
