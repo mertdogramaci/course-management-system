@@ -12,10 +12,15 @@ DROP TABLE IF EXISTS instructor_teaches_section;
 DROP TABLE IF EXISTS student_has_submission;
 DROP TABLE IF EXISTS student_belongs_department;
 DROP TABLE IF EXISTS student_enrolls_section;
-DROP TABLE IF EXISTS user_has_login_credentials;
 DROP TABLE IF EXISTS user_has_contact_info;
-DROP TABLE IF EXISTS login_credentials;
-DROP TABLE IF EXISTS contact_info;
+DROP TABLE IF EXISTS student_has_login_credentials;
+DROP TABLE IF EXISTS student_has_contact_info;
+DROP TABLE IF EXISTS instructor_has_login_credentials;
+DROP TABLE IF EXISTS instructor_has_contact_info;
+DROP TABLE IF EXISTS student_login_credentials;
+DROP TABLE IF EXISTS instructor_login_credentials;
+DROP TABLE IF EXISTS student_contact_info;
+DROP TABLE IF EXISTS instructor_contact_info;
 DROP TABLE IF EXISTS submission;
 DROP TABLE IF EXISTS student;
 DROP TABLE IF EXISTS homework;
@@ -25,6 +30,21 @@ DROP TABLE IF EXISTS instructor;
 DROP TABLE IF EXISTS course;
 DROP TABLE IF EXISTS department;
 DROP TABLE IF EXISTS faculty;
+
+
+DROP SEQUENCE student_seq;
+DROP SEQUENCE instructor_seq;
+DROP SEQUENCE student_contact_info_seq;
+DROP SEQUENCE instructor_contact_info_seq;
+DROP SEQUENCE student_login_credentials_seq;
+DROP SEQUENCE instructor_login_credentials_seq;
+DROP SEQUENCE faculty_seq;
+DROP SEQUENCE department_seq;
+DROP SEQUENCE course_seq;
+DROP SEQUENCE section_seq;
+DROP SEQUENCE homework_seq;
+DROP SEQUENCE submission_seq;
+DROP SEQUENCE time_slot_seq;
 
 
 
@@ -206,7 +226,7 @@ CREATE TABLE user_has_login_credentials (
     FOREIGN KEY (loginCredentialsID) REFERENCES login_credentials(ID)
 );
 */
-CREATE TABLE user_has_contact_info (
+CREATE TABLE student_has_contact_info (
     studentID INT NOT NULL,
     studentContact_infoID INT NOT NULL,
     PRIMARY KEY (studentID, studentContact_infoID),
@@ -344,3 +364,215 @@ CREATE TABLE homework_has_submission (
     FOREIGN KEY (homeworkID) REFERENCES homework(ID),
     FOREIGN KEY (submissionID) REFERENCES submission(ID)
 );
+
+
+
+CREATE SEQUENCE student_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE instructor_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE student_contact_info_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE instructor_contact_info_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE student_login_credentials_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE instructor_login_credentials_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE faculty_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE department_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE course_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE section_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE homework_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE submission_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE time_slot_seq START WITH 1 INCREMENT BY 1;
+
+
+
+CREATE OR REPLACE FUNCTION set_student_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('student_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_student_id
+    BEFORE INSERT ON student
+    FOR EACH ROW
+    EXECUTE FUNCTION set_student_id();
+
+
+CREATE OR REPLACE FUNCTION set_instructor_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('instructor_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_instructor_id
+    BEFORE INSERT ON instructor
+    FOR EACH ROW
+    EXECUTE FUNCTION set_instructor_id();
+
+
+CREATE OR REPLACE FUNCTION set_student_contact_info_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('student_contact_info_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_student_contact_info_id
+    BEFORE INSERT ON student_contact_info
+    FOR EACH ROW
+    EXECUTE FUNCTION set_student_contact_info_id();
+
+
+CREATE OR REPLACE FUNCTION set_student_login_credentials_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('student_login_credentials_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_student_login_credentials_id
+    BEFORE INSERT ON student_login_credentials
+    FOR EACH ROW
+    EXECUTE FUNCTION set_student_login_credentials_id();
+
+
+CREATE OR REPLACE FUNCTION set_instructor_contact_info_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('instructor_contact_info_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_instructor_contact_info_id
+    BEFORE INSERT ON instructor_contact_info
+    FOR EACH ROW
+    EXECUTE FUNCTION set_instructor_contact_info_id();
+
+
+CREATE OR REPLACE FUNCTION set_instructor_login_credentials_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('instructor_login_credentials_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_instructor_login_credentials_id
+    BEFORE INSERT ON instructor_login_credentials
+    FOR EACH ROW
+    EXECUTE FUNCTION set_instructor_login_credentials_id();
+
+
+CREATE OR REPLACE FUNCTION set_faculty_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('faculty_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_faculty_id
+    BEFORE INSERT ON faculty
+    FOR EACH ROW
+    EXECUTE FUNCTION set_faculty_id();
+
+
+CREATE OR REPLACE FUNCTION set_department_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('department_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_department_id
+    BEFORE INSERT ON department
+    FOR EACH ROW
+    EXECUTE FUNCTION set_department_id();
+
+
+CREATE OR REPLACE FUNCTION set_course_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('course_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_course_id
+    BEFORE INSERT ON course
+    FOR EACH ROW
+    EXECUTE FUNCTION set_course_id();
+
+
+CREATE OR REPLACE FUNCTION set_section_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('section_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_section_id
+    BEFORE INSERT ON section
+    FOR EACH ROW
+    EXECUTE FUNCTION set_section_id();
+
+
+CREATE OR REPLACE FUNCTION set_homework_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('homework_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_homework_id
+    BEFORE INSERT ON homework
+    FOR EACH ROW
+    EXECUTE FUNCTION set_homework_id();
+
+
+CREATE OR REPLACE FUNCTION set_submission_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('submission_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_submission_id
+    BEFORE INSERT ON submission
+    FOR EACH ROW
+    EXECUTE FUNCTION set_submission_id();
+
+
+CREATE OR REPLACE FUNCTION set_time_slot_id() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ID IS NULL THEN
+        NEW.ID := nextval('time_slot_seq');
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_time_slot_id
+    BEFORE INSERT ON time_slot
+    FOR EACH ROW
+    EXECUTE FUNCTION set_time_slot_id();
