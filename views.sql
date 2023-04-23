@@ -18,7 +18,7 @@ SELECT * FROM student_grades WHERE sectionID = 3;
 
 -- View #2 = all sections taught by a specific instructor
 CREATE VIEW instructor_sections AS
-SELECT i.ID AS instructor_ID, i.name, i.surname/*, s.ID AS section_ID, s.semester, s.year*/
+SELECT i.ID AS instructor_ID, i.name, i.surname, s.ID AS section_ID, s.semester, s.year
 FROM instructor i
 JOIN instructor_teaches_section its ON i.ID = its.instructorID
 JOIN section s ON its.sectionID = s.ID;
