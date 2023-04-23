@@ -1,1 +1,1 @@
-aaaatest
+CREATE VIEW 

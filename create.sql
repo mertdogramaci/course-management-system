@@ -22,7 +22,6 @@ DROP TABLE IF EXISTS homework;
 DROP TABLE IF EXISTS time_slot;
 DROP TABLE IF EXISTS section;
 DROP TABLE IF EXISTS instructor;
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS course;
 DROP TABLE IF EXISTS department;
 DROP TABLE IF EXISTS faculty;
@@ -42,7 +41,7 @@ CREATE TABLE department (
     facultyID INT NOT NULL,
     FOREIGN KEY (facultyID) REFERENCES faculty(ID)
 );
-
+/*
 CREATE TABLE users (
     ID INT PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -66,9 +65,9 @@ CREATE TABLE instructor (
 
 CREATE TABLE contact_info (
     ID INT PRIMARY KEY NOT NULL,
-    phone BIGINT,
+    phone VARCHAR(12),
     email VARCHAR(255),
-    address VARCHAR(255),
+    address TEXT,
     userID INT NOT NULL,
     FOREIGN KEY (userID) REFERENCES users(ID)
 );
@@ -80,13 +79,65 @@ CREATE TABLE login_credentials (
     userID INT NOT NULL,
     FOREIGN KEY (userID) REFERENCES users(ID)
 );
+*/
+CREATE TABLE student (
+    ID INT PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
+    departmentID INT NOT NULL,
+    studentID BIGINT NOT NULL,
+    schoolEnrollmentDate DATE NOT NULL,
+    semesterECTS INT DEFAULT 0,
+    FOREIGN KEY (departmentID) REFERENCES department(ID)
+);
+
+CREATE TABLE instructor (
+    ID INT PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
+    departmentID INT NOT NULL,
+    FOREIGN KEY (departmentID) REFERENCES department(ID)
+);
+
+CREATE TABLE student_contact_info (
+    ID INT PRIMARY KEY NOT NULL,
+    phone VARCHAR(12),
+    email VARCHAR(255),
+    address TEXT,
+    studentID INT NOT NULL,
+    FOREIGN KEY (studentID) REFERENCES student(ID)
+);
+
+CREATE TABLE student_login_credentials (
+    ID INT PRIMARY KEY NOT NULL,
+    username BIGINT NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    studentID INT NOT NULL,
+    FOREIGN KEY (studentID) REFERENCES student(ID)
+);
+
+CREATE TABLE instructor_login_credentials (
+    ID INT PRIMARY KEY NOT NULL,
+    username VARCHAR(255),
+    password VARCHAR(255) NOT NULL,
+    instructorID INT NOT NULL,
+    FOREIGN KEY (instructorID) REFERENCES instructor(ID)
+);
+
+CREATE TABLE instructor_contact_info (
+    ID INT PRIMARY KEY NOT NULL,
+    phone VARCHAR(12),
+    email VARCHAR(255),
+    address TEXT,
+    instructorID INT NOT NULL,
+    FOREIGN KEY (instructorID) REFERENCES instructor(ID)
+);
 
 CREATE TABLE course (
     ID INT PRIMARY KEY NOT NULL,
     title VARCHAR(255) NOT NULL,
     ects INT NOT NULL,
-    -- type için belki boolean gibi bir şey kullanılabilir  // type yerine isCompulsory yazabiliriz
-    type VARCHAR(255) NOT NULL,
+    isCompulsory BOOLEAN NOT NULL,
     description TEXT,
     departmentID INT NOT NULL,
     FOREIGN KEY (departmentID) REFERENCES department(ID)
@@ -138,7 +189,7 @@ CREATE TABLE time_slot (
 
 -- RELATION TABLES
 
-
+/*
 CREATE TABLE user_has_contact_info (
     userID INT NOT NULL,
     contact_infoID INT NOT NULL,
@@ -154,12 +205,44 @@ CREATE TABLE user_has_login_credentials (
     FOREIGN KEY (userID) REFERENCES users(ID),
     FOREIGN KEY (loginCredentialsID) REFERENCES login_credentials(ID)
 );
+*/
+CREATE TABLE user_has_contact_info (
+    studentID INT NOT NULL,
+    studentContact_infoID INT NOT NULL,
+    PRIMARY KEY (studentID, studentContact_infoID),
+    FOREIGN KEY (studentID) REFERENCES student(ID),
+    FOREIGN KEY (studentContact_infoID) REFERENCES student_contact_info(ID)
+);
+
+CREATE TABLE student_has_login_credentials (
+    studentLoginCredentialsID INT NOT NULL,
+    studentID INT NOT NULL,
+    PRIMARY KEY (studentLoginCredentialsID, studentID),
+    FOREIGN KEY (studentID) REFERENCES student(ID),
+    FOREIGN KEY (studentLoginCredentialsID) REFERENCES student_login_credentials(ID)
+);
+
+CREATE TABLE instructor_has_contact_info (
+    instructorID INT NOT NULL,
+    instructorContact_infoID INT NOT NULL,
+    PRIMARY KEY (instructorID, instructorContact_infoID),
+    FOREIGN KEY (instructorID) REFERENCES instructor(ID),
+    FOREIGN KEY (instructorContact_infoID) REFERENCES instructor_contact_info(ID)
+);
+
+CREATE TABLE instructor_has_login_credentials (
+    instructorLoginCredentialsID INT NOT NULL,
+    instructorID INT NOT NULL,
+    PRIMARY KEY (instructorLoginCredentialsID, instructorID),
+    FOREIGN KEY (instructorID) REFERENCES instructor(ID),
+    FOREIGN KEY (instructorLoginCredentialsID) REFERENCES instructor_login_credentials(ID)
+);
 
 CREATE TABLE student_enrolls_section (
     studentID INT NOT NULL,
     sectionID INT NOT NULL,
     grade INT,
-    nonAttendanceCount INT,
+    nonAttendanceCount INT DEFAULT 0,
     isApproved BOOLEAN,
     PRIMARY KEY (studentID, sectionID),
     FOREIGN KEY (studentID) REFERENCES student(ID),
