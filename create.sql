@@ -532,6 +532,7 @@ CREATE TRIGGER set_time_slot_id
 
 
 -- Generate insert, update and delete stored procedures for all tables in your database.
+-- Stored procedures for entities
 
 CREATE OR REPLACE PROCEDURE insert_faculty(
     in_name VARCHAR(255)
@@ -1051,6 +1052,629 @@ $$
 BEGIN
     DELETE FROM section_has_time_slot WHERE time_slotID = id_val;
     DELETE FROM time_slot WHERE ID = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+-- Stored procedures for relationship tables
+
+CREATE OR REPLACE PROCEDURE insert_student_has_contact_info(
+    in_student_id INT,
+    in_student_contact_info_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO student_has_contact_info (studentID, student_contact_infoID)
+    VALUES (in_student_id, in_student_contact_info_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_student_has_contact_info(
+    in_student_id INT,
+    in_student_contact_info_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE student_has_contact_info
+    SET studentID = in_student_id,
+        student_contact_infoID = in_student_contact_info_id
+    WHERE studentID = in_student_id AND student_contact_infoID = in_student_contact_info_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_student_has_contact_info(
+    in_student_id INT,
+    in_student_contact_info_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_has_contact_info 
+    WHERE studentID = in_student_id AND student_contact_infoID = in_student_contact_info_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_student_login_credentials(
+    in_student_id INT,
+    in_student_login_credentials_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO student_login_credentials (studentID, student_login_credentialsID)
+    VALUES (in_student_id, in_student_login_credentials_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_student_login_credentials(
+    in_student_id INT,
+    in_student_login_credentials_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE student_login_credentials
+    SET studentID = in_student_id,
+        student_login_credentialsID = in_student_login_credentials_id
+    WHERE studentID = in_student_id AND student_login_credentialsID = in_student_login_credentials_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_student_login_credentials(
+    in_student_id INT,
+    in_student_login_credentials_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_login_credentials 
+    WHERE studentID = in_student_id AND student_login_credentialsID = in_student_login_credentials_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_student_has_contact_info(
+    in_student_id INT,
+    in_student_contact_info_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO student_has_contact_info (studentID, student_contact_infoID)
+    VALUES (in_student_id, in_student_contact_info_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_student_has_contact_info(
+    in_student_id INT,
+    in_student_contact_info_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE student_has_contact_info
+    SET studentID = in_student_id,
+        student_contact_infoID = in_student_contact_info_id
+    WHERE studentID = in_student_id AND student_contact_infoID = in_student_contact_info_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_student_has_contact_info(
+    in_student_id INT,
+    in_student_contact_info_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_has_contact_info 
+    WHERE studentID = in_student_id AND student_contact_infoID = in_student_contact_info_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_instructor_login_credentials(
+    in_instructor_id INT,
+    in_instructor_login_credentials_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO instructor_login_credentials (instructorID, instructor_login_credentialsID)
+    VALUES (in_instructor_id, in_instructor_login_credentials_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_instructor_login_credentials(
+    in_instructor_id INT,
+    in_instructor_login_credentials_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE instructor_login_credentials
+    SET instructorID = in_instructor_id,
+        instructor_login_credentialsID = in_instructor_login_credentials_id
+    WHERE instructorID = in_instructor_id AND instructor_login_credentialsID = in_instructor_login_credentials_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_instructor_login_credentials(
+    in_instructor_id INT,
+    in_instructor_login_credentials_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM instructor_login_credentials 
+    WHERE instructorID = in_instructor_id AND instructor_login_credentialsID = in_instructor_login_credentials_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_student_enrolls_section(
+    in_student_id INT,
+    in_section_id INT,
+    in_grade INT,
+    in_non_attendence_count INT,
+    in_is_approved BOOLEAN
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO student_enrolls_section (studentID, sectionID, grade, nonAttendanceCount, isApproved)
+    VALUES (in_student_id, in_section_id, in_grade, in_non_attendence_count, in_is_approved);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_student_enrolls_section(
+    in_student_id INT,
+    in_section_id INT,
+    in_grade INT,
+    in_non_attendence_count INT,
+    in_is_approved BOOLEAN
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE student_enrolls_section
+    SET studentID = in_student_id,
+        sectionID = in_section_id,
+        grade = in_grade,
+        nonAttendanceCount = in_non_attendence_count,
+        isApproved = in_is_approved
+    WHERE studentID = in_student_id AND sectionID = in_section_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_student_enrolls_section(
+    in_student_id INT,
+    in_section_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_enrolls_section 
+    WHERE studentID = in_student_id AND sectionID = in_section_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_student_belongs_department(
+    in_student_id INT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO student_belongs_department (studentID, departmentID)
+    VALUES (in_student_id, in_department_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_student_belongs_department(
+    in_student_id INT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE student_belongs_department
+    SET studentID = in_student_id,
+        departmentID = in_department_id
+    WHERE studentID = in_student_id AND departmentID = in_department_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_student_belongs_department(
+    in_student_id INT,
+    in_department_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_belongs_department 
+    WHERE studentID = in_student_id AND departmentID = in_department_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_student_has_submission(
+    in_student_id INT,
+    in_submission_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO student_belongs_department (studentID, submissionID)
+    VALUES (in_student_id, in_submission_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_student_has_submission(
+    in_student_id INT,
+    in_submission_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE student_belongs_department
+    SET studentID = in_student_id,
+        submissionID = in_submission_id
+    WHERE studentID = in_student_id AND submissionID = in_submission_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_student_has_submission(
+    in_student_id INT,
+    in_submission_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_belongs_department 
+    WHERE studentID = in_student_id AND submissionID = in_submission_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_instructor_teaches_section(
+    in_instructor_id INT,
+    in_section_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO instructor_teaches_section (instructorID, sectionID)
+    VALUES (in_instructor_id, in_section_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_instructor_teaches_section(
+    in_instructor_id INT,
+    in_section_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE instructor_teaches_section
+    SET instructorID = in_instructor_id,
+        sectionID = in_section_id
+    WHERE instructorID = in_instructor_id AND sectionID = in_section_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_instructor_teaches_section(
+    in_instructor_id INT,
+    in_section_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM instructor_teaches_section 
+    WHERE instructorID = in_instructor_id AND sectionID = in_section_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_instructor_advisor_student(
+    in_instructor_id INT,
+    in_student_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO instructor_advisor_student (instructorID, studentID)
+    VALUES (in_instructor_id, in_student_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_instructor_advisor_student(
+    in_instructor_id INT,
+    in_student_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE instructor_advisor_student
+    SET instructorID = in_instructor_id,
+        studentID = in_student_id
+    WHERE instructorID = in_instructor_id AND studentID = in_student_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_instructor_advisor_student(
+    in_instructor_id INT,
+    in_student_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM instructor_advisor_student 
+    WHERE instructorID = in_instructor_id AND studentID = in_student_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_instructor_belongs_department(
+    in_instructor_id INT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO instructor_belongs_department (instructorID, departmentID)
+    VALUES (in_instructor_id, in_department_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_instructor_belongs_department(
+    in_instructor_id INT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE instructor_belongs_department
+    SET instructorID = in_instructor_id,
+        departmentID = in_department_id
+    WHERE instructorID = in_instructor_id AND departmentID = in_department_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_instructor_belongs_department(
+    in_instructor_id INT,
+    in_department_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM instructor_belongs_department 
+    WHERE instructorID = in_instructor_id AND departmentID = in_department_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_faculty_has_department(
+    in_faculty_id INT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO faculty_has_department (facultyID, departmentID)
+    VALUES (in_faculty_id, in_department_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_faculty_has_department(
+    in_faculty_id INT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE faculty_has_department
+    SET facultyID = in_faculty_id,
+        departmentID = in_department_id
+    WHERE facultyID = in_faculty_id AND departmentID = in_department_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_faculty_has_department(
+    in_faculty_id INT,
+    in_department_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM faculty_has_department 
+    WHERE facultyID = in_faculty_id AND departmentID = in_department_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_course_requires_course(
+    in_prereq_course_id INT,
+    in_main_course_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO course_requires_course (prereqCourseID, mainCourseID)
+    VALUES (in_prereq_course_id, in_main_course_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_course_requires_course(
+    in_prereq_course_id INT,
+    in_main_course_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE course_requires_course
+    SET prereqCourseID = in_prereq_course_id,
+        mainCourseID = in_main_course_id
+    WHERE prereqCourseID = in_prereq_course_id AND mainCourseID = in_main_course_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_course_requires_course(
+    in_prereq_course_id INT,
+    in_main_course_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM course_requires_course 
+    WHERE prereqCourseID = in_prereq_course_id AND mainCourseID = in_main_course_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_course_belongs_department(
+    in_course_id INT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO course_belongs_department (courseID, departmentID)
+    VALUES (in_course_id, in_department_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_course_belongs_department(
+    in_course_id INT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE course_belongs_department
+    SET courseID = in_course_id,
+        departmentID = in_department_id
+    WHERE courseID = in_course_id AND departmentID = in_department_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_course_belongs_department(
+    in_course_id INT,
+    in_department_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM course_belongs_department 
+    WHERE courseID = in_course_id AND departmentID = in_department_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_section_belongs_course(
+    in_section_id INT,
+    in_course_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO section_belongs_course (sectionID, courseID)
+    VALUES (in_section_id, in_course_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_section_belongs_course(
+    in_section_id INT,
+    in_course_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE section_belongs_course
+    SET sectionID = in_section_id,
+        courseID = in_course_id
+    WHERE sectionID = in_section_id AND courseID = in_course_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_section_belongs_course(
+    in_section_id INT,
+    in_course_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM section_belongs_course 
+    WHERE sectionID = in_section_id AND courseID = in_course_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_section_has_time_slot(
+    in_section_id INT,
+    in_time_slot_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO section_has_time_slot (sectionID, time_slotID)
+    VALUES (in_section_id, in_time_slot_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_section_has_time_slot(
+    in_section_id INT,
+    in_time_slot_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE section_has_time_slot
+    SET sectionID = in_section_id,
+        time_slotID = in_time_slot_id
+    WHERE sectionID = in_section_id AND time_slotID = in_time_slot_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_section_has_time_slot(
+    in_section_id INT,
+    in_time_slot_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM section_has_time_slot 
+    WHERE sectionID = in_section_id AND time_slotID = in_time_slot_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_homework_belongs_section(
+    in_homework_id INT,
+    in_section_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO homework_belongs_section (homeworkID, sectionID)
+    VALUES (in_homework_id, in_section_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_homework_belongs_section(
+    in_homework_id INT,
+    in_section_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE homework_belongs_section
+    SET homeworkID = in_homework_id,
+        sectionID = in_section_id
+    WHERE homeworkID = in_homework_id AND sectionID = in_section_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_homework_belongs_section(
+    in_homework_id INT,
+    in_section_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM homework_belongs_section 
+    WHERE homeworkID = in_homework_id AND sectionID = in_section_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_homework_has_submission(
+    in_homework_id INT,
+    in_submission_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO homework_has_submission (homeworkID, submissionID)
+    VALUES (in_homework_id, in_submission_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_homework_has_submission(
+    in_homework_id INT,
+    in_submission_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE homework_has_submission
+    SET homeworkID = in_homework_id,
+        submissionID = in_submission_id
+    WHERE homeworkID = in_homework_id AND submissionID = in_submission_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_homework_has_submission(
+    in_homework_id INT,
+    in_submission_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM homework_has_submission 
+    WHERE homeworkID = in_homework_id AND submissionID = in_submission_id;
 END;
 $$
 LANGUAGE plpgsql;
