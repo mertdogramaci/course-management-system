@@ -108,6 +108,8 @@ CALL insert_section(TRUE, 2023, 'Seminer Hall', 60, 3, 1);
 
 INSERT INTO student_enrolls_section VALUES (1, 3, 85, 3, TRUE);
 
+INSERT INTO instructor_teaches_section VALUES (1, 3);
+
 
 
 select * 

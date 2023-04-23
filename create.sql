@@ -1,4 +1,9 @@
 -- Drop all tables for being able to re-run this query
+DROP VIEW IF EXISTS student_grades;
+DROP VIEW IF EXISTS instructor_sections;
+DROP VIEW IF EXISTS department_course_stats;
+DROP VIEW IF EXISTS student_submission_stats;
+DROP VIEW IF EXISTS department_section_stats;
 DROP TABLE IF EXISTS homework_has_submission;
 DROP TABLE IF EXISTS homework_belongs_section;
 DROP TABLE IF EXISTS section_has_time_slot;
