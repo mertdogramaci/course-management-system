@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS department;
 DROP TABLE IF EXISTS faculty;
 
 
+-- Drop all sequnces for being able to re-run this query
 DROP SEQUENCE student_seq;
 DROP SEQUENCE instructor_seq;
 DROP SEQUENCE student_contact_info_seq;
@@ -61,45 +62,7 @@ CREATE TABLE department (
     facultyID INT NOT NULL,
     FOREIGN KEY (facultyID) REFERENCES faculty(ID)
 );
-/*
-CREATE TABLE users (
-    ID INT PRIMARY KEY NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    surname VARCHAR(255) NOT NULL,
-    departmentID INT NOT NULL,
-    FOREIGN KEY (departmentID) REFERENCES department(ID)
-);
 
-CREATE TABLE student (
-    studentID BIGINT NOT NULL,
-    schoolEnrollmentDate DATE NOT NULL,
-    semesterECTS INT,
-    PRIMARY KEY (ID),
-    FOREIGN KEY (departmentID) REFERENCES department(ID)
-) INHERITS (users);
-
-CREATE TABLE instructor (
-    PRIMARY KEY (ID),
-    FOREIGN KEY (departmentID) REFERENCES department(ID)
-) INHERITS (users);
-
-CREATE TABLE contact_info (
-    ID INT PRIMARY KEY NOT NULL,
-    phone VARCHAR(12),
-    email VARCHAR(255),
-    address TEXT,
-    userID INT NOT NULL,
-    FOREIGN KEY (userID) REFERENCES users(ID)
-);
-
-CREATE TABLE login_credentials (
-    ID INT PRIMARY KEY NOT NULL,
-    username VARCHAR(255),
-    password VARCHAR(255) NOT NULL,
-    userID INT NOT NULL,
-    FOREIGN KEY (userID) REFERENCES users(ID)
-);
-*/
 CREATE TABLE student (
     ID INT PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -209,23 +172,6 @@ CREATE TABLE time_slot (
 
 -- RELATION TABLES
 
-/*
-CREATE TABLE user_has_contact_info (
-    userID INT NOT NULL,
-    contact_infoID INT NOT NULL,
-    PRIMARY KEY (userID, contact_infoID),
-    FOREIGN KEY (userID) REFERENCES users(ID),
-    FOREIGN KEY (contact_infoID) REFERENCES contact_info(ID)
-);
-
-CREATE TABLE user_has_login_credentials (
-    loginCredentialsID INT NOT NULL,
-    userID INT NOT NULL,
-    PRIMARY KEY (loginCredentialsID, userID),
-    FOREIGN KEY (userID) REFERENCES users(ID),
-    FOREIGN KEY (loginCredentialsID) REFERENCES login_credentials(ID)
-);
-*/
 CREATE TABLE student_has_contact_info (
     studentID INT NOT NULL,
     studentContact_infoID INT NOT NULL,
@@ -366,6 +312,8 @@ CREATE TABLE homework_has_submission (
 );
 
 
+
+-- Create sequences and triggers for automatically incrementing primary key fields in your tables
 
 CREATE SEQUENCE student_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE instructor_seq START WITH 1 INCREMENT BY 1;
@@ -576,3 +524,111 @@ CREATE TRIGGER set_time_slot_id
     BEFORE INSERT ON time_slot
     FOR EACH ROW
     EXECUTE FUNCTION set_time_slot_id();
+
+
+
+-- Generate insert, update and delete stored procedures for all tables in your database.
+
+CREATE OR REPLACE PROCEDURE insert_faculty(
+    in_name VARCHAR(255)
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO faculty (name)
+    VALUES (in_name);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_faculty(
+    in_id INT,
+    in_name VARCHAR(255)
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE faculty
+    SET name = in_name
+    WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_faculty(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM faculty_has_department WHERE "Faculty.ID" = id_val;
+    DELETE FROM faculty WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_department(
+    in_name VARCHAR(255),
+    in_faculty_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  INSERT INTO Department (name, "Faculty.ID")
+  VALUES (in_name, in_faculty_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_department(
+    in_id INT,
+    in_name VARCHAR(255),
+    in_faculty_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  UPDATE department
+  SET name = in_name,
+      "Faculty.ID" = in_faculty_id
+  WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_department(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_belongs_department WHERE "Department.ID" = id_val;
+    DELETE FROM instructor_belongs_department WHERE "Department.ID" = id_val;
+    DELETE FROM course_belongs_department WHERE "Department.ID" = id_val;
+    DELETE FROM faculty_has_department WHERE "Department.ID" = id_val;
+    DELETE FROM department WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_student(
+    in_name VARCHAR(255),
+    in_surname VARCHAR(255),
+    in_student_id BIGINT,
+    in_school_enrollment_date DATE,
+    in_semester_ects INT,
+    in_department_id INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO student (name, surname, studentID, schoolEnrollmentDate, semesterECTS, departmentID) 
+    VALUES (in_name, in_surname, in_student_id, in_school_enrollment_date, in_semester_ects, in_department_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_student(
+    in_id INT,
+    in_name VARCHAR(255),
+    in_surname VARCHAR(255),
+    in_student_id BIGINT,
+    in_school_enrollment_date DATE,
+    in_semester_ects INT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE Student
+    SET StudentID = in_student_id, 
+    SchoolEnrollmentDate = in_school_enrollment_date,
+    emesterECTS = in_semester_ects, 
+    "Department.ID" = in_department_id
+    WHERE ID = in_id;
+END;
+$$;
+

@@ -111,8 +111,7 @@ INSERT INTO student_enrolls_section (studentID, sectionID, grade, nonAttendanceC
 
 
 select * 
-from student;
-/*join student_enrolls_section on (student_enrolls_section.studentID = student.ID)
+from student join student_enrolls_section on (student_enrolls_section.studentID = student.ID)
 join section on (section.ID = student_enrolls_section.sectionID) 
 join course on (course.ID = section.courseID)
-join instructor on (section.instructorID = instructor.ID);*/
+join instructor on (section.instructorID = instructor.ID);
