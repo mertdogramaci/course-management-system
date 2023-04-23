@@ -33,11 +33,11 @@ DROP TABLE IF EXISTS time_slot;
 DROP TABLE IF EXISTS section;
 DROP TABLE IF EXISTS instructor;
 DROP TABLE IF EXISTS course;
-DROP TABLE IF EXISTS department;
-DROP TABLE IF EXISTS faculty;
-
+DROP TABLE IF EXISTS department cascade;
+DROP TABLE IF EXISTS faculty cascade;
 
 -- Drop all sequnces for being able to re-run this query
+-- Delete this queries if the database is already empty
 DROP SEQUENCE student_seq;
 DROP SEQUENCE instructor_seq;
 DROP SEQUENCE student_contact_info_seq;
@@ -51,8 +51,6 @@ DROP SEQUENCE section_seq;
 DROP SEQUENCE homework_seq;
 DROP SEQUENCE submission_seq;
 DROP SEQUENCE time_slot_seq;
-
-
 
 -- ENTITY TABLES
 
@@ -98,7 +96,7 @@ CREATE TABLE student_contact_info (
 
 CREATE TABLE student_login_credentials (
     ID INT PRIMARY KEY NOT NULL,
-    username BIGINT NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     studentID INT NOT NULL,
     FOREIGN KEY (studentID) REFERENCES student(ID)
@@ -106,7 +104,7 @@ CREATE TABLE student_login_credentials (
 
 CREATE TABLE instructor_login_credentials (
     ID INT PRIMARY KEY NOT NULL,
-    username VARCHAR(255),
+    username VARCHAR(255) UNIQUE,
     password VARCHAR(255) NOT NULL,
     instructorID INT NOT NULL,
     FOREIGN KEY (instructorID) REFERENCES instructor(ID)
@@ -612,7 +610,7 @@ CREATE OR REPLACE PROCEDURE insert_student(
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO student (name, surname, studentID, schoolEnrollmentDate, semesterECTS, departmentID) 
+    INSERT INTO student (name, surname, studentID, schoolEnrollmentDate, semesterECTS, departmentID)
     VALUES (in_name, in_surname, in_student_id, in_school_enrollment_date, in_semester_ects, in_department_id);
 END;
 $$;
@@ -628,9 +626,9 @@ CREATE OR REPLACE PROCEDURE update_student(
 ) LANGUAGE plpgsql AS $$
 BEGIN
     UPDATE Student
-    SET StudentID = in_student_id, 
+    SET StudentID = in_student_id,
     SchoolEnrollmentDate = in_school_enrollment_date,
-    emesterECTS = in_semester_ects, 
+    emesterECTS = in_semester_ects,
     departmentID = in_department_id
     WHERE ID = in_id;
 END;
@@ -771,7 +769,7 @@ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE PROCEDURE insert_student_login_credentials(
-    in_username BIGINT,
+    in_username VARCHAR(255),
     in_password VARCHAR(255),
     in_student_id INT
 ) LANGUAGE plpgsql AS $$
@@ -782,7 +780,7 @@ END;
 $$;
 
 CREATE OR REPLACE PROCEDURE update_student_login_credentials(
-    in_username BIGINT,
+    in_username VARCHAR(255),
     in_password VARCHAR(255),
     in_student_id INT
 ) LANGUAGE plpgsql AS $$
@@ -1025,7 +1023,7 @@ CREATE OR REPLACE PROCEDURE insert_time_slot(
     in_section_id INT
 ) LANGUAGE plpgsql AS $$
 BEGIN
-    INSERT INTO submission (day, startTime, endTime, sectionID)
+    INSERT INTO time_slot (day, startTime, endTime, sectionID)
     VALUES (in_day, in_startTime, in_endTime, in_section_id);
 END;
 $$;
@@ -1088,43 +1086,43 @@ CREATE OR REPLACE FUNCTION delete_student_has_contact_info(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM student_has_contact_info 
+    DELETE FROM student_has_contact_info
     WHERE studentID = in_student_id AND student_contact_infoID = in_student_contact_info_id;
 END;
 $$
 LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE PROCEDURE insert_student_login_credentials(
+CREATE OR REPLACE PROCEDURE insert_student_has_login_credentials(
     in_student_id INT,
     in_student_login_credentials_id INT
 ) LANGUAGE plpgsql AS $$
 BEGIN
-    INSERT INTO student_login_credentials (studentID, student_login_credentialsID)
+    INSERT INTO student_has_login_credentials (studentID, student_login_credentialsID)
     VALUES (in_student_id, in_student_login_credentials_id);
 END;
 $$;
 
-CREATE OR REPLACE PROCEDURE update_student_login_credentials(
+CREATE OR REPLACE PROCEDURE update_student_has_login_credentials(
     in_student_id INT,
     in_student_login_credentials_id INT
 ) LANGUAGE plpgsql AS $$
 BEGIN
-    UPDATE student_login_credentials
+    UPDATE student_has_login_credentials
     SET studentID = in_student_id,
         student_login_credentialsID = in_student_login_credentials_id
     WHERE studentID = in_student_id AND student_login_credentialsID = in_student_login_credentials_id;
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION delete_student_login_credentials(
+CREATE OR REPLACE FUNCTION delete_student_has_login_credentials(
     in_student_id INT,
     in_student_login_credentials_id INT
 )
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM student_login_credentials 
+    DELETE FROM student_has_login_credentials
     WHERE studentID = in_student_id AND student_login_credentialsID = in_student_login_credentials_id;
 END;
 $$
@@ -1160,43 +1158,43 @@ CREATE OR REPLACE FUNCTION delete_student_has_contact_info(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM student_has_contact_info 
+    DELETE FROM student_has_contact_info
     WHERE studentID = in_student_id AND student_contact_infoID = in_student_contact_info_id;
 END;
 $$
 LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE PROCEDURE insert_instructor_login_credentials(
+CREATE OR REPLACE PROCEDURE insert_instructor_has_login_credentials(
     in_instructor_id INT,
     in_instructor_login_credentials_id INT
 ) LANGUAGE plpgsql AS $$
 BEGIN
-    INSERT INTO instructor_login_credentials (instructorID, instructor_login_credentialsID)
+    INSERT INTO instructor_has_login_credentials (instructorID, instructor_login_credentialsID)
     VALUES (in_instructor_id, in_instructor_login_credentials_id);
 END;
 $$;
 
-CREATE OR REPLACE PROCEDURE update_instructor_login_credentials(
+CREATE OR REPLACE PROCEDURE update_instructor_has_login_credentials(
     in_instructor_id INT,
     in_instructor_login_credentials_id INT
 ) LANGUAGE plpgsql AS $$
 BEGIN
-    UPDATE instructor_login_credentials
+    UPDATE instructor_has_login_credentials
     SET instructorID = in_instructor_id,
         instructor_login_credentialsID = in_instructor_login_credentials_id
     WHERE instructorID = in_instructor_id AND instructor_login_credentialsID = in_instructor_login_credentials_id;
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION delete_instructor_login_credentials(
+CREATE OR REPLACE FUNCTION delete_instructor_has_login_credentials(
     in_instructor_id INT,
     in_instructor_login_credentials_id INT
 )
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM instructor_login_credentials 
+    DELETE FROM instructor_has_login_credentials
     WHERE instructorID = in_instructor_id AND instructor_login_credentialsID = in_instructor_login_credentials_id;
 END;
 $$
@@ -1241,7 +1239,7 @@ CREATE OR REPLACE FUNCTION delete_student_enrolls_section(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM student_enrolls_section 
+    DELETE FROM student_enrolls_section
     WHERE studentID = in_student_id AND sectionID = in_section_id;
 END;
 $$
@@ -1277,7 +1275,7 @@ CREATE OR REPLACE FUNCTION delete_student_belongs_department(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM student_belongs_department 
+    DELETE FROM student_belongs_department
     WHERE studentID = in_student_id AND departmentID = in_department_id;
 END;
 $$
@@ -1313,7 +1311,7 @@ CREATE OR REPLACE FUNCTION delete_student_has_submission(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM student_belongs_department 
+    DELETE FROM student_belongs_department
     WHERE studentID = in_student_id AND submissionID = in_submission_id;
 END;
 $$
@@ -1349,7 +1347,7 @@ CREATE OR REPLACE FUNCTION delete_instructor_teaches_section(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM instructor_teaches_section 
+    DELETE FROM instructor_teaches_section
     WHERE instructorID = in_instructor_id AND sectionID = in_section_id;
 END;
 $$
@@ -1385,7 +1383,7 @@ CREATE OR REPLACE FUNCTION delete_instructor_advisor_student(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM instructor_advisor_student 
+    DELETE FROM instructor_advisor_student
     WHERE instructorID = in_instructor_id AND studentID = in_student_id;
 END;
 $$
@@ -1421,7 +1419,7 @@ CREATE OR REPLACE FUNCTION delete_instructor_belongs_department(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM instructor_belongs_department 
+    DELETE FROM instructor_belongs_department
     WHERE instructorID = in_instructor_id AND departmentID = in_department_id;
 END;
 $$
@@ -1457,7 +1455,7 @@ CREATE OR REPLACE FUNCTION delete_faculty_has_department(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM faculty_has_department 
+    DELETE FROM faculty_has_department
     WHERE facultyID = in_faculty_id AND departmentID = in_department_id;
 END;
 $$
@@ -1493,7 +1491,7 @@ CREATE OR REPLACE FUNCTION delete_course_requires_course(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM course_requires_course 
+    DELETE FROM course_requires_course
     WHERE prereqCourseID = in_prereq_course_id AND mainCourseID = in_main_course_id;
 END;
 $$
@@ -1529,7 +1527,7 @@ CREATE OR REPLACE FUNCTION delete_course_belongs_department(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM course_belongs_department 
+    DELETE FROM course_belongs_department
     WHERE courseID = in_course_id AND departmentID = in_department_id;
 END;
 $$
@@ -1565,7 +1563,7 @@ CREATE OR REPLACE FUNCTION delete_section_belongs_course(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM section_belongs_course 
+    DELETE FROM section_belongs_course
     WHERE sectionID = in_section_id AND courseID = in_course_id;
 END;
 $$
@@ -1601,7 +1599,7 @@ CREATE OR REPLACE FUNCTION delete_section_has_time_slot(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM section_has_time_slot 
+    DELETE FROM section_has_time_slot
     WHERE sectionID = in_section_id AND time_slotID = in_time_slot_id;
 END;
 $$
@@ -1637,7 +1635,7 @@ CREATE OR REPLACE FUNCTION delete_homework_belongs_section(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM homework_belongs_section 
+    DELETE FROM homework_belongs_section
     WHERE homeworkID = in_homework_id AND sectionID = in_section_id;
 END;
 $$
@@ -1673,7 +1671,7 @@ CREATE OR REPLACE FUNCTION delete_homework_has_submission(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM homework_has_submission 
+    DELETE FROM homework_has_submission
     WHERE homeworkID = in_homework_id AND submissionID = in_submission_id;
 END;
 $$
