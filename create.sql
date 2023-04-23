@@ -84,7 +84,7 @@ CREATE TABLE instructor (
 
 CREATE TABLE student_contact_info (
     ID INT PRIMARY KEY NOT NULL,
-    phone VARCHAR(12),
+    phone VARCHAR(15),
     email VARCHAR(255),
     address TEXT,
     studentID INT NOT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE instructor_login_credentials (
 
 CREATE TABLE instructor_contact_info (
     ID INT PRIMARY KEY NOT NULL,
-    phone VARCHAR(12),
+    phone VARCHAR(15),
     email VARCHAR(255),
     address TEXT,
     instructorID INT NOT NULL,
@@ -577,8 +577,7 @@ CREATE OR REPLACE PROCEDURE update_department(
 ) LANGUAGE plpgsql AS $$
 BEGIN
   UPDATE department
-  SET name = in_name,
-      "faculty.ID" = in_faculty_id
+  SET name = in_name, "faculty.ID" = in_faculty_id
   WHERE ID = in_id;
 END;
 $$;
@@ -637,13 +636,380 @@ RETURNS VOID AS
 $$
 BEGIN
     DELETE FROM student_belongs_department WHERE "student.ID" = id_val;
-    DELETE FROM student_contact_info WHERE "student.ID" = id_val;
     DELETE FROM student_enrolls_section WHERE "student.ID" = id_val;
     DELETE FROM student_has_contact_info WHERE "student.ID" = id_val;
     DELETE FROM student_has_login_credentials WHERE "student.ID" = id_val;
     DELETE FROM student_has_submission WHERE "student.ID" = id_val;
-    DELETE FROM student_login_credentials WHERE "student.ID" = id_val;
     DELETE FROM student WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_instructor(
+    in_name VARCHAR(255),
+    in_surname VARCHAR(255),
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO instructor (ID, "department.ID")
+    VALUES (in_name, in_surname, in_department_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_instructor(
+    in_id INT,
+    in_name VARCHAR(255),
+    in_surname VARCHAR(255),
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE instructor
+    SET "department.ID" = in_department_id
+    WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_instructor(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM instructor_advisor_student WHERE "instructor.ID" = id_val;
+    DELETE FROM instructor_belongs_department WHERE "instructor.ID" = id_val;
+    DELETE FROM instructor_has_contact_info WHERE "instructor.ID" = id_val;
+    DELETE FROM instructor_has_login_credentials WHERE "instructor.ID" = id_val;
+    DELETE FROM instructor_teaches_section WHERE "instructor.ID" = id_val;
+    DELETE FROM instructor WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_student_contact_info(
+    in_phone VARCHAR(15),
+    in_email VARCHAR(255),
+    in_address TEXT,
+    in_student_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  INSERT INTO student_contact_info (phone, email, address, "student.ID")
+  VALUES (in_phone, in_email, in_address, in_student_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_student_contact_info(
+    in_id INT,
+    in_phone VARCHAR(15),
+    in_email VARCHAR(255),
+    in_address TEXT,
+    in_student_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE student_contact_info
+    SET phone = in_phone,
+        email = in_email,
+        address = in_address,
+        "student.ID" = in_student_id
+    WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_student_contact_info(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_has_contact_info WHERE "student_contact_info.ID" = id_val;
+    DELETE FROM student_contact_info WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_instructor_contact_info(
+    in_phone VARCHAR(15),
+    in_email VARCHAR(255),
+    in_address TEXT,
+    in_instructor_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  INSERT INTO instructor_contact_info (phone, email, address, "instructor.ID")
+  VALUES (in_phone, in_email, in_address, in_instructor_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_instructor_contact_info(
+    in_id INT,
+    in_phone VARCHAR(15),
+    in_email VARCHAR(255),
+    in_address TEXT,
+    in_instructor_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE instructor_contact_info
+    SET phone = in_phone,
+        email = in_email,
+        address = in_address,
+        "instructor.ID" = in_instructor_id
+    WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_instructor_contact_info(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM instructor_has_contact_info WHERE "instructor_contact_info.ID" = id_val;
+    DELETE FROM instructor_contact_info WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_student_login_credentials(
+    in_username BIGINT,
+    in_password VARCHAR(255),
+    in_student_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  INSERT INTO student_login_credentials (username, password, "student.ID")
+  VALUES (in_username, in_password, in_student_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_student_login_credentials(
+    in_id INT,
+    in_username BIGINT,
+    in_password VARCHAR(255),
+    in_student_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  UPDATE student_login_credentials
+  SET username = in_username,
+        password = in_password,
+        "student.ID" = in_student_id
+  WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_student_login_credentials(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_has_login_credentials WHERE "student_login_credentials.ID" = id_val;
+    DELETE FROM student_login_credentials WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_instructor_login_credentials(
+    in_username VARCHAR(255),
+    in_password VARCHAR(255),
+    in_instructor_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  INSERT INTO instructor_login_credentials (username, password, "instructor.ID")
+  VALUES (in_username, in_password, in_instructor_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_instructor_login_credentials(
+    in_id INT,
+    in_username VARCHAR(255),
+    in_password VARCHAR(255),
+    in_instructor_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  UPDATE instructor_login_credentials
+  SET username = in_username,
+        password = in_password,
+        "instructor.ID" = in_instructor_id
+  WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_instructor_login_credentials(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM instructor_has_login_credentials WHERE "instructor_login_credentials.ID" = id_val;
+    DELETE FROM instructor_login_credentials WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_course(
+    in_title VARCHAR(255),
+    in_ects INT,
+    in_isCompulsory BOOLEAN,
+    in_description TEXT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  INSERT INTO course (title, ects, isCompulsory, description, "department.ID")
+  VALUES (in_title, in_ects, in_isCompulsory, in_description, in_department_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_course(
+    in_title VARCHAR(255),
+    in_ects INT,
+    in_isCompulsory BOOLEAN,
+    in_description TEXT,
+    in_department_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE course
+    SET title = in_title,
+        ects = in_ects,
+        isCompulsory = in_isCompulsory,
+        description = in_description,
+        "department.ID" = in_department_id
+    WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_course(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM course_belongs_department WHERE "course.ID" = id_val;
+    DELETE FROM course_requires_course WHERE "course.ID" = id_val;
+    DELETE FROM section_belongs_course WHERE "course.ID" = id_val;
+    DELETE FROM course WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_section(
+    in_semester BOOLEAN,
+    in_year INT,
+    in_classroomInfo TEXT,
+    in_quota INT,
+    in_course_id INT,
+    in_instructor_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  INSERT INTO course (semester, year, classroomInfo, quota, "course.ID", "instructor.ID")
+  VALUES (in_semester, in_year, in_classroomInfo, in_quota, in_course_id, in_instructor_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_section(
+    in_semester BOOLEAN,
+    in_year INT,
+    in_classroomInfo TEXT,
+    in_quota INT,
+    in_course_id INT,
+    in_instructor_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE section
+    SET semester = in_semester,
+        year = in_year,
+        classroomInfo = in_classroomInfo,
+        quota = in_quota,
+        "course.ID" = in_course_id,
+        "instructor.ID" = in_instructor_id
+    WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_section(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM section_belongs_course WHERE "section.ID" = id_val;
+    DELETE FROM section_has_time_slot WHERE "section.ID" = id_val;
+    DELETE FROM student_enrolls_section WHERE "section.ID" = id_val;
+    DELETE FROM instructor_teaches_section WHERE "section.ID" = id_val;
+    DELETE FROM homework_belongs_section WHERE "section.ID" = id_val;
+    DELETE FROM section WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_homework(
+    in_title TEXT,
+    in_content BYTEA,
+    in_issueDate DATE,
+    in_dueDate DATE,
+    in_section_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  INSERT INTO homework (title, content, issueDate, dueDate, "section.ID")
+  VALUES (in_title, in_content, in_issueDate, in_dueDate, in_section_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_homework(
+    in_title TEXT,
+    in_content BYTEA,
+    in_issueDate DATE,
+    in_dueDate DATE,
+    in_section_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE homework
+    SET title = in_title,
+        content = in_content,
+        issueDate = in_issueDate,
+        dueDate = in_dueDate,
+        "section.ID" = in_section_id
+    WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_homework(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM homework_belongs_section WHERE "homework.ID" = id_val;
+    DELETE FROM homework_has_submission WHERE "homework.ID" = id_val;
+    DELETE FROM homework WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_submission(
+    in_marks INT,
+    in_content BYTEA,
+    in_student_id INT,
+    in_homework_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+  INSERT INTO submission (marks, content, "student.ID", "homework.ID")
+  VALUES (in_marks, in_content, in_student_id, in_homework_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_submission(
+    in_marks INT,
+    in_content BYTEA,
+    in_student_id INT,
+    in_homework_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE submission
+    SET marks = in_marks,
+        content = in_content,
+        "student.ID" = in_student_id,
+        "homework.ID" = in_homework_id
+    WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_submission(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_has_submission WHERE "submission.ID" = id_val;
+    DELETE FROM homework_has_submission WHERE "submission.ID" = id_val;
+    DELETE FROM submission WHERE "ID" = id_val;
 END;
 $$
 LANGUAGE plpgsql;
