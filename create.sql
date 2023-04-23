@@ -160,8 +160,7 @@ CREATE TABLE submission (
 
 CREATE TABLE time_slot (
     ID INT PRIMARY KEY NOT NULL,
-    -- day için belki int gibi bir şey kullanılabilir
-    day VARCHAR(255) NOT NULL,
+    day INT NOT NULL,
     startTime TIMESTAMP NOT NULL,
     endTime TIMESTAMP NOT NULL,
     sectionID INT NOT NULL,
@@ -777,7 +776,6 @@ END;
 $$;
 
 CREATE OR REPLACE PROCEDURE update_student_login_credentials(
-    in_id INT,
     in_username BIGINT,
     in_password VARCHAR(255),
     in_student_id INT
@@ -814,7 +812,6 @@ END;
 $$;
 
 CREATE OR REPLACE PROCEDURE update_instructor_login_credentials(
-    in_id INT,
     in_username VARCHAR(255),
     in_password VARCHAR(255),
     in_instructor_id INT
@@ -1010,6 +1007,45 @@ BEGIN
     DELETE FROM student_has_submission WHERE "submission.ID" = id_val;
     DELETE FROM homework_has_submission WHERE "submission.ID" = id_val;
     DELETE FROM submission WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE insert_time_slot(
+    in_day INT,
+    in_startTime TIMESTAMP,
+    in_endTime TIMESTAMP,
+    in_section_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO submission (day, startTime, endTime, "section.ID")
+    VALUES (in_day, in_startTime, in_endTime, in_section_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_time_slot(
+    in_day INT,
+    in_startTime TIMESTAMP,
+    in_endTime TIMESTAMP,
+    in_section_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE time_slot
+    SET day = in_day,
+        startTime = in_startTime,
+        endTime = in_endTime,
+        "section.ID" = in_section_id
+    WHERE ID = in_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_time_slot(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM section_has_time_slot WHERE "time_slot.ID" = id_val;
+    DELETE FROM time_slot WHERE "ID" = id_val;
 END;
 $$
 LANGUAGE plpgsql;
