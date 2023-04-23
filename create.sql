@@ -553,7 +553,7 @@ CREATE OR REPLACE FUNCTION delete_faculty(id_val INT)
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM faculty_has_department WHERE "Faculty.ID" = id_val;
+    DELETE FROM faculty_has_department WHERE "faculty.ID" = id_val;
     DELETE FROM faculty WHERE "ID" = id_val;
 END;
 $$
@@ -565,7 +565,7 @@ CREATE OR REPLACE PROCEDURE insert_department(
     in_faculty_id INT
 ) LANGUAGE plpgsql AS $$
 BEGIN
-  INSERT INTO Department (name, "Faculty.ID")
+  INSERT INTO Department (name, "faculty.ID")
   VALUES (in_name, in_faculty_id);
 END;
 $$;
@@ -578,7 +578,7 @@ CREATE OR REPLACE PROCEDURE update_department(
 BEGIN
   UPDATE department
   SET name = in_name,
-      "Faculty.ID" = in_faculty_id
+      "faculty.ID" = in_faculty_id
   WHERE ID = in_id;
 END;
 $$;
@@ -587,10 +587,10 @@ CREATE OR REPLACE FUNCTION delete_department(id_val INT)
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM student_belongs_department WHERE "Department.ID" = id_val;
-    DELETE FROM instructor_belongs_department WHERE "Department.ID" = id_val;
-    DELETE FROM course_belongs_department WHERE "Department.ID" = id_val;
-    DELETE FROM faculty_has_department WHERE "Department.ID" = id_val;
+    DELETE FROM student_belongs_department WHERE "department.ID" = id_val;
+    DELETE FROM instructor_belongs_department WHERE "department.ID" = id_val;
+    DELETE FROM course_belongs_department WHERE "department.ID" = id_val;
+    DELETE FROM faculty_has_department WHERE "department.ID" = id_val;
     DELETE FROM department WHERE "ID" = id_val;
 END;
 $$
@@ -627,8 +627,23 @@ BEGIN
     SET StudentID = in_student_id, 
     SchoolEnrollmentDate = in_school_enrollment_date,
     emesterECTS = in_semester_ects, 
-    "Department.ID" = in_department_id
+    "department.ID" = in_department_id
     WHERE ID = in_id;
 END;
 $$;
 
+CREATE OR REPLACE FUNCTION delete_student(id_val INT)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM student_belongs_department WHERE "student.ID" = id_val;
+    DELETE FROM student_contact_info WHERE "student.ID" = id_val;
+    DELETE FROM student_enrolls_section WHERE "student.ID" = id_val;
+    DELETE FROM student_has_contact_info WHERE "student.ID" = id_val;
+    DELETE FROM student_has_login_credentials WHERE "student.ID" = id_val;
+    DELETE FROM student_has_submission WHERE "student.ID" = id_val;
+    DELETE FROM student_login_credentials WHERE "student.ID" = id_val;
+    DELETE FROM student WHERE "ID" = id_val;
+END;
+$$
+LANGUAGE plpgsql;
