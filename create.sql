@@ -1201,6 +1201,42 @@ $$
 LANGUAGE plpgsql;
 
 
+CREATE OR REPLACE PROCEDURE insert_instructor_has_contact_info(
+    in_instructor_id INT,
+    in_instructor_contact_info_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO instructor_has_contact_info (instructorID, instructor_contact_infoID)
+    VALUES (in_instructor_id, in_instructor_contact_info_id);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_instructor_has_contact_info(
+    in_instructor_id INT,
+    in_instructor_contact_info_id INT
+) LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE instructor_has_contact_info
+    SET instructorID = in_instructor_id,
+        instructor_contact_infoID = in_instructor_contact_info_id
+    WHERE instructorID = in_instructor_id AND instructor_contact_infoID = in_instructor_contact_info_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION delete_instructor_has_contact_info(
+    in_instructor_id INT,
+    in_instructor_contact_info_id INT
+)
+RETURNS VOID AS
+$$
+BEGIN
+    DELETE FROM instructor_has_contact_info
+    WHERE instructorID = in_instructor_id AND instructor_contact_infoID = in_instructor_contact_info_id;
+END;
+$$
+LANGUAGE plpgsql;
+
+
 CREATE OR REPLACE PROCEDURE insert_student_enrolls_section(
     in_student_id INT,
     in_section_id INT,
