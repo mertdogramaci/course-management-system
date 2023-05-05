@@ -1129,42 +1129,6 @@ $$
 LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE PROCEDURE insert_student_has_contact_info(
-    in_student_id INT,
-    in_student_contact_info_id INT
-) LANGUAGE plpgsql AS $$
-BEGIN
-    INSERT INTO student_has_contact_info (studentID, student_contact_infoID)
-    VALUES (in_student_id, in_student_contact_info_id);
-END;
-$$;
-
-CREATE OR REPLACE PROCEDURE update_student_has_contact_info(
-    in_student_id INT,
-    in_student_contact_info_id INT
-) LANGUAGE plpgsql AS $$
-BEGIN
-    UPDATE student_has_contact_info
-    SET studentID = in_student_id,
-        student_contact_infoID = in_student_contact_info_id
-    WHERE studentID = in_student_id AND student_contact_infoID = in_student_contact_info_id;
-END;
-$$;
-
-CREATE OR REPLACE FUNCTION delete_student_has_contact_info(
-    in_student_id INT,
-    in_student_contact_info_id INT
-)
-RETURNS VOID AS
-$$
-BEGIN
-    DELETE FROM student_has_contact_info
-    WHERE studentID = in_student_id AND student_contact_infoID = in_student_contact_info_id;
-END;
-$$
-LANGUAGE plpgsql;
-
-
 CREATE OR REPLACE PROCEDURE insert_instructor_has_login_credentials(
     in_instructor_id INT,
     in_instructor_login_credentials_id INT
