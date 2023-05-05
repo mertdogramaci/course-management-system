@@ -1287,7 +1287,7 @@ CREATE OR REPLACE PROCEDURE insert_student_has_submission(
     in_submission_id INT
 ) LANGUAGE plpgsql AS $$
 BEGIN
-    INSERT INTO student_belongs_department (studentID, submissionID)
+    INSERT INTO student_has_submission (studentID, submissionID)
     VALUES (in_student_id, in_submission_id);
 END;
 $$;
@@ -1297,7 +1297,7 @@ CREATE OR REPLACE PROCEDURE update_student_has_submission(
     in_submission_id INT
 ) LANGUAGE plpgsql AS $$
 BEGIN
-    UPDATE student_belongs_department
+    UPDATE student_has_submission
     SET studentID = in_student_id,
         submissionID = in_submission_id
     WHERE studentID = in_student_id AND submissionID = in_submission_id;
@@ -1311,7 +1311,7 @@ CREATE OR REPLACE FUNCTION delete_student_has_submission(
 RETURNS VOID AS
 $$
 BEGIN
-    DELETE FROM student_belongs_department
+    DELETE FROM student_has_submission
     WHERE studentID = in_student_id AND submissionID = in_submission_id;
 END;
 $$
