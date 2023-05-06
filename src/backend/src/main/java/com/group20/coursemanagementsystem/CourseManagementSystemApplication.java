@@ -1,13 +1,13 @@
-package com.group20.backend;
+package com.group20.coursemanagementsystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendApplication {
+public class CourseManagementSystemApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendApplication.class, args);
+		SpringApplication.run(CourseManagementSystemApplication.class, args);
 	}
 
 }
