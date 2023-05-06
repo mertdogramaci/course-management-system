@@ -10,6 +10,7 @@ import lombok.*;
 @ToString
 @RequiredArgsConstructor
 public class Faculty {
+
     @Id
     private Long id;
 

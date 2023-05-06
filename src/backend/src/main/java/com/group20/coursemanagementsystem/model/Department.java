@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public class Department {
+
     @Id
     private Long id;
 
