@@ -37,6 +37,7 @@ public class Section {
 
     @OneToMany
     @JoinColumn(name = "instructor_id")
+    @ToString.Exclude
     private Instructor instructor;
 
     @Override

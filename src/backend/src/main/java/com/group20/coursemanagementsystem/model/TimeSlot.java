@@ -31,6 +31,7 @@ public class TimeSlot {
 
     @OneToMany
     @JoinColumn(name = "section_id")
+    @ToString.Exclude
     private Section section;
 
     @Override
