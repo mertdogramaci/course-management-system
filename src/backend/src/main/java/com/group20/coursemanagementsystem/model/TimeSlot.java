@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -29,10 +30,10 @@ public class TimeSlot {
     @Column(name = "endTime")
     private Timestamp endTime;
 
-    @OneToMany
+    @ManyToMany
     @JoinColumn(name = "section_id")
     @ToString.Exclude
-    private Section section;
+    private List<Section> sections;
 
     @Override
     public boolean equals(Object o) {
@@ -45,7 +46,7 @@ public class TimeSlot {
         if (!day.equals(timeSlot.day)) return false;
         if (!startTime.equals(timeSlot.startTime)) return false;
         if (!endTime.equals(timeSlot.endTime)) return false;
-        return Objects.equals(section, timeSlot.section);
+        return Objects.equals(sections, timeSlot.sections);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class TimeSlot {
         result = 31 * result + day.hashCode();
         result = 31 * result + startTime.hashCode();
         result = 31 * result + endTime.hashCode();
-        result = 31 * result + (section != null ? section.hashCode() : 0);
+        result = 31 * result + (sections != null ? sections.hashCode() : 0);
         return result;
     }
 }

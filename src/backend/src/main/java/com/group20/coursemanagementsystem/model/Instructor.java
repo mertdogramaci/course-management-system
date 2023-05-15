@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name = "instructor")
 @Getter
@@ -26,6 +28,15 @@ public class Instructor {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
+
+    @OneToOne
+    private InstructorContactInfo instructorContactInfo;
+
+    @OneToOne
+    private InstructorLoginCredentials instructorLoginCredentials;
+
+    @OneToMany
+    private List<Section> sections;
 
     @Override
     public boolean equals(Object o) {

@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "homework")
@@ -35,6 +36,9 @@ public class Homework {
     @ManyToOne
     @JoinColumn(name = "section_id")
     private Section section;
+
+    @OneToMany
+    private List<Submission> submissions;
 
     @Override
     public boolean equals(Object o) {

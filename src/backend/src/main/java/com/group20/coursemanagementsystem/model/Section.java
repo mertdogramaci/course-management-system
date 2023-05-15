@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -35,10 +36,16 @@ public class Section {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "instructor_id")
     @ToString.Exclude
     private Instructor instructor;
+
+    @OneToMany
+    private List<Homework> homeworks;
+
+    @ManyToMany
+    private List<TimeSlot> timeSlots;
 
     @Override
     public boolean equals(Object o) {

@@ -3,6 +3,8 @@ package com.group20.coursemanagementsystem.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "faculty")
 @Getter
@@ -16,6 +18,9 @@ public class Faculty {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany
+    private List<Department> departments;
 
     @Override
     public boolean equals(Object o) {

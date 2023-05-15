@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -36,6 +37,15 @@ public class Student{
 
     @Column(name = "semesterECTS")
     private Integer semesterECTS = 0;
+
+    @OneToOne
+    private StudentContactInfo studentContactInfo;
+
+    @OneToOne
+    private StudentLoginCredentials studentLoginCredentials;
+
+    @OneToMany
+    private List<Submission> submissions;
 
     @Override
     public boolean equals(Object o) {

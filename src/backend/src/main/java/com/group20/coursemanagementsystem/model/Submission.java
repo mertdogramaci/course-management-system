@@ -26,12 +26,12 @@ public class Submission {
     @Column(name = "content")
     private Byte[] content;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "student_id")
     @ToString.Exclude
     private Student student;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "homework_id")
     @ToString.Exclude
     private Homework homework;
