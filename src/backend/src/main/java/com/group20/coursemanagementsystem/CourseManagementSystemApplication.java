@@ -1,14 +1,14 @@
-package com.group20.backend;
+package com.group20.coursemanagementsystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
-public class BackendApplication {
+public class CourseManagementSystemApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendApplication.class, args);
+		SpringApplication.run(CourseManagementSystemApplication.class, args);
 	}
 
 }
