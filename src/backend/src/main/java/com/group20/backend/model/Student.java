@@ -1,8 +1,9 @@
-package com.group20.backend.student.entity;
+package com.group20.backend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ import java.util.Objects;
 public class Student{
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "first_name")
