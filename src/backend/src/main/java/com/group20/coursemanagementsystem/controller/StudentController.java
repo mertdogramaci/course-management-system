@@ -1,7 +1,7 @@
-package com.group20.backend.controller;
+package com.group20.coursemanagementsystem.controller;
 
-import com.group20.backend.model.Student;
-import com.group20.backend.repository.StudentRepository;
+import com.group20.coursemanagementsystem.model.Student;
+import com.group20.coursemanagementsystem.repository.StudentRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

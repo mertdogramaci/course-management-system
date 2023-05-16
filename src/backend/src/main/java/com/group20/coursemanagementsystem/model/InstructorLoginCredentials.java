@@ -15,6 +15,7 @@ import lombok.ToString;
 public class InstructorLoginCredentials {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "username", unique = true)

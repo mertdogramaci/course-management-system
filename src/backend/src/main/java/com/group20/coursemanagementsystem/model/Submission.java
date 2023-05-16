@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +19,7 @@ import java.util.Objects;
 public class Submission {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "marks")
@@ -27,14 +29,14 @@ public class Submission {
     private Byte[] content;
 
     @OneToMany
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "submission_id")
     @ToString.Exclude
-    private Student student;
+    private List<Student> student;
 
     @OneToMany
-    @JoinColumn(name = "homework_id")
+    @JoinColumn(name = "submission_id")
     @ToString.Exclude
-    private Homework homework;
+    private List<Homework> homework;
 
     @Override
     public boolean equals(Object o) {

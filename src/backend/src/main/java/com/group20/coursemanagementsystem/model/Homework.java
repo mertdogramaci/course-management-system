@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 
 @Entity
 @Table(name = "homework")
@@ -18,6 +18,7 @@ import java.util.Date;
 public class Homework {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title")
@@ -27,10 +28,10 @@ public class Homework {
     private Byte[] content;
 
     @Column(name = "issueDate")
-    private Date issueDate;
+    private LocalDateTime issueDate;
 
     @Column(name = "dueDate")
-    private Date dueDate;
+    private LocalDateTime dueDate;
 
     @ManyToOne
     @JoinColumn(name = "section_id")

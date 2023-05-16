@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +19,7 @@ import java.util.Objects;
 public class TimeSlot {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "day")
@@ -32,7 +34,7 @@ public class TimeSlot {
     @OneToMany
     @JoinColumn(name = "section_id")
     @ToString.Exclude
-    private Section section;
+    private List<Section> section;
 
     @Override
     public boolean equals(Object o) {

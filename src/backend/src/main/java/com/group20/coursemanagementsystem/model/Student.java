@@ -3,6 +3,7 @@ package com.group20.coursemanagementsystem.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ import java.util.Objects;
 public class Student{
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
@@ -32,7 +34,7 @@ public class Student{
     private Long studentID;
 
     @Column(name = "schoolEnrollmentDate")
-    private Date schoolEnrollmentDate;
+    private LocalDate schoolEnrollmentDate;
 
     @Column(name = "semesterECTS")
     private Integer semesterECTS = 0;

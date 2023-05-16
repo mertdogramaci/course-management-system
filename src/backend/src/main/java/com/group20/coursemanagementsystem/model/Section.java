@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +18,7 @@ import java.util.Objects;
 public class Section {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "semester")
@@ -38,7 +40,7 @@ public class Section {
     @OneToMany
     @JoinColumn(name = "instructor_id")
     @ToString.Exclude
-    private Instructor instructor;
+    private List<Instructor> instructor;
 
     @Override
     public boolean equals(Object o) {

@@ -17,6 +17,7 @@ import java.util.Objects;
 public class StudentContactInfo {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "phone")
@@ -27,6 +28,7 @@ public class StudentContactInfo {
 
     @Column(name = "address")
     private String address;
+
     @OneToOne
     @JoinColumn(name = "student_id")
     private Student student;
