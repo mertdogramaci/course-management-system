@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 
@@ -14,10 +13,10 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Student{
+public class Student {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
@@ -30,14 +29,24 @@ public class Student{
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @Column(name = "studentID")
+    @Column(name = "student_id", unique = true)
     private Long studentID;
 
-    @Column(name = "schoolEnrollmentDate")
+    @Column(name = "school_enrollment_date")
     private LocalDate schoolEnrollmentDate;
 
-    @Column(name = "semesterECTS")
+    @Column(name = "semester_ects")
     private Integer semesterECTS = 0;
+
+    public Student(String name, String surname, Department department, Long studentID, LocalDate schoolEnrollmentDate,
+                   Integer semesterECTS) {
+        this.name = name;
+        this.surname = surname;
+        this.department = department;
+        this.studentID = studentID;
+        this.schoolEnrollmentDate = schoolEnrollmentDate;
+        this.semesterECTS = semesterECTS;
+    }
 
     @Override
     public boolean equals(Object o) {

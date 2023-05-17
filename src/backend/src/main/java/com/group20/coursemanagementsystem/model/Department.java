@@ -18,12 +18,17 @@ public class Department {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
+
+    public Department(String name, Faculty faculty) {
+        this.name = name;
+        this.faculty = faculty;
+    }
 
     @Override
     public boolean equals(Object o) {

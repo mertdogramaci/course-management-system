@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "student_login_credentials")
 @Getter
@@ -19,7 +21,7 @@ public class StudentLoginCredentials {
     private Long id;
 
     @Column(name = "username", unique = true)
-    private Long username;
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -28,25 +30,22 @@ public class StudentLoginCredentials {
     @JoinColumn(name = "student_id")
     private Student student;
 
+    public StudentLoginCredentials(String username, String password, Student student) {
+        this.username = username;
+        this.password = password;
+        this.student = student;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         StudentLoginCredentials that = (StudentLoginCredentials) o;
-
-        if (!id.equals(that.id)) return false;
-        if (!username.equals(that.username)) return false;
-        if (!password.equals(that.password)) return false;
-        return student.equals(that.student);
+        return Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(student, that.student);
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + username.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + student.hashCode();
-        return result;
+        return Objects.hash(id, username, password, student);
     }
 }

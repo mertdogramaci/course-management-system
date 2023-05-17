@@ -15,8 +15,12 @@ public class Faculty {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
+
+    public Faculty(String name) {
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object o) {
