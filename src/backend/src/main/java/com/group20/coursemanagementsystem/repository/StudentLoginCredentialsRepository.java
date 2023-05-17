@@ -17,7 +17,7 @@ public class StudentLoginCredentialsRepository {
     @Transactional
     public StudentLoginCredentials save(StudentLoginCredentials studentLoginCredentials) {
         Query query = entityManager.createNativeQuery(
-                "INSERT INTO student_login_credentials (username, password, instructorID) VALUES (?, ?, ?)");
+                "INSERT INTO student_login_credentials (username, password, student_id) VALUES (?, ?, ?)");
         query.setParameter(1, studentLoginCredentials.getUsername());
         query.setParameter(2, studentLoginCredentials.getPassword());
         query.setParameter(3, studentLoginCredentials.getStudent().getId());
