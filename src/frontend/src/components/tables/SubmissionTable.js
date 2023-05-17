@@ -25,7 +25,6 @@ function SubmissionTable(probs) {
                     <th>Content</th>
                     <th>Student ID</th>
                     <th>Homework ID</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,12 +36,6 @@ function SubmissionTable(probs) {
                             <th>{submission.content}</th>
                             <th>{submission.student.id}</th>
                             <th>{submission.homework.id}</th>
-                            <th>
-                                <ButtonGroup>
-                                    <Button size="sm" color="primary" tag={Link} to={"/submissions/" + submission.id}>Edit</Button>
-                                    <Button size="sm" color="primary" onClick={() => remove(submission.id)}>Delete</Button>
-                                </ButtonGroup>
-                            </th>
                         </tr>
                     );
                 })}

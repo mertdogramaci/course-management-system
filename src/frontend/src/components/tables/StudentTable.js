@@ -27,7 +27,6 @@ function StudentTable(probs) {
                     <th>Student ID</th>
                     <th>School Enrollment Date</th>
                     <th>Semester ECTS</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,12 +40,6 @@ function StudentTable(probs) {
                             <th>{student.studentID}</th>
                             <th>{student.schoolEnrollmentDate}</th>
                             <th>{student.semesterECTS}</th>
-                            <th>
-                                <ButtonGroup>
-                                    <Button size="sm" color="primary" tag={Link} to={"/students/" + student.id}>Edit</Button>
-                                    <Button size="sm" color="primary" onClick={() => remove(student.id)}>Delete</Button>
-                                </ButtonGroup>
-                            </th>
                         </tr>
                     );
                 })}

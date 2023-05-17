@@ -27,7 +27,6 @@ function HomeworkTable(probs) {
                     <th>Due Date</th>
                     <th>Course</th>
                     <th>Section</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,12 +41,6 @@ function HomeworkTable(probs) {
                             <th>{homework.dueDate}</th>
                             <th>{homework.section.course.title}</th>
                             <th>{homework.section.semester} {homework.section.year}</th>
-                            <th>
-                                <ButtonGroup>
-                                    <Button size="sm" color="primary" tag={Link} to={"/homeworks/" + homework.id}>Edit</Button>
-                                    <Button size="sm" color="primary" onClick={() => remove(homework.id)}>Delete</Button>
-                                </ButtonGroup>
-                            </th>
                         </tr>
                     );
                 })}

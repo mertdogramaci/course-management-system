@@ -25,7 +25,6 @@ function InstructorContactInfoTable(probs) {
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Address</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,12 +36,6 @@ function InstructorContactInfoTable(probs) {
                             <th>{instructorContactInfo.phone}</th>
                             <th>{instructorContactInfo.email}</th>
                             <th>{instructorContactInfo.address}</th>
-                            <th>
-                                <ButtonGroup>
-                                    <Button size="sm" color="primary" tag={Link} to={"/InstructorContactInfos/" + instructorContactInfo.id}>Edit</Button>
-                                    <Button size="sm" color="primary" onClick={() => remove(instructorContactInfo.id)}>Delete</Button>
-                                </ButtonGroup>
-                            </th>
                         </tr>
                     );
                 })}

@@ -24,7 +24,6 @@ function InstructorTable(probs) {
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Department Name</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,12 +34,6 @@ function InstructorTable(probs) {
                             <th>{instructor.name}</th>
                             <th>{instructor.surname}</th>
                             <th>{instructor.department.name}</th>
-                            <th>
-                                <ButtonGroup>
-                                    <Button size="sm" color="primary" tag={Link} to={"/Instructors/" + instructor.id}>Edit</Button>
-                                    <Button size="sm" color="primary" onClick={() => remove(instructor.id)}>Delete</Button>
-                                </ButtonGroup>
-                            </th>
                         </tr>
                     );
                 })}

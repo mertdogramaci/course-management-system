@@ -26,7 +26,6 @@ function CourseTable(probs) {
                     <th>Compulsory</th>
                     <th>Description</th>
                     <th>Department Name</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,12 +38,6 @@ function CourseTable(probs) {
                             <th>{course.isCompulsory}</th>
                             <th>{course.description}</th>
                             <th>{course.department.name}</th>
-                            <th>
-                                <ButtonGroup>
-                                    <Button size="sm" color="primary" tag={Link} to={"/Courses/" + course.id}>Edit</Button>
-                                    <Button size="sm" color="primary" onClick={() => remove(course.id)}>Delete</Button>
-                                </ButtonGroup>
-                            </th>
                         </tr>
                     );
                 })}
