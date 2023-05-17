@@ -37,7 +37,7 @@ public class CourseRepository {
     @Transactional
     public Course update(Long id, Course course) {
         Query query = entityManager.createNativeQuery(
-                "UPDATE course SET title = ?, ects = ?, is_compulsory = ?, description = ?, departmentID = ? " +
+                "UPDATE course SET title = ?, ects = ?, is_compulsory = ?, description = ?, department_id = ? " +
                         "WHERE ID = ?");
         query.setParameter(1, course.getTitle());
         query.setParameter(2, course.getEcts());
@@ -58,7 +58,7 @@ public class CourseRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM course", Course.class);
+        Query query = entityManager.createQuery("SELECT c FROM Course c", Course.class);
         return query.getResultList();
     }
 }

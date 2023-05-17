@@ -26,15 +26,23 @@ public class Course {
     @Column(name = "ects")
     private Integer ects;
 
-    @Column(name = "isCompulsory")
+    @Column(name = "is_compulsory")
     private boolean isCompulsory;
 
     @Column(name = "description")
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
+
+    public Course(String title, Integer ects, boolean isCompulsory, String description, Department department) {
+        this.title = title;
+        this.ects = ects;
+        this.isCompulsory = isCompulsory;
+        this.description = description;
+        this.department = department;
+    }
 
     @Override
     public boolean equals(Object o) {

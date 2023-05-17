@@ -25,8 +25,8 @@ public class Student {
     @Column(name = "surname")
     private String surname;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
     @Column(name = "student_id", unique = true)

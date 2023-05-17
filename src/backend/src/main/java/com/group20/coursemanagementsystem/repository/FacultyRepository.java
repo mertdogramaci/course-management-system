@@ -47,7 +47,7 @@ public class FacultyRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM faculty", Faculty.class);
+        Query query = entityManager.createQuery("SELECT f FROM Faculty f", Faculty.class);
         return query.getResultList();
     }
 }

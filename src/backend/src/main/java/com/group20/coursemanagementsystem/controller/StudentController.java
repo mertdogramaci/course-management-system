@@ -19,7 +19,7 @@ public class StudentController {
 
     @GetMapping
     public List getAllStudents() {
-        return studentRepository.getAllStudents();
+        return studentRepository.findAll();
     }
 
     @PostMapping("/save")

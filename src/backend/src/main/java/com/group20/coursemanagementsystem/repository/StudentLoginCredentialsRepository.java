@@ -36,7 +36,7 @@ public class StudentLoginCredentialsRepository {
     @Transactional
     public StudentLoginCredentials update(Long id, StudentLoginCredentials studentLoginCredentials) {
         Query query = entityManager.createNativeQuery(
-                "UPDATE student_login_credentials SET username = ?, password = ?, studentID = ? " +
+                "UPDATE student_login_credentials SET username = ?, password = ?, student_id = ? " +
                         "WHERE ID = ?");
         query.setParameter(1, studentLoginCredentials.getUsername());
         query.setParameter(2, studentLoginCredentials.getPassword());
@@ -55,7 +55,7 @@ public class StudentLoginCredentialsRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM student_login_credentials",
+        Query query = entityManager.createQuery("SELECT slc FROM StudentLoginCredentials slc",
                 StudentLoginCredentials.class);
         return query.getResultList();
     }

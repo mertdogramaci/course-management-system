@@ -17,7 +17,7 @@ public class InstructorRepository {
     @Transactional
     public Instructor save(Instructor instructor) {
         Query query = entityManager.createNativeQuery(
-                "INSERT INTO instructor (name, surname, departmentID) VALUES (?, ?, ?)");
+                "INSERT INTO instructor (name, surname, department_id) VALUES (?, ?, ?)");
         query.setParameter(1, instructor.getName());
         query.setParameter(2, instructor.getSurname());
         query.setParameter(3, instructor.getDepartment().getId());
@@ -35,7 +35,7 @@ public class InstructorRepository {
     @Transactional
     public Instructor update(Long id, Instructor instructor) {
         Query query = entityManager.createNativeQuery(
-                "UPDATE instructor SET name = ?, surname = ?, departmentID = ? WHERE ID = ?");
+                "UPDATE instructor SET name = ?, surname = ?, department_id = ? WHERE ID = ?");
         query.setParameter(1, instructor.getName());
         query.setParameter(2, instructor.getSurname());
         query.setParameter(3, instructor.getDepartment().getId());
@@ -53,7 +53,7 @@ public class InstructorRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM instructor", Instructor.class);
+        Query query = entityManager.createQuery("SELECT i FROM Instructor i", Instructor.class);
         return query.getResultList();
     }
 }

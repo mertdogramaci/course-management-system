@@ -14,11 +14,6 @@ public class StudentRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List getAllStudents() {
-        Query query = entityManager.createQuery("SELECT s FROM Student s", Student.class);
-        return query.getResultList();
-    }
-
     @Transactional
     public <S extends Student> S save(S student) {
         Query query = entityManager.createNativeQuery("INSERT INTO student (name, surname, department_id, student_id, school_enrollment_date, semester_ects) VALUES (?, ?, ?, ?, ?, ?)");
@@ -41,7 +36,7 @@ public class StudentRepository {
     @Transactional
     public Student update(Long id, Student student) {
         Query query = entityManager.createNativeQuery(
-                "UPDATE Student SET StudentID = ?, SchoolEnrollmentDate = ?, semesterECTS = ?, departmentID = ? " +
+                "UPDATE Student SET student_id = ?, school_enrollment_date = ?, semester_ects = ?, department_id = ? " +
                         "WHERE ID = ?");
         query.setParameter(1, student.getStudentID());
         query.setParameter(2, student.getSchoolEnrollmentDate());
@@ -58,5 +53,10 @@ public class StudentRepository {
         Query query = entityManager.createNativeQuery("DELETE FROM student WHERE id = ?");
         query.setParameter(1, id);
         query.executeUpdate();
+    }
+
+    public List findAll() {
+        Query query = entityManager.createQuery("SELECT s FROM Student s", Student.class);
+        return query.getResultList();
     }
 }

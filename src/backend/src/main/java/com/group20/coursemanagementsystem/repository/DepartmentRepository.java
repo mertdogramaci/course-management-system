@@ -49,7 +49,7 @@ public class DepartmentRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM department", Department.class);
+        Query query = entityManager.createQuery("SELECT d FROM Department d", Department.class);
         return query.getResultList();
     }
 }

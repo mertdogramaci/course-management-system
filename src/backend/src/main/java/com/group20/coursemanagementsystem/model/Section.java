@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,20 +28,29 @@ public class Section {
     @Column(name = "year")
     private Integer year;
 
-    @Column(name = "classroomInfo")
+    @Column(name = "classroom_info")
     private String classroomInfo;
 
     @Column(name = "quota")
     private Integer quota;
 
     @ManyToOne
-    @JoinColumn(name = "course_id")
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Course course;
 
-    @OneToMany
-    @JoinColumn(name = "instructor_id")
+    @ManyToOne
+    @JoinColumn(name = "instructor_id", referencedColumnName = "id")
     @ToString.Exclude
-    private List<Instructor> instructor;
+    private Instructor instructor;
+
+    public Section(Boolean semester, Integer year, String classroomInfo, Integer quota, Course course, Instructor instructor) {
+        this.semester = semester;
+        this.year = year;
+        this.classroomInfo = classroomInfo;
+        this.quota = quota;
+        this.course = course;
+        this.instructor = instructor;
+    }
 
     @Override
     public boolean equals(Object o) {

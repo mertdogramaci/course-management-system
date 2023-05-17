@@ -25,8 +25,14 @@ public class InstructorLoginCredentials {
     private String password;
 
     @OneToOne
-    @JoinColumn(name = "instructor_id")
+    @JoinColumn(name = "instructor_id", referencedColumnName = "id")
     private Instructor instructor;
+
+    public InstructorLoginCredentials(String username, String password, Instructor instructor) {
+        this.username = username;
+        this.password = password;
+        this.instructor = instructor;
+    }
 
     @Override
     public boolean equals(Object o) {

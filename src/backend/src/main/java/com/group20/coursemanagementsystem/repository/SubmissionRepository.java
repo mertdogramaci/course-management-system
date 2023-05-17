@@ -51,7 +51,7 @@ public class SubmissionRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM submission", Submission.class);
+        Query query = entityManager.createQuery("SELECT s FROM Submission s", Submission.class);
         return query.getResultList();
     }
 }

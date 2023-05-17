@@ -25,8 +25,14 @@ public class Instructor {
     private String surname;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
+
+    public Instructor(String name, String surname, Department department) {
+        this.name = name;
+        this.surname = surname;
+        this.department = department;
+    }
 
     @Override
     public boolean equals(Object o) {

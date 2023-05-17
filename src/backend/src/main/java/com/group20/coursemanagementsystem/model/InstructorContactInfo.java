@@ -30,7 +30,7 @@ public class InstructorContactInfo {
     private String address;
 
     @OneToOne
-    @JoinColumn(name = "instructor_id")
+    @JoinColumn(name = "instructor_id", referencedColumnName = "id")
     private Instructor instructor;
 
     @Override

@@ -17,7 +17,7 @@ public class InstructorLoginCredentialsRepository {
     @Transactional
     public InstructorLoginCredentials save(InstructorLoginCredentials instructorLoginCredentials) {
         Query query = entityManager.createNativeQuery(
-                "INSERT INTO instructor_login_credentials (username, password, instructorID) VALUES (?, ?, ?)");
+                "INSERT INTO instructor_login_credentials (username, password, instructor_id) VALUES (?, ?, ?)");
         query.setParameter(1, instructorLoginCredentials.getUsername());
         query.setParameter(2, instructorLoginCredentials.getPassword());
         query.setParameter(3, instructorLoginCredentials.getInstructor().getId());
@@ -36,7 +36,7 @@ public class InstructorLoginCredentialsRepository {
     @Transactional
     public InstructorLoginCredentials update(Long id, InstructorLoginCredentials instructorLoginCredentials) {
         Query query = entityManager.createNativeQuery(
-                "UPDATE instructor_login_credentials SET username = ?, password = ?, instructorID = ? " +
+                "UPDATE instructor_login_credentials SET username = ?, password = ?, instructor_id = ? " +
                         "WHERE ID = ?");
         query.setParameter(1, instructorLoginCredentials.getUsername());
         query.setParameter(2, instructorLoginCredentials.getPassword());
@@ -55,7 +55,7 @@ public class InstructorLoginCredentialsRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM instructor_login_credentials",
+        Query query = entityManager.createQuery("SELECT ilc FROM InstructorLoginCredentials ilc",
                 InstructorLoginCredentials.class);
         return query.getResultList();
     }

@@ -17,7 +17,7 @@ public class TimeSlotRepository {
     @Transactional
     public TimeSlot save(TimeSlot timeSlot) {
         Query query = entityManager.createNativeQuery(
-                "INSERT INTO time_slot (day, startTime, endTime) VALUES (?, ?, ?)");
+                "INSERT INTO time_slot (day, start_time, end_time) VALUES (?, ?, ?)");
         query.setParameter(1, timeSlot.getDay());
         query.setParameter(2, timeSlot.getStartTime());
         query.setParameter(3, timeSlot.getEndTime());
@@ -35,7 +35,7 @@ public class TimeSlotRepository {
     @Transactional
     public TimeSlot update(Long id, TimeSlot timeSlot) {
         Query query = entityManager.createNativeQuery(
-                "UPDATE time_slot SET day = ?, startTime = ?, endTime = ? WHERE ID = ?");
+                "UPDATE time_slot SET day = ?, start_time = ?, end_time = ? WHERE ID = ?");
         query.setParameter(1, timeSlot.getDay());
         query.setParameter(2, timeSlot.getStartTime());
         query.setParameter(3, timeSlot.getEndTime());
@@ -53,7 +53,7 @@ public class TimeSlotRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM time_slot", TimeSlot.class);
+        Query query = entityManager.createQuery("SELECT ts FROM TimeSlot ts", TimeSlot.class);
         return query.getResultList();
     }
 }

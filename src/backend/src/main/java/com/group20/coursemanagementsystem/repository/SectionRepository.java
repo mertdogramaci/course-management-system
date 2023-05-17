@@ -17,12 +17,13 @@ public class SectionRepository {
     @Transactional
     public Section save(Section section) {
         Query query = entityManager.createNativeQuery(
-                "INSERT INTO section (semester, year, classroomInfo, quota, courseID) VALUES (?, ?, ?, ?, ?)");
+                "INSERT INTO section (semester, year, classroom_info, quota, course_id, instructor_id) VALUES (?, ?, ?, ?, ?, ?)");
         query.setParameter(1, section.getSemester());
         query.setParameter(2, section.getYear());
         query.setParameter(3, section.getClassroomInfo());
         query.setParameter(4, section.getQuota());
         query.setParameter(5, section.getCourse().getId());
+        query.setParameter(6, section.getInstructor().getId());
         query.executeUpdate();
 
         return section;
@@ -37,13 +38,14 @@ public class SectionRepository {
     @Transactional
     public Section update(Long id, Section section) {
         Query query = entityManager.createNativeQuery(
-                "UPDATE section SET semester = ?, year = ?, classroomInfo = ?, quota = ?, courseID = ? WHERE ID = ?");
+                "UPDATE section SET semester = ?, year = ?, classroom_info = ?, quota = ?, course_id = ?, instructor_id WHERE ID = ?");
         query.setParameter(1, section.getSemester());
         query.setParameter(2, section.getYear());
         query.setParameter(3, section.getClassroomInfo());
         query.setParameter(4, section.getQuota());
         query.setParameter(5, section.getCourse().getId());
-        query.setParameter(6, id);
+        query.setParameter(6, section.getInstructor().getId());
+        query.setParameter(7, id);
         query.executeUpdate();
 
         return section;
@@ -57,7 +59,7 @@ public class SectionRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM section", Section.class);
+        Query query = entityManager.createQuery("SELECT s FROM Section s", Section.class);
         return query.getResultList();
     }
 }

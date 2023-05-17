@@ -17,7 +17,7 @@ public class InstructorContactInfoRepository {
     @Transactional
     public InstructorContactInfo save(InstructorContactInfo instructorContactInfo) {
         Query query = entityManager.createNativeQuery(
-                "INSERT INTO instructor_contact_info (phone, email, address, instructorID) VALUES (?, ?, ?, ?)");
+                "INSERT INTO instructor_contact_info (phone, email, address, instructor_id) VALUES (?, ?, ?, ?)");
         query.setParameter(1, instructorContactInfo.getPhone());
         query.setParameter(2, instructorContactInfo.getEmail());
         query.setParameter(3, instructorContactInfo.getAddress());
@@ -37,7 +37,7 @@ public class InstructorContactInfoRepository {
     @Transactional
     public InstructorContactInfo update(Long id, InstructorContactInfo instructorContactInfo) {
         Query query = entityManager.createNativeQuery(
-                "UPDATE instructor_contact_info SET phone = ?, email = ?, address = ?, instructorID = ? WHERE ID = ?");
+                "UPDATE instructor_contact_info SET phone = ?, email = ?, address = ?, instructor_id = ? WHERE ID = ?");
         query.setParameter(1, instructorContactInfo.getPhone());
         query.setParameter(2, instructorContactInfo.getEmail());
         query.setParameter(3, instructorContactInfo.getAddress());
@@ -56,7 +56,7 @@ public class InstructorContactInfoRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM instructor_contact_info",
+        Query query = entityManager.createQuery("SELECT ici FROM InstructorContactInfo ici",
                 InstructorContactInfo.class);
         return query.getResultList();
     }

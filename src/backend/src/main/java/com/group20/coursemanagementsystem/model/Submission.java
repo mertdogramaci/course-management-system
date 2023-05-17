@@ -28,15 +28,15 @@ public class Submission {
     @Column(name = "content")
     private Byte[] content;
 
-    @OneToMany
-    @JoinColumn(name = "submission_id")
+    @ManyToOne
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
     @ToString.Exclude
-    private List<Student> student;
+    private Student student;
 
-    @OneToMany
-    @JoinColumn(name = "submission_id")
+    @ManyToOne
+    @JoinColumn(name = "homework_id", referencedColumnName = "id")
     @ToString.Exclude
-    private List<Homework> homework;
+    private Homework homework;
 
     @Override
     public boolean equals(Object o) {

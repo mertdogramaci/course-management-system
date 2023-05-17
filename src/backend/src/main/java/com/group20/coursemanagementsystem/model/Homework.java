@@ -27,14 +27,14 @@ public class Homework {
     @Column(name = "content")
     private Byte[] content;
 
-    @Column(name = "issueDate")
+    @Column(name = "issue_date")
     private LocalDateTime issueDate;
 
-    @Column(name = "dueDate")
+    @Column(name = "due_date")
     private LocalDateTime dueDate;
 
     @ManyToOne
-    @JoinColumn(name = "section_id")
+    @JoinColumn(name = "section_id", referencedColumnName = "id")
     private Section section;
 
     @Override

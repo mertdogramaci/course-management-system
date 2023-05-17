@@ -27,7 +27,7 @@ public class StudentLoginCredentials {
     private String password;
 
     @OneToOne
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
     public StudentLoginCredentials(String username, String password, Student student) {

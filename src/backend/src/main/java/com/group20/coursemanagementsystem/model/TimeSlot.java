@@ -25,16 +25,16 @@ public class TimeSlot {
     @Column(name = "day")
     private Integer day;
 
-    @Column(name = "startTime")
+    @Column(name = "start_time")
     private Timestamp startTime;
 
-    @Column(name = "endTime")
+    @Column(name = "end_time")
     private Timestamp endTime;
 
-    @OneToMany
-    @JoinColumn(name = "section_id")
+    @ManyToOne
+    @JoinColumn(name = "section_id", referencedColumnName = "id")
     @ToString.Exclude
-    private List<Section> section;
+    private Section section;
 
     @Override
     public boolean equals(Object o) {

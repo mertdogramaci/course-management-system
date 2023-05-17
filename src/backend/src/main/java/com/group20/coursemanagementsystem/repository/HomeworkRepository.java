@@ -17,7 +17,7 @@ public class HomeworkRepository {
     @Transactional
     public Homework save(Homework homework) {
         Query query = entityManager.createNativeQuery(
-                "INSERT INTO homework (title, content, issueDate, dueDate, sectionID) VALUES (?, ?, ?, ?, ?)");
+                "INSERT INTO homework (title, content, issue_date, due_date, section_id) VALUES (?, ?, ?, ?, ?)");
         query.setParameter(1, homework.getTitle());
         query.setParameter(2, homework.getContent());
         query.setParameter(3, homework.getIssueDate());
@@ -37,7 +37,7 @@ public class HomeworkRepository {
     @Transactional
     public Homework update(Long id, Homework homework) {
         Query query = entityManager.createNativeQuery(
-                "UPDATE homework SET title = ?, content = ?, issueDate = ?, dueDate = ?, sectionID = ? WHERE ID = ?");
+                "UPDATE homework SET title = ?, content = ?, issue_date = ?, due_date = ?, section_id = ? WHERE ID = ?");
         query.setParameter(1, homework.getTitle());
         query.setParameter(2, homework.getContent());
         query.setParameter(3, homework.getIssueDate());
@@ -57,7 +57,7 @@ public class HomeworkRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM homework", Homework.class);
+        Query query = entityManager.createQuery("SELECT h FROM Homework h", Homework.class);
         return query.getResultList();
     }
 }
