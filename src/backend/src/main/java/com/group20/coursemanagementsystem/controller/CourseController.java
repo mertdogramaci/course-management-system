@@ -22,12 +22,23 @@ public class CourseController {
     }
 
     @GetMapping("/{courseId}")
-    public ResponseEntity<Object> getCourseById(Long id) {
+    public ResponseEntity<Course> getCourseById(Long id) {
         return ResponseEntity.ok(courseRepository.findById(id));
     }
 
     @PostMapping("/save")
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
         return ResponseEntity.ok(courseRepository.save(course));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Course> updateCourse(@PathVariable Long id, @RequestBody Course course) {
+        return ResponseEntity.ok(courseRepository.update(id, course));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCourse(@PathVariable Long id) {
+        courseRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }
