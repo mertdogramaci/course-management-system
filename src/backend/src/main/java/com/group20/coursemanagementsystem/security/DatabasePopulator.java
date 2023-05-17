@@ -30,15 +30,23 @@ public class DatabasePopulator {
 
     @Transactional
     public void populateDatabase() {
-        facultyRepository.save(new Faculty("engineering"));
-        Faculty faculty = facultyRepository.findById(1L);
+        Faculty faculty = new Faculty();
+        faculty.setName("Engineering");
+        facultyRepository.save(faculty);
 
-        departmentRepository.save(new Department("computer", faculty));
-        Department department = departmentRepository.findById(1L);
+        Department department = new Department();
+        department.setFaculty(faculty);
+        department.setName("Computer Engineering");
+        departmentRepository.save(department);
 
-        studentRepository.save(new Student("ozgun", "akyuz", department, 21827005L, LocalDate.now(),
-                40));
-        Student student = studentRepository.findById(1L);
+        Student student = new Student();
+        student.setName("Özgün");
+        student.setSurname("Akyüz");
+        student.setDepartment(department);
+        student.setStudentID(21827005L);
+        student.setSchoolEnrollmentDate(LocalDate.now());
+        student.setSemesterECTS(40);
+        studentRepository.save(student);
 
         studentLoginCredentialsRepository.save(new StudentLoginCredentials("b21827005", "ozgun", student));
     }
