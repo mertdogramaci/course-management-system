@@ -1,5 +1,6 @@
 package com.group20.coursemanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class Department {
 
     @ManyToOne
     @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Faculty faculty;
 
     public Department(String name, Faculty faculty) {
