@@ -15,7 +15,7 @@ public class StudentRepository {
     private EntityManager entityManager;
 
     public List getAllStudents() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM Student", Student.class);
+        Query query = entityManager.createQuery("SELECT s FROM Student s", Student.class);
         return query.getResultList();
     }
 
