@@ -31,11 +31,11 @@ public class DepartmentRepository {
     }
 
     @Transactional
-    public Department update(Department department) {
+    public Department update(Long id, Department department) {
         Query query = entityManager.createNativeQuery("UPDATE department SET name = ?, faculty_id = ? WHERE ID = ?");
         query.setParameter(1, department.getName());
         query.setParameter(2, department.getFaculty().getId());
-        query.setParameter(3, department.getId());
+        query.setParameter(3, id);
         query.executeUpdate();
 
         return department;

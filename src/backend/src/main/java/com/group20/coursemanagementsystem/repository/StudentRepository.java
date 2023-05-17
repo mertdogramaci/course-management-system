@@ -39,7 +39,7 @@ public class StudentRepository {
     }
 
     @Transactional
-    public Student update(Student student) {
+    public Student update(Long id, Student student) {
         Query query = entityManager.createNativeQuery(
                 "UPDATE Student SET StudentID = ?, SchoolEnrollmentDate = ?, semesterECTS = ?, departmentID = ? " +
                         "WHERE ID = ?");
@@ -47,7 +47,7 @@ public class StudentRepository {
         query.setParameter(2, student.getSchoolEnrollmentDate());
         query.setParameter(3, student.getSemesterECTS());
         query.setParameter(4, student.getDepartment().getId());
-        query.setParameter(5, student.getId());
+        query.setParameter(5, id);
         query.executeUpdate();
 
         return student;

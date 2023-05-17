@@ -30,10 +30,10 @@ public class FacultyRepository {
     }
 
     @Transactional
-    public Faculty update(Faculty faculty) {
+    public Faculty update(Long id, Faculty faculty) {
         Query query = entityManager.createNativeQuery("UPDATE faculty SET name = ? WHERE ID = ?");
         query.setParameter(1, faculty.getName());
-        query.setParameter(2, faculty.getId());
+        query.setParameter(2, id);
         query.executeUpdate();
 
         return faculty;

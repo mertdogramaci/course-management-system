@@ -35,7 +35,7 @@ public class SectionRepository {
     }
 
     @Transactional
-    public Section update(Section section) {
+    public Section update(Long id, Section section) {
         Query query = entityManager.createNativeQuery(
                 "UPDATE section SET semester = ?, year = ?, classroomInfo = ?, quota = ?, courseID = ? WHERE ID = ?");
         query.setParameter(1, section.getSemester());
@@ -43,7 +43,7 @@ public class SectionRepository {
         query.setParameter(3, section.getClassroomInfo());
         query.setParameter(4, section.getQuota());
         query.setParameter(5, section.getCourse().getId());
-        query.setParameter(6, section.getId());
+        query.setParameter(6, id);
         query.executeUpdate();
 
         return section;

@@ -33,13 +33,13 @@ public class TimeSlotRepository {
     }
 
     @Transactional
-    public TimeSlot update(TimeSlot timeSlot) {
+    public TimeSlot update(Long id, TimeSlot timeSlot) {
         Query query = entityManager.createNativeQuery(
                 "UPDATE time_slot SET day = ?, startTime = ?, endTime = ? WHERE ID = ?");
         query.setParameter(1, timeSlot.getDay());
         query.setParameter(2, timeSlot.getStartTime());
         query.setParameter(3, timeSlot.getEndTime());
-        query.setParameter(4, timeSlot.getId());
+        query.setParameter(4, id);
         query.executeUpdate();
 
         return timeSlot;

@@ -32,12 +32,12 @@ public class SubmissionRepository {
     }
 
     @Transactional
-    public Submission update(Submission submission) {
+    public Submission update(Long id, Submission submission) {
         Query query = entityManager.createNativeQuery(
                 "UPDATE submission SET marks = ?, content = ? WHERE ID = ?");
         query.setParameter(1, submission.getMarks());
         query.setParameter(2, submission.getContent());
-        query.setParameter(3, submission.getId());
+        query.setParameter(3, id);
         query.executeUpdate();
 
         return submission;

@@ -34,14 +34,14 @@ public class StudentLoginCredentialsRepository {
     }
 
     @Transactional
-    public StudentLoginCredentials update(StudentLoginCredentials studentLoginCredentials) {
+    public StudentLoginCredentials update(Long id, StudentLoginCredentials studentLoginCredentials) {
         Query query = entityManager.createNativeQuery(
                 "UPDATE student_login_credentials SET username = ?, password = ?, studentID = ? " +
                         "WHERE ID = ?");
         query.setParameter(1, studentLoginCredentials.getUsername());
         query.setParameter(2, studentLoginCredentials.getPassword());
         query.setParameter(3, studentLoginCredentials.getStudent().getId());
-        query.setParameter(4, studentLoginCredentials.getId());
+        query.setParameter(4, id);
         query.executeUpdate();
 
         return studentLoginCredentials;

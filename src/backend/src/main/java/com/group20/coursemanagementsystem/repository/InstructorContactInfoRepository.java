@@ -35,14 +35,14 @@ public class InstructorContactInfoRepository {
     }
 
     @Transactional
-    public InstructorContactInfo update(InstructorContactInfo instructorContactInfo) {
+    public InstructorContactInfo update(Long id, InstructorContactInfo instructorContactInfo) {
         Query query = entityManager.createNativeQuery(
                 "UPDATE instructor_contact_info SET phone = ?, email = ?, address = ?, instructorID = ? WHERE ID = ?");
         query.setParameter(1, instructorContactInfo.getPhone());
         query.setParameter(2, instructorContactInfo.getEmail());
         query.setParameter(3, instructorContactInfo.getAddress());
         query.setParameter(4, instructorContactInfo.getInstructor().getId());
-        query.setParameter(5, instructorContactInfo.getId());
+        query.setParameter(5, id);
         query.executeUpdate();
 
         return instructorContactInfo;

@@ -35,7 +35,7 @@ public class CourseRepository {
     }
 
     @Transactional
-    public Course update(Course course) {
+    public Course update(Long id, Course course) {
         Query query = entityManager.createNativeQuery(
                 "UPDATE course SET title = ?, ects = ?, is_compulsory = ?, description = ?, departmentID = ? " +
                         "WHERE ID = ?");
@@ -44,7 +44,7 @@ public class CourseRepository {
         query.setParameter(3, course.isCompulsory());
         query.setParameter(4, course.getDescription());
         query.setParameter(5, course.getDepartment().getId());
-        query.setParameter(6, course.getId());
+        query.setParameter(6, id);
         query.executeUpdate();
 
         return course;

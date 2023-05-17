@@ -35,7 +35,7 @@ public class HomeworkRepository {
     }
 
     @Transactional
-    public Homework update(Homework homework) {
+    public Homework update(Long id, Homework homework) {
         Query query = entityManager.createNativeQuery(
                 "UPDATE homework SET title = ?, content = ?, issueDate = ?, dueDate = ?, sectionID = ? WHERE ID = ?");
         query.setParameter(1, homework.getTitle());
@@ -43,7 +43,7 @@ public class HomeworkRepository {
         query.setParameter(3, homework.getIssueDate());
         query.setParameter(4, homework.getDueDate());
         query.setParameter(5, homework.getSection().getId());
-        query.setParameter(6, homework.getId());
+        query.setParameter(6, id);
         query.executeUpdate();
 
         return homework;
