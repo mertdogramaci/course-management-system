@@ -27,10 +27,10 @@ public class StudentController {
         return studentRepository.save(newStudent);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student student) {
-        return ResponseEntity.ok(studentRepository.update(id, student));
-    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student student) {
+//        return ResponseEntity.ok(studentRepository.update(id, student));
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long id) {

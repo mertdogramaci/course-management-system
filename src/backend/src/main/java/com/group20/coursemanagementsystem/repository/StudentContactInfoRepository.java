@@ -1,9 +1,9 @@
 package com.group20.coursemanagementsystem.repository;
 
 import com.group20.coursemanagementsystem.model.StudentContactInfo;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

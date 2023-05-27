@@ -1,80 +1,44 @@
 package com.group20.coursemanagementsystem.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
-import lombok.*;
+import com.group20.coursemanagementsystem.enums.MemberType;
+import com.group20.coursemanagementsystem.model.Member;
+import com.group20.coursemanagementsystem.security.domain.Authority;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.Set;
 
 
-@Entity
-@Table(name = "student")
 @Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
-public class Student {
+@Inheritance
+@Entity
+@Table(name = "student_table")
+@DiscriminatorValue(value = "STUDENT")
+@NoArgsConstructor
+public class Student extends Member {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "surname")
-    private String surname;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Department department;
-
-    @Column(name = "student_id", unique = true)
-    private Long studentID;
-
-    @Column(name = "school_enrollment_date")
-    private LocalDate schoolEnrollmentDate;
-
-    @Column(name = "semester_ects")
-    private Integer semesterECTS = 0;
-
-    public Student(String name, String surname, Department department, Long studentID, LocalDate schoolEnrollmentDate,
-                   Integer semesterECTS) {
-        this.name = name;
-        this.surname = surname;
-        this.department = department;
-        this.studentID = studentID;
-        this.schoolEnrollmentDate = schoolEnrollmentDate;
-        this.semesterECTS = semesterECTS;
+    public Student(String firstName, String lastName, String hacettepeId, String email,
+                   String password, MemberType memberType  , Set<Authority> authorities) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.hacettepeId = hacettepeId;
+        this.email = email;
+        this.password = password;
+        this.memberType = memberType;
+        this.authorities = authorities;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Student student = (Student) o;
-
-        if (!id.equals(student.id)) return false;
-        if (!name.equals(student.name)) return false;
-        if (!surname.equals(student.surname)) return false;
-        if (!department.equals(student.department)) return false;
-        if (!studentID.equals(student.studentID)) return false;
-        if (!schoolEnrollmentDate.equals(student.schoolEnrollmentDate)) return false;
-        return Objects.equals(semesterECTS, student.semesterECTS);
+    public Student(String firstName, String lastName, String hacettepeId, String email, String password, MemberType memberType) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.hacettepeId = hacettepeId;
+        this.email = email;
+        this.password = password;
+        this.memberType = memberType;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + surname.hashCode();
-        result = 31 * result + department.hashCode();
-        result = 31 * result + studentID.hashCode();
-        result = 31 * result + schoolEnrollmentDate.hashCode();
-        result = 31 * result + (semesterECTS != null ? semesterECTS.hashCode() : 0);
-        return result;
+    public Student(String firstName, String lastName, String hacettepeId, String email, String password, String profilePhoto, String phoneNumber, String linkedInURL, String githubURL, String about, String experience, String interests, MemberType memberType, Set<Authority> authorities) {
+        super(firstName, lastName, hacettepeId, email, password, profilePhoto, phoneNumber, linkedInURL, githubURL, about, experience, interests, memberType, authorities);
     }
 }
