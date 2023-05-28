@@ -23,10 +23,10 @@ function StudentTable(probs) {
                     <th>ID</th>
                     <th>Name</th>
                     <th>Surname</th>
-                    <th>Department Name</th>
                     <th>Student ID</th>
                     <th>School Enrollment Date</th>
                     <th>Semester ECTS</th>
+                    <th>Department Name</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,10 +36,10 @@ function StudentTable(probs) {
                             <th>{student.id}</th>
                             <th>{student.name}</th>
                             <th>{student.surname}</th>
-                            <th>{student.department.name}</th>
                             <th>{student.studentID}</th>
                             <th>{student.schoolEnrollmentDate}</th>
                             <th>{student.semesterECTS}</th>
+                            <th>{student.department.name}</th>
                         </tr>
                     );
                 })}

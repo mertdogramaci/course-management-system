@@ -22,6 +22,7 @@ function FacultyTable(probs) {
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +31,12 @@ function FacultyTable(probs) {
                         <tr key={faculty.id}>
                             <th>{faculty.id}</th>
                             <th>{faculty.name}</th>
+                            <th>   
+                                <ButtonGroup>
+                                    <Button size="sm" color="primary" tag={Link} to={"/faculties/" + faculty.id}>Edit</Button>
+                                    <Button size="sm" color="primary" onClick={() => remove(faculty.id)}>Delete</Button>
+                                </ButtonGroup>
+                            </th>
                         </tr>
                     );
                 })}
