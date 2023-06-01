@@ -49,17 +49,17 @@ public class EnrolmentRequest extends BaseEntity {
 
     //Map function to Member
     public Member toMember() {
-        return new Member(firstName, lastName, hacettepeId, email, memberType);
+        return new Member(firstName, lastName, email, memberType);
     }
 
     //Map function to Student
     public Student toStudent() {
-        return new Student(firstName, lastName, hacettepeId, email, password, memberType);
+        return new Student(firstName, lastName, email, password, memberType);
     }
 
     //Map function to Academician
     public Academician toAcademician() {
-        return new Academician(firstName, lastName, hacettepeId, email, password, memberType);
+        return new Academician(firstName, lastName, hacettepeId, email, memberType);
     }
 }
 
