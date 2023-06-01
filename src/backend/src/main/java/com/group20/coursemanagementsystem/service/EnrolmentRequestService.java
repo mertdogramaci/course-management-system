@@ -39,8 +39,8 @@ public class EnrolmentRequestService {
             return new MessageResponse(MessageType.ERROR, ENROLMENT_REQUEST_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeId()));
         if (enrolmentRequestRepository.existsByEmail(newEnrolmentRequest.getEmail()))
             return new MessageResponse(MessageType.ERROR, ENROLMENT_REQUEST_EMAIL_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeId()));
-        if (memberRepository.existsByHacettepeId(newEnrolmentRequest.getHacettepeId()))
-            return new MessageResponse(MessageType.ERROR, MEMBER_WITH_HACETTEPE_ID_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeId()));
+//        if (memberRepository.existsByHacettepeId(newEnrolmentRequest.getHacettepeId()))
+//            return new MessageResponse(MessageType.ERROR, MEMBER_WITH_HACETTEPE_ID_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeId()));
         if (memberRepository.existsByEmail(newEnrolmentRequest.getEmail()))
             return new MessageResponse(MessageType.ERROR, MEMBER_WITH_EMAIL_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeId()));
         newEnrolmentRequest.setPassword(passwordEncoder.encode(newEnrolmentRequest.getPassword()));

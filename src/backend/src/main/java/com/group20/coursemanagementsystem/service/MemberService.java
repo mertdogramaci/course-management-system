@@ -82,10 +82,10 @@ public class MemberService {
         return new MessageResponse(MessageType.SUCCESS, MEMBER_ADDED_MESSAGE.formatted(enrolmentRequestFromDB.getHacettepeId()));
     }
 
-    public Member getMemberByHacettepeId(final String hacettepeId) {
-        return memberRepository.findByHacettepeId(hacettepeId)
-                .orElseThrow(() -> new EntityNotFoundException(MEMBER_DOES_NOT_EXIST_MESSAGE.formatted(hacettepeId)));
-    }
+//    public Member getMemberByHacettepeId(final String hacettepeId) {
+//        return memberRepository.findByHacettepeId(hacettepeId)
+//                .orElseThrow(() -> new EntityNotFoundException(MEMBER_DOES_NOT_EXIST_MESSAGE.formatted(hacettepeId)));
+//    }
     public Member getMemberById(final Long id) {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));

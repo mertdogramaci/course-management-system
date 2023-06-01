@@ -20,20 +20,18 @@ import java.util.Set;
 @NoArgsConstructor
 public class Academician extends Member {
 
-    public Academician(String firstName, String lastName, String hacettepeId, String email, String password, MemberType memberType, Set<Authority> authorities) {
+    public Academician(String firstName, String lastName, String email, String password, MemberType memberType, Set<Authority> authorities) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.hacettepeId = hacettepeId;
         this.email = email;
         this.password = password;
         this.memberType = memberType;
         this.authorities = authorities;
     }
 
-    public Academician(String firstName, String lastName, String hacettepeId, String email, String password, MemberType memberType) {
+    public Academician(String firstName, String lastName, String email, String password, MemberType memberType) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.hacettepeId = hacettepeId;
         this.email = email;
         this.password = password;
         this.memberType = memberType;

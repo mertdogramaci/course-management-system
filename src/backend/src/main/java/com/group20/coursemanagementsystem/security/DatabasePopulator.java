@@ -83,14 +83,9 @@ public class DatabasePopulator {
 
         if (!memberRepository.existsByEmail("zgnakyuz@gmail.com")) {
             Student member = new Student(
-                    "Özgün", "Akyüz",
-                    "21827005", "zgnakyuz@gmail.com",
-                    passwordEncoder.encode("özgün"),
-                    "/assets/images/21827005-pp.png", "507 296 64 91",
-                    "https://www.linkedin.com/in/ozgunakyuz/", "https://github.com/b21827005",
+                    "Özgün", "Akyüz", "zgnakyuz@gmail.com",
+                    passwordEncoder.encode("özgün"), "507 296 64 91",
                     "Hi i'm Özgün Akyüz, I am a 3rd year computer engineering student.",
-                    "Somera -- Deep Learning Intern 2021 June",
-                    "Deep Learning\nComputer Vision\nBig Data",
                     MemberType.STUDENT,
                     Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT"))
             );

@@ -27,35 +27,17 @@ public class Member extends BaseEntity implements UserDetails {
     @Column(name = "last_name")
     protected String lastName;
 
-    @Column(name = "hacettepe_id")
-    protected String hacettepeId;
-
     @Column(name = "email", unique = true)
     protected String email;
 
     @Column(name = "password")
     protected String password;
 
-    @Column(name = "profile_photo")
-    protected String profilePhoto;
-
     @Column(name = "phone_number")
     protected String phoneNumber;
 
-    @Column(name = "linked_in_url")
-    protected String linkedInURL;
-
-    @Column(name = "github_url")
-    protected String githubURL;
-
-    @Column(name = "about")
+    @Column(name = "about") //TODO: Change this as Address
     protected String about;
-
-    @Column(name = "experience")
-    protected String experience;
-
-    @Column(name = "interest")
-    protected String interests;
 
     @Column(name = "member_type")
     protected MemberType memberType;
@@ -76,82 +58,58 @@ public class Member extends BaseEntity implements UserDetails {
 
     protected Member() {} //No args constructor is needed for Entity
 
-    public Member(String firstName, String lastName, String hacettepeId, String email, String password, MemberType memberType, Set<Authority> authorities) {
+    public Member(String firstName, String lastName, String email, String password, MemberType memberType, Set<Authority> authorities) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.hacettepeId = hacettepeId;
         this.email = email;
         this.password = password;
         this.memberType = memberType;
         this.authorities = authorities;
     }
 
-    public Member(String firstName, String lastName, String hacettepeId, String email, MemberType memberType) {
+    public Member(String firstName, String lastName, String email, MemberType memberType) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.hacettepeId = hacettepeId;
         this.email = email;
         this.memberType = memberType;
     }
 
-    public Member(String firstName, String lastName, String hacettepeId, String email, String password, String profilePhoto,
-                  String phoneNumber, String linkedInURL, String githubURL, String about, String experience, String interests) {
+    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String about) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.hacettepeId = hacettepeId;
         this.email = email;
         this.password = password;
-        this.profilePhoto = profilePhoto;
         this.phoneNumber = phoneNumber;
-        this.linkedInURL = linkedInURL;
-        this.githubURL = githubURL;
         this.about = about;
-        this.experience = experience;
-        this.interests = interests;
     }
 
-    public Member(String firstName, String lastName, String hacettepeId, String email, String profilePhoto,
-                  String phoneNumber, String linkedInURL, String githubURL, String about, String experience, String interests) {
+    public Member(String firstName, String lastName, String email, String phoneNumber, String about) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.hacettepeId = hacettepeId;
         this.email = email;
-        this.profilePhoto = profilePhoto;
         this.phoneNumber = phoneNumber;
-        this.linkedInURL = linkedInURL;
-        this.githubURL = githubURL;
         this.about = about;
-        this.experience = experience;
-        this.interests = interests;
     }
 
     public Member(String password) {
         this.password = password;
     }
 
-    public Member(String firstName, String lastName, String hacettepeId, String email, String password,
-                  String profilePhoto, String phoneNumber, String linkedInURL, String githubURL, String about,
-                  String experience, String interests, MemberType memberType, Set<Authority> authorities) {
+    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String about,
+                  MemberType memberType, Set<Authority> authorities) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.hacettepeId = hacettepeId;
         this.email = email;
         this.password = password;
-        this.profilePhoto = profilePhoto;
         this.phoneNumber = phoneNumber;
-        this.linkedInURL = linkedInURL;
-        this.githubURL = githubURL;
         this.about = about;
-        this.experience = experience;
-        this.interests = interests;
         this.memberType = memberType;
         this.authorities = authorities;
     }
 
-    public Member(String firstName, String lastName, String hacettepeId, String email) {
+    public Member(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.hacettepeId = hacettepeId;
         this.email = email;
     }
 
@@ -160,14 +118,7 @@ public class Member extends BaseEntity implements UserDetails {
         this.firstName = updatedMember.getFirstName();
         this.lastName = updatedMember.getLastName();
         this.phoneNumber = updatedMember.getPhoneNumber();
-        this.linkedInURL = updatedMember.getLinkedInURL();
-        this.githubURL = updatedMember.getGithubURL();
         this.about = updatedMember.getAbout();
-        this.experience = updatedMember.getExperience();
-        this.interests = updatedMember.getInterests();
-        if (updatedMember.getProfilePhoto() != null) {
-            this.profilePhoto = updatedMember.getProfilePhoto();
-        }
     }
 
     public void updatePassword(final Member updatedMember) {
@@ -208,12 +159,8 @@ public class Member extends BaseEntity implements UserDetails {
         return true;
     }
 
-    //Check whether or not a member has same hacettepe id with another member
-    public boolean hasSameHacettepeIdAs(Member member) {
-        return hacettepeId.equals(member.getHacettepeId());
-    }
-
-    public void addJoinDate(final LocalDate newDate) {
-        joinDates.add(newDate);
-    }
+//    //Check whether or not a member has same hacettepe id with another member
+//    public boolean hasSameHacettepeIdAs(Member member) {
+//        return hacettepeId.equals(member.getHacettepeId());
+//    }
 }
