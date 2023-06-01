@@ -9,7 +9,6 @@ import javax.validation.constraints.NotEmpty;
 @RequiredArgsConstructor
 public class LoginRequest {
 
-    // I made it immutable, modify it if you encounter any problem later
     @NotEmpty
     private final String email;
 
