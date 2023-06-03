@@ -4,7 +4,10 @@ import com.group20.coursemanagementsystem.enums.MemberType;
 import com.group20.coursemanagementsystem.model.Instructor;
 import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.model.Student;
+
 import javax.persistence.Query;
+
+import com.group20.coursemanagementsystem.security.domain.Authority;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -60,6 +63,15 @@ public class MemberRepository {
         query.setParameter(7, member.getMemberType().ordinal());
         query.setParameter(8, member.getDepartment().getId());
         query.executeUpdate();
+
+        Member saved = findByEmail(member.getEmail());
+        for (Authority auth : member.getAuthorities()) {
+            query = entityManager.createNativeQuery("INSERT INTO member_authorities (member_id, authority_id) VALUES (?, ?)");
+            query.setParameter(1, saved.getId());
+            query.setParameter(2, auth.getId());
+            query.executeUpdate();
+        }
+
         return member;
     }
 

@@ -19,15 +19,15 @@ public abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // These attributes will be used when editing concurrent operations ~~Soft Locking
-    @Version
-    private Long version; // will be used for debugging later
-
-    @CreatedDate
-    private LocalDateTime creationDate; // will be used for debugging later
-
-    @LastModifiedDate
-    private LocalDateTime lastModifiedDate; // will be used for debugging later
+//    // These attributes will be used when editing concurrent operations ~~Soft Locking
+//    @Version
+//    private Long version; // will be used for debugging later
+//
+//    @CreatedDate
+//    private LocalDateTime creationDate; // will be used for debugging later
+//
+//    @LastModifiedDate
+//    private LocalDateTime lastModifiedDate; // will be used for debugging later
 
     @Override
     public boolean equals(Object o) {
