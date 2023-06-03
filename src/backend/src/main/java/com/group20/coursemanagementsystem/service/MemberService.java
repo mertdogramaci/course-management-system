@@ -1,13 +1,12 @@
 package com.group20.coursemanagementsystem.service;
 
-import com.group20.coursemanagementsystem.model.Academician;
-import com.group20.coursemanagementsystem.repository.AcademicianRepository;
+import com.group20.coursemanagementsystem.model.Instructor;
+import com.group20.coursemanagementsystem.repository.InstructorRepository;
 import com.group20.coursemanagementsystem.dto.MessageResponse;
 import com.group20.coursemanagementsystem.enums.MemberType;
 import com.group20.coursemanagementsystem.enums.MessageType;
 import com.group20.coursemanagementsystem.request.EnrolmentRequest;
 import com.group20.coursemanagementsystem.repository.EnrolmentRequestRepository;
-import com.group20.coursemanagementsystem.service.EnrolmentRequestService;
 import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.repository.MemberRepository;
 import com.group20.coursemanagementsystem.security.repositories.AuthorityRepository;
@@ -17,11 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Base64;
 import java.util.Set;
 import java.util.List;
-import java.util.UUID;
 
 
 @Service
@@ -29,7 +25,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final StudentRepository studentRepository;
-    private final AcademicianRepository academicianRepository;
+    private final InstructorRepository instructorRepository;
     private final AuthorityRepository authorityRepository;
     private final EnrolmentRequestRepository enrolmentRequestRepository;
     private final PasswordEncoder passwordEncoder;
@@ -47,14 +43,14 @@ public class MemberService {
     private static final String MEMBER_PASSWORD_NOT_EQUAL_MESSAGE = "Your password is not correct!";
     public MemberService(final MemberRepository memberRepository,
                          final StudentRepository studentRepository,
-                         final AcademicianRepository academicianRepository,
+                         final InstructorRepository instructorRepository,
                          final AuthorityRepository authorityRepository,
                          final EnrolmentRequestRepository enrolmentRequestRepository,
                          final PasswordEncoder passwordEncoder,
                          final EnrolmentRequestService enrolmentRequestService) {
         this.memberRepository = memberRepository;
         this.studentRepository = studentRepository;
-        this.academicianRepository = academicianRepository;
+        this.instructorRepository = instructorRepository;
         this.authorityRepository = authorityRepository;
         this.enrolmentRequestRepository = enrolmentRequestRepository;
         this.enrolmentRequestService = enrolmentRequestService;
@@ -70,10 +66,10 @@ public class MemberService {
             newStudent.giveAuthorities(Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")));
             studentRepository.save(newStudent);
         }
-        else if (enrolmentRequestFromDB.getMemberType() == MemberType.ACADEMICIAN) {
-            Academician newAcademician = enrolmentRequestFromDB.toAcademician();
-            newAcademician.giveAuthorities(Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("ACADEMICIAN")));
-            academicianRepository.save(newAcademician);
+        else if (enrolmentRequestFromDB.getMemberType() == MemberType.INSTRUCTOR) {
+            Instructor newInstructor = enrolmentRequestFromDB.toInstructor();
+            newInstructor.giveAuthorities(Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("INSTRUCTOR")));
+//            instructorRepository.save(newInstructor);
         }
         else {
             System.out.println("Other type of member is not possible!");
@@ -82,24 +78,30 @@ public class MemberService {
         return new MessageResponse(MessageType.SUCCESS, MEMBER_ADDED_MESSAGE.formatted(enrolmentRequestFromDB.getHacettepeId()));
     }
 
-    public Member getMemberByHacettepeId(final String hacettepeId) {
-        return memberRepository.findByHacettepeId(hacettepeId)
-                .orElseThrow(() -> new EntityNotFoundException(MEMBER_DOES_NOT_EXIST_MESSAGE.formatted(hacettepeId)));
-    }
+//    public Member getMemberByHacettepeId(final String hacettepeId) {
+//        return memberRepository.findByHacettepeId(hacettepeId)
+//                .orElseThrow(() -> new EntityNotFoundException(MEMBER_DOES_NOT_EXIST_MESSAGE.formatted(hacettepeId)));
+//    }
     public Member getMemberById(final Long id) {
-        return memberRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
+        return memberRepository.findById(id);
+
+//                .orElseThrow(() -> new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
     }
     public Member getMemberByEmail(final String email) {
-        return memberRepository.findByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException(MEMBER_WITH_EMAIL_DOES_NOT_EXIST_MESSAGE.formatted(email)));
+        Member member = memberRepository.findByEmail(email);
+        if (member == null) {
+            throw new EntityNotFoundException(MEMBER_WITH_EMAIL_DOES_NOT_EXIST_MESSAGE.formatted(email));
+        }
+        return member;
     }
 
     public MessageResponse updateMember(final Long id, final Member updatedMember) {
-        Member memberFromDB = memberRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
+        Member memberFromDB = memberRepository.findById(id);
+        if (memberFromDB == null) {
+            throw new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id));
+        }
 
-        memberFromDB.updateMember(updatedMember); // (Important OOP Note) : Handle the data inside entities. Don't use setters
+        memberFromDB.updateMember(updatedMember);
         memberRepository.save(memberFromDB);
         return new MessageResponse(MessageType.SUCCESS, MEMBER_UPDATED_MESSAGE);
     }
@@ -114,12 +116,12 @@ public class MemberService {
         return new MessageResponse(MessageType.SUCCESS, MEMBER_DELETED_MESSAGE.formatted(id));
     }
 
-    public List<Member> search(String keyword) {
-        if (keyword != null) {
-            return memberRepository.search(keyword);
-        }
-        return memberRepository.findAll();
-    }
+//    public List<Member> search(String keyword) {
+//        if (keyword != null) {
+//            return memberRepository.search(keyword);
+//        }
+//        return memberRepository.findAll();
+//    }
 
     public MessageResponse changePassword(Long id, String oldPassword, String newPassword){
         if (!memberRepository.existsById(id)) {

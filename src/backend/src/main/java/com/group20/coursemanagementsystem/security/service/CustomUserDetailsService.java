@@ -1,5 +1,6 @@
 package com.group20.coursemanagementsystem.security.service;
 
+import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.repository.MemberRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,7 +18,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return memberRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        Member member = memberRepository.findByEmail(email);
+        if (member == null) {
+            throw new UsernameNotFoundException("User not found!");
+        }
+        return member;
     }
 }

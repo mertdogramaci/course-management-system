@@ -1,49 +1,38 @@
 package com.group20.coursemanagementsystem.repository;
 
 import com.group20.coursemanagementsystem.model.Instructor;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class InstructorRepository {
+
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
-    public Instructor save(Instructor instructor) {
-        Query query = entityManager.createNativeQuery(
-                "INSERT INTO instructor (name, surname, department_id) VALUES (?, ?, ?)");
-        query.setParameter(1, instructor.getName());
-        query.setParameter(2, instructor.getSurname());
-        query.setParameter(3, instructor.getDepartment().getId());
-        query.executeUpdate();
-
-        return instructor;
-    }
-
     public Instructor findById(Long id) {
-        Query query = entityManager.createNativeQuery("SELECT * FROM instructor WHERE id = ?", Instructor.class);
+        Query query = entityManager.createNativeQuery("SELECT * FROM instructor_table WHERE id = ?", Instructor.class);
         query.setParameter(1, id);
         return (Instructor) query.getSingleResult();
     }
 
-    @Transactional
-    public Instructor update(Long id, Instructor instructor) {
-        Query query = entityManager.createNativeQuery(
-                "UPDATE instructor SET name = ?, surname = ?, department_id = ? WHERE ID = ?");
-        query.setParameter(1, instructor.getName());
-        query.setParameter(2, instructor.getSurname());
-        query.setParameter(3, instructor.getDepartment().getId());
-        query.setParameter(6, id);
-        query.executeUpdate();
-
-        return instructor;
-    }
+//    @Transactional
+//    public Instructor update(Long id, Instructor instructor) {
+//        Query query = entityManager.createNativeQuery(
+//                "UPDATE instructor SET name = ?, surname = ?, department_id = ? WHERE ID = ?");
+//        query.setParameter(1, instructor.getName());
+//        query.setParameter(2, instructor.getSurname());
+//        query.setParameter(3, instructor.getDepartment().getId());
+//        query.setParameter(4, id);
+//        query.executeUpdate();
+//
+//        return instructor;
+//    }
 
     @Transactional
     public void deleteById(Long id) {
