@@ -81,19 +81,19 @@ public class DatabasePopulator {
         departmentRepository.save(new Department("Computer Education and Instructional Technology", faculty));
         departmentRepository.save(new Department("Educational Sciences", faculty));
 
-        if (!memberRepository.existsByEmail("zgnakyuz@gmail.com")) {
-            Student member = new Student(
-                    "Özgün", "Akyüz", "zgnakyuz@gmail.com",
-                    passwordEncoder.encode("özgün"), "507 296 64 91",
-                    "Hi i'm Özgün Akyüz, I am a 3rd year computer engineering student.",
-                    MemberType.STUDENT,
-                    Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT"))
-            );
-            memberRepository.save(member);
-        }
-
-
         Department department = departmentRepository.findById(1L);
+        Student member = new Student(
+                "Özgün", "Akyüz", "zgnakyuz@gmail.com",
+                passwordEncoder.encode("özgün"), "507 296 64 91",
+                "Hi i'm Özgün Akyüz, I am a 3rd year computer engineering student.",
+                MemberType.STUDENT,
+                Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
+                department
+        );
+        memberRepository.save(member);
+
+
+
 //        studentRepository.save(new Student("ozgun", "akyuz", department, 21827005L, LocalDate.now(),
 //                40));
 //        studentRepository.save(new Student("ipek", "yildiz", department, 21827001L, LocalDate.now(),
