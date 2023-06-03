@@ -2,6 +2,7 @@ import { Grid, useTheme } from '@mui/material';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../components/Header/Header';
+import Sidebar from '../components/Sidebar';
 
 export default function MainLayout() {
   const theme = useTheme();
@@ -27,6 +28,7 @@ export default function MainLayout() {
             height: '100vh'
           }}
         >
+          <Sidebar />
         </Grid>
         <Grid
           item

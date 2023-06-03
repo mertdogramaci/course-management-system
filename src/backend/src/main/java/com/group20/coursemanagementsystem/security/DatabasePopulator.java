@@ -20,11 +20,7 @@ public class DatabasePopulator {
 
     private final DepartmentRepository departmentRepository;
 
-    private final StudentLoginCredentialsRepository studentLoginCredentialsRepository;
-
     private final InstructorRepository instructorRepository;
-
-    private final InstructorLoginCredentialsRepository instructorLoginCredentialsRepository;
 
     private final SectionRepository sectionRepository;
 
@@ -37,14 +33,14 @@ public class DatabasePopulator {
     private final PasswordEncoder passwordEncoder;
 
     public DatabasePopulator(StudentRepository studentRepository, FacultyRepository facultyRepository,
-                             DepartmentRepository departmentRepository, StudentLoginCredentialsRepository studentLoginCredentialsRepository,
-                             InstructorRepository instructorRepository, InstructorLoginCredentialsRepository instructorLoginCredentialsRepository, SectionRepository sectionRepository, CourseRepository courseRepository, AuthorityRepository authorityRepository, MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+                             DepartmentRepository departmentRepository, InstructorRepository instructorRepository,
+                             SectionRepository sectionRepository, CourseRepository courseRepository,
+                             AuthorityRepository authorityRepository, MemberRepository memberRepository,
+                             PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;
         this.facultyRepository = facultyRepository;
         this.departmentRepository = departmentRepository;
-        this.studentLoginCredentialsRepository = studentLoginCredentialsRepository;
         this.instructorRepository = instructorRepository;
-        this.instructorLoginCredentialsRepository = instructorLoginCredentialsRepository;
         this.sectionRepository = sectionRepository;
         this.courseRepository = courseRepository;
         this.authorityRepository = authorityRepository;
@@ -63,10 +59,9 @@ public class DatabasePopulator {
         if (!authorityRepository.existsByAuthority("STUDENT")) {
             authorityRepository.save(new Authority(null, "STUDENT", new HashSet<>()));
         }
-        if (!authorityRepository.existsByAuthority("ACADEMICIAN")) {
-            authorityRepository.save(new Authority(null, "ACADEMICIAN", new HashSet<>()));
+        if (!authorityRepository.existsByAuthority("INSTRUCTOR")) {
+            authorityRepository.save(new Authority(null, "INSTRUCTOR", new HashSet<>()));
         }
-
 
         facultyRepository.save(new Faculty("Engineering"));
         facultyRepository.save(new Faculty("Education"));
@@ -81,65 +76,31 @@ public class DatabasePopulator {
         departmentRepository.save(new Department("Computer Education and Instructional Technology", faculty));
         departmentRepository.save(new Department("Educational Sciences", faculty));
 
-        if (!memberRepository.existsByEmail("zgnakyuz@gmail.com")) {
-            Student member = new Student(
-                    "Özgün", "Akyüz",
-                    "21827005", "zgnakyuz@gmail.com",
-                    passwordEncoder.encode("özgün"),
-                    "/assets/images/21827005-pp.png", "507 296 64 91",
-                    "https://www.linkedin.com/in/ozgunakyuz/", "https://github.com/b21827005",
-                    "Hi i'm Özgün Akyüz, I am a 3rd year computer engineering student.",
-                    "Somera -- Deep Learning Intern 2021 June",
-                    "Deep Learning\nComputer Vision\nBig Data",
-                    MemberType.STUDENT,
-                    Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT"))
-            );
-            memberRepository.save(member);
-        }
-
-
         Department department = departmentRepository.findById(1L);
-//        studentRepository.save(new Student("ozgun", "akyuz", department, 21827005L, LocalDate.now(),
-//                40));
-//        studentRepository.save(new Student("ipek", "yildiz", department, 21827001L, LocalDate.now(),
-//                40));
+        Student member = new Student(
+                "Özgün", "Akyüz", "zgnakyuz@gmail.com",
+                passwordEncoder.encode("özgün"), "507 296 64 91",
+                "Hi i'm Özgün Akyüz, I am a 3rd year computer engineering student.",
+                MemberType.STUDENT,
+                Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
+                department, "21827005", 40
+        );
+        memberRepository.save(member);
 
-        department = departmentRepository.findById(2L);
-//        studentRepository.save(new Student("mert", "dogramaci", department, 21827555L, LocalDate.now(),
-//                40));
-//
-//        Student student = studentRepository.findById(1L);
-//        studentLoginCredentialsRepository.save(new StudentLoginCredentials("b21827005", "ozgun", student));
-//
-//        student = studentRepository.findById(2L);
-//        studentLoginCredentialsRepository.save(new StudentLoginCredentials("b21827001", "ipek", student));
-//
-//        student = studentRepository.findById(3L);
-//        studentLoginCredentialsRepository.save(new StudentLoginCredentials("b21827555", "mert", student));
-
-
-        department = departmentRepository.findById(1L);
-        instructorRepository.save(new Instructor("engin", "demir", department));
-        instructorRepository.save(new Instructor("ali baran", "tasdemir", department));
+//        instructorRepository.save(new Instructor("engin", "demir", department));
+//        instructorRepository.save(new Instructor("ali baran", "tasdemir", department));
         courseRepository.save(new Course("BBM101", 6, true, "example descriptionbbm101", department));
         courseRepository.save(new Course("BBM201", 5, true, "example descriptionbbm201", department));
 
-        department = departmentRepository.findById(2L);
-        instructorRepository.save(new Instructor("john", "doe", department));
-        courseRepository.save(new Course("deneme101", 5, true, "example description2", department));
+//        department = departmentRepository.findById(2L);
+//        instructorRepository.save(new Instructor("john", "doe", department));
+//        courseRepository.save(new Course("deneme101", 5, true, "example description2", department));
 
 
-        Instructor instructor = instructorRepository.findById(1L);
-        instructorLoginCredentialsRepository.save(new InstructorLoginCredentials("b21827999", "demir", instructor));
-        Course course = courseRepository.findById(1L);
-        sectionRepository.save(new Section(false, 2022, "BBM101 fall 2022 section 1", 40, course, instructor));
-        instructor = instructorRepository.findById(2L);
-        sectionRepository.save(new Section(false, 2022, "BBM101 fall 2022 section 2", 40, course, instructor));
-
-        instructor = instructorRepository.findById(2L);
-        instructorLoginCredentialsRepository.save(new InstructorLoginCredentials("b21827998", "tasdemir", instructor));
-
-        instructor = instructorRepository.findById(3L);
-        instructorLoginCredentialsRepository.save(new InstructorLoginCredentials("b21827997", "doe", instructor));
+//        Instructor instructor = instructorRepository.findById(1L);
+//        Course course = courseRepository.findById(1L);
+//        sectionRepository.save(new Section(false, 2022, "BBM101 fall 2022 section 1", 40, course, instructor));
+//        instructor = instructorRepository.findById(2L);
+//        sectionRepository.save(new Section(false, 2022, "BBM101 fall 2022 section 2", 40, course, instructor));
     }
 }

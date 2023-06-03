@@ -68,7 +68,10 @@ export default function Router() {
         </AuthGuard>
       ),
       children: [
-        { path: '', element: <HomePage /> }
+        { path: '', element: <HomePage /> },
+        { path: 'profile', element: <Profile />, children: [
+          { path: ':id', element: <Profile /> }
+        ] }
       ]
     },
 
@@ -86,6 +89,10 @@ const EnrollmentRequests= Loadable(lazy(() => import('../pages/admin/EnrollmentR
 const ForgotPasswordRequests = Loadable(lazy(() => import('../pages/admin/ForgotPasswordRequests')))
 
 const HomePage = Loadable(lazy(() => import('../components/HomePage')));
+const Profile = Loadable(lazy(() => import('../pages/Profile')))
+
+
 
 const NotFound = Loadable(lazy(() => import('../pages/NotFound')))
+
 

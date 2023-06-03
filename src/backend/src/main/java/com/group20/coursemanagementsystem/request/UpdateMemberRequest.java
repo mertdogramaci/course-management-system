@@ -1,12 +1,10 @@
-package com.group20.coursemanagementsystem.security.request;
+package com.group20.coursemanagementsystem.request;
 
 import com.group20.coursemanagementsystem.model.Member;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.Serializable;
 
 @RequiredArgsConstructor
@@ -30,3 +28,4 @@ public class UpdateMemberRequest implements Serializable {
         return new Member(firstName, lastName, email, phoneNumber, about);
     }
 }
+
