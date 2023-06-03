@@ -79,14 +79,11 @@ public class MemberRepository {
             query.executeUpdate();
         }
 
-//        if (savedMember.getMemberType() == MemberType.ACADEMICIAN) {
-//            Student student = (Instructor) member;
-//            query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects) VALUES (?, ?, ?)");
-//            query.setParameter(1, savedMember.getId());
-//            query.setParameter(2, student.getHacettepeID());
-//            query.setParameter(3, student.getSemesterECTS());
-//            query.executeUpdate();
-//        }
+        if (savedMember.getMemberType() == MemberType.INSTRUCTOR) {
+            query = entityManager.createNativeQuery("INSERT INTO instructor_table (id) VALUES (?)");
+            query.setParameter(1, savedMember.getId());
+            query.executeUpdate();
+        }
 
         return member;
     }
