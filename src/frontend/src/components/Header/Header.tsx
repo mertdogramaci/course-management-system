@@ -101,7 +101,7 @@ export default function Header() {
           }
           <Box>
             <Link component={RouterLink} sx={{ color: 'white' }} onClick={logout} to={PATH_AUTH.login}>
-              {"header.logout"}
+              {"Log Out"}
             </Link>
           </Box>
         </Toolbar>
