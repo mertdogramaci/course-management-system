@@ -1,58 +1,38 @@
 package com.group20.coursemanagementsystem.model;
 
-import javax.persistence.*;
+import com.group20.coursemanagementsystem.enums.MemberType;
+import com.group20.coursemanagementsystem.security.domain.Authority;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "instructor")
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.Table;
+import java.util.Set;
+
 @Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
-public class Instructor {
+@Inheritance
+@Entity
+@Table(name = "instructor_table")
+@DiscriminatorValue(value = "INSTRUCTOR")
+@NoArgsConstructor
+public class Instructor extends Member {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "surname")
-    private String surname;
-
-    @ManyToOne
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
-    private Department department;
-
-    public Instructor(String name, String surname, Department department) {
-        this.name = name;
-        this.surname = surname;
-        this.department = department;
+    public Instructor(String firstName, String lastName, String email, String password, MemberType memberType, Set<Authority> authorities) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.memberType = memberType;
+        this.authorities = authorities;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Instructor that = (Instructor) o;
-
-        if (!id.equals(that.id)) return false;
-        if (!name.equals(that.name)) return false;
-        if (!surname.equals(that.surname)) return false;
-        return department.equals(that.department);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + surname.hashCode();
-        result = 31 * result + department.hashCode();
-        return result;
+    public Instructor(String firstName, String lastName, String email, String password, MemberType memberType) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.memberType = memberType;
     }
 }

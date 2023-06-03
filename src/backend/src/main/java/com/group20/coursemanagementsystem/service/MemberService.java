@@ -1,28 +1,23 @@
 package com.group20.coursemanagementsystem.service;
 
-import com.group20.coursemanagementsystem.model.Academician;
-import com.group20.coursemanagementsystem.repository.AcademicianRepository;
+import com.group20.coursemanagementsystem.model.Instructor;
+import com.group20.coursemanagementsystem.repository.InstructorRepository;
 import com.group20.coursemanagementsystem.dto.MessageResponse;
 import com.group20.coursemanagementsystem.enums.MemberType;
 import com.group20.coursemanagementsystem.enums.MessageType;
 import com.group20.coursemanagementsystem.request.EnrolmentRequest;
 import com.group20.coursemanagementsystem.repository.EnrolmentRequestRepository;
-import com.group20.coursemanagementsystem.service.EnrolmentRequestService;
 import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.repository.MemberRepository;
 import com.group20.coursemanagementsystem.security.repositories.AuthorityRepository;
 import com.group20.coursemanagementsystem.model.Student;
 import com.group20.coursemanagementsystem.repository.StudentRepository;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Base64;
 import java.util.Set;
 import java.util.List;
-import java.util.UUID;
 
 
 @Service
@@ -30,7 +25,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final StudentRepository studentRepository;
-    private final AcademicianRepository academicianRepository;
+    private final InstructorRepository instructorRepository;
     private final AuthorityRepository authorityRepository;
     private final EnrolmentRequestRepository enrolmentRequestRepository;
     private final PasswordEncoder passwordEncoder;
@@ -48,14 +43,14 @@ public class MemberService {
     private static final String MEMBER_PASSWORD_NOT_EQUAL_MESSAGE = "Your password is not correct!";
     public MemberService(final MemberRepository memberRepository,
                          final StudentRepository studentRepository,
-                         final AcademicianRepository academicianRepository,
+                         final InstructorRepository instructorRepository,
                          final AuthorityRepository authorityRepository,
                          final EnrolmentRequestRepository enrolmentRequestRepository,
                          final PasswordEncoder passwordEncoder,
                          final EnrolmentRequestService enrolmentRequestService) {
         this.memberRepository = memberRepository;
         this.studentRepository = studentRepository;
-        this.academicianRepository = academicianRepository;
+        this.instructorRepository = instructorRepository;
         this.authorityRepository = authorityRepository;
         this.enrolmentRequestRepository = enrolmentRequestRepository;
         this.enrolmentRequestService = enrolmentRequestService;
@@ -71,10 +66,10 @@ public class MemberService {
             newStudent.giveAuthorities(Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")));
             studentRepository.save(newStudent);
         }
-        else if (enrolmentRequestFromDB.getMemberType() == MemberType.ACADEMICIAN) {
-            Academician newAcademician = enrolmentRequestFromDB.toAcademician();
-            newAcademician.giveAuthorities(Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("ACADEMICIAN")));
-            academicianRepository.save(newAcademician);
+        else if (enrolmentRequestFromDB.getMemberType() == MemberType.INSTRUCTOR) {
+            Instructor newInstructor = enrolmentRequestFromDB.toInstructor();
+            newInstructor.giveAuthorities(Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("INSTRUCTOR")));
+//            instructorRepository.save(newInstructor);
         }
         else {
             System.out.println("Other type of member is not possible!");

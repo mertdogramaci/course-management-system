@@ -1,7 +1,6 @@
 package com.group20.coursemanagementsystem.repository;
 
 import com.group20.coursemanagementsystem.enums.MemberType;
-import com.group20.coursemanagementsystem.model.Instructor;
 import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.model.Student;
 
@@ -14,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class MemberRepository {

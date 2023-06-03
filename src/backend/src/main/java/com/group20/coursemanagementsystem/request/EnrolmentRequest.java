@@ -1,6 +1,6 @@
 package com.group20.coursemanagementsystem.request;
 
-import com.group20.coursemanagementsystem.model.Academician;
+import com.group20.coursemanagementsystem.model.Instructor;
 import com.group20.coursemanagementsystem.model.BaseEntity;
 import com.group20.coursemanagementsystem.enums.MemberType;
 import com.group20.coursemanagementsystem.model.Member;
@@ -58,8 +58,8 @@ public class EnrolmentRequest extends BaseEntity {
     }
 
     //Map function to Academician
-    public Academician toAcademician() {
-        return new Academician(firstName, lastName, hacettepeId, email, memberType);
+    public Instructor toInstructor() {
+        return new Instructor(firstName, lastName, hacettepeId, email, memberType);
     }
 }
 
