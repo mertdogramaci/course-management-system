@@ -13,6 +13,7 @@ import com.group20.coursemanagementsystem.repository.MemberRepository;
 import com.group20.coursemanagementsystem.security.repositories.AuthorityRepository;
 import com.group20.coursemanagementsystem.model.Student;
 import com.group20.coursemanagementsystem.repository.StudentRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -87,19 +88,25 @@ public class MemberService {
 //                .orElseThrow(() -> new EntityNotFoundException(MEMBER_DOES_NOT_EXIST_MESSAGE.formatted(hacettepeId)));
 //    }
     public Member getMemberById(final Long id) {
-        return memberRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
+        return memberRepository.findById(id);
+
+//                .orElseThrow(() -> new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
     }
     public Member getMemberByEmail(final String email) {
-        return memberRepository.findByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException(MEMBER_WITH_EMAIL_DOES_NOT_EXIST_MESSAGE.formatted(email)));
+        Member member = memberRepository.findByEmail(email);
+        if (member == null) {
+            throw new EntityNotFoundException(MEMBER_WITH_EMAIL_DOES_NOT_EXIST_MESSAGE.formatted(email));
+        }
+        return member;
     }
 
     public MessageResponse updateMember(final Long id, final Member updatedMember) {
-        Member memberFromDB = memberRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
+        Member memberFromDB = memberRepository.findById(id);
+        if (memberFromDB == null) {
+            throw new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id));
+        }
 
-        memberFromDB.updateMember(updatedMember); // (Important OOP Note) : Handle the data inside entities. Don't use setters
+        memberFromDB.updateMember(updatedMember);
         memberRepository.save(memberFromDB);
         return new MessageResponse(MessageType.SUCCESS, MEMBER_UPDATED_MESSAGE);
     }
@@ -114,12 +121,12 @@ public class MemberService {
         return new MessageResponse(MessageType.SUCCESS, MEMBER_DELETED_MESSAGE.formatted(id));
     }
 
-    public List<Member> search(String keyword) {
-        if (keyword != null) {
-            return memberRepository.search(keyword);
-        }
-        return memberRepository.findAll();
-    }
+//    public List<Member> search(String keyword) {
+//        if (keyword != null) {
+//            return memberRepository.search(keyword);
+//        }
+//        return memberRepository.findAll();
+//    }
 
     public MessageResponse changePassword(Long id, String oldPassword, String newPassword){
         if (!memberRepository.existsById(id)) {

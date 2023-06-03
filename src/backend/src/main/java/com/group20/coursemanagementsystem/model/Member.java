@@ -42,6 +42,10 @@ public class Member extends BaseEntity implements UserDetails {
     @Column(name = "member_type")
     protected MemberType memberType;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    private Department department;
+
     @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -96,7 +100,7 @@ public class Member extends BaseEntity implements UserDetails {
     }
 
     public Member(String firstName, String lastName, String email, String password, String phoneNumber, String about,
-                  MemberType memberType, Set<Authority> authorities) {
+                  MemberType memberType, Set<Authority> authorities, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -105,6 +109,7 @@ public class Member extends BaseEntity implements UserDetails {
         this.about = about;
         this.memberType = memberType;
         this.authorities = authorities;
+        this.department = department;
     }
 
     public Member(String firstName, String lastName, String email) {

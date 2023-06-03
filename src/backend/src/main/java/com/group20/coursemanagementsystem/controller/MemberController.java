@@ -69,17 +69,17 @@ public class MemberController {
         return responseList;
     }
 
-    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
-    @GetMapping("/search")
-    public List<MemberQueryResponse> search(@RequestParam(value = "query") String query) {
-        List<Member> foundMembers = memberService.search(query);
-        List<MemberQueryResponse> responseList = new ArrayList<>();
-
-        for (Member member : foundMembers) {
-            responseList.add(new MemberQueryResponse(member));
-        }
-        return responseList;
-    }
+//    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
+//    @GetMapping("/search")
+//    public List<MemberQueryResponse> search(@RequestParam(value = "query") String query) {
+//        List<Member> foundMembers = memberService.search(query);
+//        List<MemberQueryResponse> responseList = new ArrayList<>();
+//
+//        for (Member member : foundMembers) {
+//            responseList.add(new MemberQueryResponse(member));
+//        }
+//        return responseList;
+//    }
 
 //    @PreAuthorize("hasAuthority('ADMIN')")
 //    @GetMapping("/{hacettepeId}")

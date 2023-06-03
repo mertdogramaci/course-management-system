@@ -18,6 +18,12 @@ import java.util.Set;
 @NoArgsConstructor
 public class Student extends Member {
 
+    @Column(name = "hacettepe_id", unique = true)
+    protected String hacettepeID;
+
+    @Column(name = "semester_ects")
+    protected int semesterECTS;
+
     public Student(String firstName, String lastName, String email,
                    String password, MemberType memberType, Set<Authority> authorities) {
         this.firstName = firstName;
@@ -36,7 +42,8 @@ public class Student extends Member {
         this.memberType = memberType;
     }
 
-    public Student(String firstName, String lastName, String email, String password, String phoneNumber, String about, MemberType memberType, Set<Authority> authorities) {
-        super(firstName, lastName, email, password, phoneNumber, about, memberType, authorities);
+    public Student(String firstName, String lastName, String email, String password, String phoneNumber, String about,
+                   MemberType memberType, Set<Authority> authorities, Department department) {
+        super(firstName, lastName, email, password, phoneNumber, about, memberType, authorities, department);
     }
 }
