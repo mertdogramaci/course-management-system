@@ -16,7 +16,7 @@ public class StudentRepository {
 
     @Transactional
     public <S extends Student> S save(S student) {
-        Query query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects) VALUES (?, ?, ?, ?, ?, ?)");
+        Query query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects) VALUES (?, ?, ?)");
         query.setParameter(1, student.getId());
         query.setParameter(2, student.getHacettepeID());
         query.setParameter(3, student.getSemesterECTS());

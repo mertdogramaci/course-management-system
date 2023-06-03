@@ -64,13 +64,31 @@ public class MemberRepository {
         query.setParameter(8, member.getDepartment().getId());
         query.executeUpdate();
 
-        Member saved = findByEmail(member.getEmail());
+        Member savedMember = findByEmail(member.getEmail());
         for (Authority auth : member.getAuthorities()) {
             query = entityManager.createNativeQuery("INSERT INTO member_authorities (member_id, authority_id) VALUES (?, ?)");
-            query.setParameter(1, saved.getId());
+            query.setParameter(1, savedMember.getId());
             query.setParameter(2, auth.getId());
             query.executeUpdate();
         }
+
+        if (savedMember.getMemberType() == MemberType.STUDENT) {
+            Student student = (Student) member;
+            query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects) VALUES (?, ?, ?)");
+            query.setParameter(1, savedMember.getId());
+            query.setParameter(2, student.getHacettepeID());
+            query.setParameter(3, student.getSemesterECTS());
+            query.executeUpdate();
+        }
+
+//        if (savedMember.getMemberType() == MemberType.ACADEMICIAN) {
+//            Student student = (Instructor) member;
+//            query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects) VALUES (?, ?, ?)");
+//            query.setParameter(1, savedMember.getId());
+//            query.setParameter(2, student.getHacettepeID());
+//            query.setParameter(3, student.getSemesterECTS());
+//            query.executeUpdate();
+//        }
 
         return member;
     }

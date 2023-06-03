@@ -20,8 +20,6 @@ public class DatabasePopulator {
 
     private final DepartmentRepository departmentRepository;
 
-    private final StudentLoginCredentialsRepository studentLoginCredentialsRepository;
-
     private final InstructorRepository instructorRepository;
 
     private final InstructorLoginCredentialsRepository instructorLoginCredentialsRepository;
@@ -37,12 +35,14 @@ public class DatabasePopulator {
     private final PasswordEncoder passwordEncoder;
 
     public DatabasePopulator(StudentRepository studentRepository, FacultyRepository facultyRepository,
-                             DepartmentRepository departmentRepository, StudentLoginCredentialsRepository studentLoginCredentialsRepository,
-                             InstructorRepository instructorRepository, InstructorLoginCredentialsRepository instructorLoginCredentialsRepository, SectionRepository sectionRepository, CourseRepository courseRepository, AuthorityRepository authorityRepository, MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+                             DepartmentRepository departmentRepository, InstructorRepository instructorRepository,
+                             InstructorLoginCredentialsRepository instructorLoginCredentialsRepository,
+                             SectionRepository sectionRepository, CourseRepository courseRepository,
+                             AuthorityRepository authorityRepository, MemberRepository memberRepository,
+                             PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;
         this.facultyRepository = facultyRepository;
         this.departmentRepository = departmentRepository;
-        this.studentLoginCredentialsRepository = studentLoginCredentialsRepository;
         this.instructorRepository = instructorRepository;
         this.instructorLoginCredentialsRepository = instructorLoginCredentialsRepository;
         this.sectionRepository = sectionRepository;
@@ -67,7 +67,6 @@ public class DatabasePopulator {
             authorityRepository.save(new Authority(null, "ACADEMICIAN", new HashSet<>()));
         }
 
-
         facultyRepository.save(new Faculty("Engineering"));
         facultyRepository.save(new Faculty("Education"));
         facultyRepository.save(new Faculty("Science"));
@@ -88,11 +87,9 @@ public class DatabasePopulator {
                 "Hi i'm Özgün Akyüz, I am a 3rd year computer engineering student.",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department
+                department, "21827005", 40
         );
         memberRepository.save(member);
-
-
 
 //        studentRepository.save(new Student("ozgun", "akyuz", department, 21827005L, LocalDate.now(),
 //                40));
