@@ -60,7 +60,7 @@ public class StudentEnrollsSectionRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createQuery("SELECT s FROM student_enrolls_section s",
+        Query query = entityManager.createNativeQuery("SELECT * FROM student_enrolls_section",
                 StudentEnrollsSection.class);
         return query.getResultList();
     }

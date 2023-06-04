@@ -39,12 +39,15 @@ public class DatabasePopulator {
 
     private final StudentEnrollsSectionRepository studentEnrollsSectionRepository;
 
+    private final InstructorTeachesSectionRepository instructorTeachesSectionRepository;
+
     public DatabasePopulator(FacultyRepository facultyRepository, DepartmentRepository departmentRepository,
                              SectionRepository sectionRepository, CourseRepository courseRepository,
                              AuthorityRepository authorityRepository, MemberRepository memberRepository,
                              PasswordEncoder passwordEncoder, HomeworkRepository homeworkRepository,
                              SubmissionRepository submissionRepository, TimeSlotRepository timeSlotRepository,
-                             StudentEnrollsSectionRepository studentEnrollsSectionRepository) {
+                             StudentEnrollsSectionRepository studentEnrollsSectionRepository,
+                             InstructorTeachesSectionRepository instructorTeachesSectionRepository) {
         this.facultyRepository = facultyRepository;
         this.departmentRepository = departmentRepository;
         this.sectionRepository = sectionRepository;
@@ -56,6 +59,7 @@ public class DatabasePopulator {
         this.submissionRepository = submissionRepository;
         this.timeSlotRepository = timeSlotRepository;
         this.studentEnrollsSectionRepository = studentEnrollsSectionRepository;
+        this.instructorTeachesSectionRepository = instructorTeachesSectionRepository;
     }
 
     @Transactional
@@ -604,11 +608,42 @@ public class DatabasePopulator {
                 true));
         studentEnrollsSectionRepository.save(new StudentEnrollsSection(student4, section2, 0, 0,
                 true));
-        /*studentEnrollsSectionRepository.save(new StudentEnrollsSection());
-        studentEnrollsSectionRepository.save(new StudentEnrollsSection());
-        studentEnrollsSectionRepository.save(new StudentEnrollsSection());
-        studentEnrollsSectionRepository.save(new StudentEnrollsSection());
-        studentEnrollsSectionRepository.save(new StudentEnrollsSection());
-        studentEnrollsSectionRepository.save(new StudentEnrollsSection());*/
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student5, section2, 0, 0,
+                false));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student6, section7, 0, 0,
+                false));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student7, section9, 0, 0,
+                false));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student8, section6, 0, 0,
+                false));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student9, section10, 0, 0,
+                true));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student10, section8, 0, 0,
+                true));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student11, section8, 0, 0,
+                true));
+
+
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor4, section1));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor2, section2));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor3, section3));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor6, section4));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor7, section5));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor2, section6));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor2, section7));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor1, section8));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor1, section9));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor2, section10));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor6, section11));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor7, section12));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor8, section13));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor9, section14));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor10, section15));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor11, section16));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor4, section17));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor2, section18));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor3, section19));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor2, section20));
+        instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor2, section21));
     }
 }
