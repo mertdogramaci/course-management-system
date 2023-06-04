@@ -24,9 +24,14 @@ export default function Profile() {
   const [isFriend, setIsFriend] = useState<boolean>(false);
   const [sentRequests, setSentRequests] = useState<any[]>([]);
   const [isRequestSent, setIsRequestSent] = useState<boolean>(false);
+  const [studentUser, getStudentUser] = useState<any[]>([]);
 
   useEffect(() => {
     if (user) {
+      // if (user.memberType === MemberType.STUDENT) { // Check if the user's member type is "Student"
+      //   getStudentData(user.id); // Call the function to get the student data
+      // }
+
       if (id) {
         fetchOtherProfileData(user.id, Number(id));
         handleIsFriend();
@@ -54,6 +59,20 @@ export default function Profile() {
       setSnackbarOpen(true);
     }
   }
+
+  // const getStudentData = async (userId: number) => {
+  //   try {
+  //     const response = await axios.get(`students/${userId}`); // Replace "students/${userId}" with the appropriate API route to fetch student data
+
+  //     if (response.status === 200) {
+  //       setStudentUser(response.data); // Assign the fetched student data to the studentUser state variable
+  //     }
+  //   } catch (error) {
+  //     setSnackbarAlertType('error');
+  //     setSnackbarMessage(error.response.data.message);
+  //     setSnackbarOpen(true);
+  //   }
+  // };
 
   const fetchOtherProfileData = async (requesterId: number, requestedId: number) => {
     try {

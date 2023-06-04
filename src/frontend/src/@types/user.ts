@@ -14,4 +14,19 @@ export class User {
     public phoneNumber: string,
     public about: string
   ) {}
+
+}
+export class Student extends User {
+  constructor(
+    id: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+    about: string,
+    hacettepeID: string,
+    semesterECTS: number
+  ) {
+    super(id, firstName, lastName, email, MemberType.STUDENT, phoneNumber, about);
+  }
 }
