@@ -3,9 +3,6 @@ import { Button, ButtonGroup } from "reactstrap";
 import axios from '../../../api/axios';
 
 function CourseTable(props) {
-  const [course, setCourse] = useState([]);
-  const [grade, setGrade] = useState([]);
-
   const remove = async (id) => {
     try {
       const response = await axios.delete(`/studentEnrollsSection/${id}`);
