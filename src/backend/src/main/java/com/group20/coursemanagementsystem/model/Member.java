@@ -118,6 +118,13 @@ public class Member extends BaseEntity implements UserDetails {
         this.email = email;
     }
 
+    public Member(String email, String password, MemberType memberType, Set<Authority> authorities) {
+        this.email = email;
+        this.password = password;
+        this.memberType = memberType;
+        this.authorities = authorities;
+    }
+
     // Note that some fields should not be updated!
     public void updateMember(final Member updatedMember) {
         this.firstName = updatedMember.getFirstName();

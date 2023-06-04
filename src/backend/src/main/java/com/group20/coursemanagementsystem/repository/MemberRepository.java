@@ -50,6 +50,24 @@ public class MemberRepository {
 
     @Transactional
     public <M extends Member> M save(M member) {
+        if (member.getMemberType() == MemberType.ADMIN) {
+            Query query = entityManager.createNativeQuery("INSERT INTO member_table (email, password, member_type) VALUES (?, ?, ?)");
+            query.setParameter(1, member.getEmail());
+            query.setParameter(2, member.getPassword());
+            query.setParameter(3, member.getMemberType().ordinal());
+            query.executeUpdate();
+
+            Member savedMember = findByEmail(member.getEmail());
+            for (Authority auth : member.getAuthorities()) {
+                query = entityManager.createNativeQuery("INSERT INTO member_authorities (member_id, authority_id) VALUES (?, ?)");
+                query.setParameter(1, savedMember.getId());
+                query.setParameter(2, auth.getId());
+                query.executeUpdate();
+            }
+
+            return member;
+        }
+
         Query query = entityManager.createNativeQuery("INSERT INTO member_table (first_name, last_name, email, password, " +
                 "phone_number, about, member_type, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         query.setParameter(1, member.getFirstName());

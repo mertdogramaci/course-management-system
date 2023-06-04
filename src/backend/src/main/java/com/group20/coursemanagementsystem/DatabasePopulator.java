@@ -253,6 +253,10 @@ public class DatabasePopulator {
                 department1, "2200895678", 30);
         memberRepository.save(member);
 
+        Member admin = new Member("admin@admin.com",
+                passwordEncoder.encode("admin"), MemberType.ADMIN, Set.of(authorityRepository.findByAuthority("ADMIN")));
+        memberRepository.save(admin);
+
 
         Member student1 = memberRepository.findById(1L);
         Member student2 = memberRepository.findById(2L);
