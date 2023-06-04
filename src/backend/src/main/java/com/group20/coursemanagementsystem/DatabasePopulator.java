@@ -37,11 +37,14 @@ public class DatabasePopulator {
 
     private final TimeSlotRepository timeSlotRepository;
 
+    private final StudentEnrollsSectionRepository studentEnrollsSectionRepository;
+
     public DatabasePopulator(FacultyRepository facultyRepository, DepartmentRepository departmentRepository,
                              SectionRepository sectionRepository, CourseRepository courseRepository,
                              AuthorityRepository authorityRepository, MemberRepository memberRepository,
                              PasswordEncoder passwordEncoder, HomeworkRepository homeworkRepository,
-                             SubmissionRepository submissionRepository, TimeSlotRepository timeSlotRepository) {
+                             SubmissionRepository submissionRepository, TimeSlotRepository timeSlotRepository,
+                             StudentEnrollsSectionRepository studentEnrollsSectionRepository) {
         this.facultyRepository = facultyRepository;
         this.departmentRepository = departmentRepository;
         this.sectionRepository = sectionRepository;
@@ -52,6 +55,7 @@ public class DatabasePopulator {
         this.homeworkRepository = homeworkRepository;
         this.submissionRepository = submissionRepository;
         this.timeSlotRepository = timeSlotRepository;
+        this.studentEnrollsSectionRepository = studentEnrollsSectionRepository;
     }
 
     @Transactional
@@ -590,5 +594,21 @@ public class DatabasePopulator {
                 LocalTime.of(15, 20), section10));
         timeSlotRepository.save(new TimeSlot(4, LocalTime.of(8, 40),
                 LocalTime.of(11, 20), section11));
+
+
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student1, section1, 0, 0,
+                true));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student2, section1, 0, 0,
+                true));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student3, section1, 0, 0,
+                true));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student4, section2, 0, 0,
+                true));
+        /*studentEnrollsSectionRepository.save(new StudentEnrollsSection());
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection());
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection());
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection());
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection());
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection());*/
     }
 }
