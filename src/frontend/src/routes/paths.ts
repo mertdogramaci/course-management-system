@@ -34,8 +34,7 @@ export const PATH_MAIN = {
   myNetwork: '/myNetwork',
   profile: '/profile',
   settings: '/settings',
-  courses: '/courses',
+  courses: '/studentEnrollsSection',
   faculties: '/faculties',
-  departments: '/departments',
-  myCourses: '/studentEnrollsSection'
+  departments: '/departments'
 };

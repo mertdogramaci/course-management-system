@@ -12,6 +12,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { PATH_ADMIN, PATH_AUTH, PATH_MAIN } from '../../routes/paths';
 import { isAdmin } from '../../utils';
+import '../../App.css'
 
 
 
@@ -53,7 +54,7 @@ export default function Header() {
             variant="h6"
             noWrap
             component="div"
-            fontWeight={800}
+            fontWeight={500}
             sx={{ mr: 2 }}
             onClick={() => navigate(PATH_MAIN.feed)}
           >

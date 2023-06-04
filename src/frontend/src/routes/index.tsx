@@ -72,8 +72,7 @@ export default function Router() {
         { path: 'profile', element: <Profile />, children: [
           { path: ':id', element: <Profile /> }
         ] },
-        { path: 'courses', element: <CoursesPage /> },
-        {path: 'studentEnrollsSection', element: <MyCourses/>}
+        { path: 'studentEnrollsSection', element: <CoursesPage /> }
       ]
     },
 
@@ -91,9 +90,8 @@ const EnrollmentRequests= Loadable(lazy(() => import('../pages/admin/EnrollmentR
 const ForgotPasswordRequests = Loadable(lazy(() => import('../pages/admin/ForgotPasswordRequests')))
 
 const HomePage = Loadable(lazy(() => import('../components/HomePage')));
-const Profile = Loadable(lazy(() => import('../pages/Profile')))
-const CoursesPage = Loadable(lazy(() => import('../pages/CoursesPage')))
-const MyCourses = Loadable(lazy(() => import('../pages/MyCourses')));
+const Profile = Loadable(lazy(() => import('../pages/student/Profile')))
+const CoursesPage = Loadable(lazy(() => import('../pages/student/pages/CoursesPage')))
 
 
 const NotFound = Loadable(lazy(() => import('../pages/NotFound')))

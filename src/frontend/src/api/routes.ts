@@ -1,6 +1,6 @@
 const ApiRoutes = {
   LOGIN: '/login',
-  COURSES: '/courses',
+  COURSES: '/studentEnrollsSection',
   PROFILE: '/members/profile',
   ENROLLMENT: '/enroll',
   APPROVE_ENROLLMENT: '/enroll/approve',
@@ -15,8 +15,7 @@ const ApiRoutes = {
   LIST_CONTACTS: '/contact/list',
   CONNECTION_REQUEST: '/contact/request',
   APPROVE_CONNECTION_REQUEST: '/contact/request/approve',
-  DENY_CONNECTION_REQUEST: '/contact/request/deny',
-  STUDENT_ENROLLS_SECTION: '/studentEnrollsSection'
+  DENY_CONNECTION_REQUEST: '/contact/request/deny'
 };
 
 export default ApiRoutes;
