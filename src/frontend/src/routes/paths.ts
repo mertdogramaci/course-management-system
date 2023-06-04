@@ -33,5 +33,9 @@ export const PATH_MAIN = {
   chat: '/chat',
   myNetwork: '/myNetwork',
   profile: '/profile',
-  settings: '/settings'
+  settings: '/settings',
+  courses: '/courses',
+  faculties: '/faculties',
+  departments: '/departments',
+  myCourses: '/studentEnrollsSection'
 };

@@ -4,8 +4,9 @@ import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
-import SlideshowIcon from '@mui/icons-material/Slideshow';
-import WorkIcon from '@mui/icons-material/Work';
+import FacultyIcon from '@mui/icons-material/School'
+import DepartmentIcon from '@mui/icons-material/HomeWork'
+import CourseIcon from '@mui/icons-material/Book'
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import List from '@mui/material/List';
 import React from 'react';
@@ -32,23 +33,23 @@ export default function Sidebar() {
         </ListItemIcon>
         <ListItemText primary={"Main Page"}/>
       </ListItemButton>
-      <ListItemButton onClick={() => handleClick(PATH_MAIN.jobs)}>
+      <ListItemButton onClick={() => handleClick(PATH_MAIN.faculties)}>
         <ListItemIcon>
-          <WorkIcon color = "primary" />
+          <FacultyIcon color = "primary" />
         </ListItemIcon>
-        <ListItemText primary={"Jobs"} />
+        <ListItemText primary={"Faculties"} />
       </ListItemButton>
-      <ListItemButton onClick={() => handleClick(PATH_MAIN.events)}>
+      <ListItemButton onClick={() => handleClick(PATH_MAIN.departments)}>
         <ListItemIcon>
-          <EventIcon color = "primary" />
+          <DepartmentIcon color = "primary"/>
         </ListItemIcon>
-        <ListItemText primary={"Events"} />
+        <ListItemText primary={"Departments"} />
       </ListItemButton>
-      <ListItemButton onClick={() => handleClick(PATH_MAIN.presentations)}>
+      <ListItemButton onClick={() => handleClick(PATH_MAIN.myCourses)}>
         <ListItemIcon>
-          <SlideshowIcon color = "primary"/>
+          <CourseIcon color = "primary" />
         </ListItemIcon>
-        <ListItemText primary={"Presentations"} />
+        <ListItemText primary={"My Courses"} />
       </ListItemButton>
       { user?.memberType !== "ADMIN" && (
         <>
