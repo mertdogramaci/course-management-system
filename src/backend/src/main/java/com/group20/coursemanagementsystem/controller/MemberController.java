@@ -1,10 +1,12 @@
 package com.group20.coursemanagementsystem.controller;
 
 import com.group20.coursemanagementsystem.dto.MessageResponse;
+import com.group20.coursemanagementsystem.model.Student;
 import com.group20.coursemanagementsystem.request.ProfileDataRequest;
 import com.group20.coursemanagementsystem.response.MemberResponse;
 import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.response.MemberQueryResponse;
+import com.group20.coursemanagementsystem.response.StudentResponse;
 import com.group20.coursemanagementsystem.security.service.CustomUserDetailsService;
 import com.group20.coursemanagementsystem.service.MemberService;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,15 @@ public class MemberController {
         this.customUserDetailsService = customUserDetailsService;
     }
 
+    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
+    @GetMapping("/findStudent/{id}")
+    public StudentResponse getStudent(@PathVariable Long id) {
+        Student student = memberService.getStudentById(id);
+        return new StudentResponse(student);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
     @PostMapping("/profile")
     public MemberResponse getProfileData(@RequestBody final ProfileDataRequest profileDataRequest) {

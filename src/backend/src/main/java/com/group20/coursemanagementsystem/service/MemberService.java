@@ -92,8 +92,17 @@ public class MemberService {
         }
 
         return member;
-// throw new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
+        // throw new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
     }
+
+    public Student getStudentById(final Long id) {
+        Member member = memberRepository.findById(id);
+        Student student = studentRepository.findById(id);
+        student.updateMemberFields(member);
+        return student;
+        // throw new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
+    }
+
     public Member getMemberByEmail(final String email) {
         Member member = memberRepository.findByEmail(email);
         if (member == null) {
