@@ -1,5 +1,6 @@
 package com.group20.coursemanagementsystem.repository;
 
+import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.model.Student;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

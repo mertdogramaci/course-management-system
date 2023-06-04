@@ -48,4 +48,16 @@ public class Student extends Member {
         this.hacettepeID = hacettepeID;
         this.semesterECTS = semesterECTS;
     }
+
+    public void updateMemberFields(Member m) {
+        this.firstName = m.getFirstName();
+        this.lastName = m.getLastName();
+        this.email = m.getEmail();
+        this.password = m.getPassword();
+        this.phoneNumber = m.getPhoneNumber();
+        this.about = m.getAbout();
+        this.memberType = m.getMemberType();
+        this.authorities = m.getAuthorities();
+        updateDepartment(m.getDepartment());
+    }
 }

@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Set;
 import java.util.List;
 
@@ -83,15 +84,28 @@ public class MemberService {
 //                .orElseThrow(() -> new EntityNotFoundException(MEMBER_DOES_NOT_EXIST_MESSAGE.formatted(hacettepeId)));
 //    }
     public Member getMemberById(final Long id) {
-        return memberRepository.findById(id);
+        Member member = memberRepository.findById(id);
+        if (member.getMemberType() == MemberType.STUDENT) {
+            Student student = studentRepository.findById(id);
+            student.updateMemberFields(member);
+            return student;
+        }
 
-//                .orElseThrow(() -> new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
+        return member;
+// throw new EntityNotFoundException(MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
     }
     public Member getMemberByEmail(final String email) {
         Member member = memberRepository.findByEmail(email);
         if (member == null) {
             throw new EntityNotFoundException(MEMBER_WITH_EMAIL_DOES_NOT_EXIST_MESSAGE.formatted(email));
         }
+
+        if (member.getMemberType() == MemberType.STUDENT) {
+            Student student = studentRepository.findById(member.getId());
+            student.updateMemberFields(member);
+            return student;
+        }
+
         return member;
     }
 

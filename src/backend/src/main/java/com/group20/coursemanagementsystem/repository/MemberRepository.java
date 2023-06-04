@@ -21,8 +21,8 @@ public class MemberRepository {
     private EntityManager entityManager;
 
     public Member findById(Long id) {
-        Query query = entityManager.createNativeQuery("SELECT * FROM member_table WHERE id = ?", Member.class);
-        query.setParameter(1, id);
+        Query query = entityManager.createQuery("SELECT m FROM Member m WHERE m.id = :id", Member.class);
+        query.setParameter("id", id);
         return (Member) query.getSingleResult();
     }
 

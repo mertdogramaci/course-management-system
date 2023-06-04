@@ -126,6 +126,10 @@ public class Member extends BaseEntity implements UserDetails {
         this.about = updatedMember.getAbout();
     }
 
+    public void updateDepartment(final Department department) {
+        this.department = department;
+    }
+
     public void updatePassword(final Member updatedMember) {
         this.password = updatedMember.getPassword();
     }
