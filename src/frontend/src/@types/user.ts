@@ -24,8 +24,8 @@ export class Student extends User {
     email: string,
     phoneNumber: string,
     about: string,
-    hacettepeID: string,
-    semesterECTS: number
+    public hacettepeID: string,
+    public semesterECTS: number
   ) {
     super(id, firstName, lastName, email, MemberType.STUDENT, phoneNumber, about);
   }
