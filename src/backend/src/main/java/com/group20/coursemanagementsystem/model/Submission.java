@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -31,14 +30,14 @@ public class Submission {
     @ManyToOne
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     @ToString.Exclude
-    private Student student;
+    private Member student;
 
     @ManyToOne
     @JoinColumn(name = "homework_id", referencedColumnName = "id")
     @ToString.Exclude
     private Homework homework;
 
-    public Submission(int marks, Byte[] content, Student student, Homework homework) {
+    public Submission(int marks, Byte[] content, Member student, Homework homework) {
         this.marks = marks;
         this.content = content;
         this.student = student;

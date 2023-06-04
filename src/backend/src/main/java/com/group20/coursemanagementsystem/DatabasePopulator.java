@@ -1,7 +1,5 @@
 package com.group20.coursemanagementsystem;
 
-import com.group20.coursemanagementsystem.enums.Day;
-import com.group20.coursemanagementsystem.enums.Semester;
 import com.group20.coursemanagementsystem.model.*;
 import com.group20.coursemanagementsystem.repository.*;
 import com.group20.coursemanagementsystem.security.repositories.AuthorityRepository;
@@ -244,24 +242,24 @@ public class DatabasePopulator {
         memberRepository.save(member);
 
 
-        Student student1 = (Student) memberRepository.findById(1L);
-        Student student2 = (Student) memberRepository.findById(2L);
-        Student student3 = (Student) memberRepository.findById(3L);
-        Student student4 = (Student) memberRepository.findById(4L);
-        Student student5 = (Student) memberRepository.findById(5L);
-        Student student6 = (Student) memberRepository.findById(6L);
-        Student student7 = (Student) memberRepository.findById(7L);
-        Student student8 = (Student) memberRepository.findById(8L);
-        Student student9 = (Student) memberRepository.findById(9L);
-        Student student10 = (Student) memberRepository.findById(10L);
-        Student student11 = (Student) memberRepository.findById(11L);
-        Student student12 = (Student) memberRepository.findById(12L);
-        Student student13 = (Student) memberRepository.findById(13L);
-        Student student14 = (Student) memberRepository.findById(14L);
-        Student student15 = (Student) memberRepository.findById(15L);
-        Student student16 = (Student) memberRepository.findById(16L);
-        Student student17 = (Student) memberRepository.findById(17L);
-        Student student18 = (Student) memberRepository.findById(18L);
+        Member student1 = memberRepository.findById(1L);
+        Member student2 = memberRepository.findById(2L);
+        Member student3 = memberRepository.findById(3L);
+        Member student4 = memberRepository.findById(4L);
+        Member student5 = memberRepository.findById(5L);
+        Member student6 = memberRepository.findById(6L);
+        Member student7 = memberRepository.findById(7L);
+        Member student8 = memberRepository.findById(8L);
+        Member student9 = memberRepository.findById(9L);
+        Member student10 = memberRepository.findById(10L);
+        Member student11 = memberRepository.findById(11L);
+        Member student12 = memberRepository.findById(12L);
+        Member student13 = memberRepository.findById(13L);
+        Member student14 = memberRepository.findById(14L);
+        Member student15 = memberRepository.findById(15L);
+        Member student16 = memberRepository.findById(16L);
+        Member student17 = memberRepository.findById(17L);
+        Member student18 = memberRepository.findById(18L);
 
 
         Instructor instructor = new Instructor("Engin", "Demir", "engindemir@gmail.com",
@@ -362,22 +360,22 @@ public class DatabasePopulator {
         memberRepository.save(instructor);
 
 
-        Instructor instructor1 = (Instructor) memberRepository.findById(19L);
-        Instructor instructor2 = (Instructor) memberRepository.findById(20L);
-        Instructor instructor3 = (Instructor) memberRepository.findById(21L);
-        Instructor instructor4 = (Instructor) memberRepository.findById(22L);
-        Instructor instructor5 = (Instructor) memberRepository.findById(23L);
-        Instructor instructor6 = (Instructor) memberRepository.findById(24L);
-        Instructor instructor7 = (Instructor) memberRepository.findById(25L);
-        Instructor instructor8 = (Instructor) memberRepository.findById(26L);
-        Instructor instructor9 = (Instructor) memberRepository.findById(27L);
-        Instructor instructor10 = (Instructor) memberRepository.findById(28L);
-        Instructor instructor11 = (Instructor) memberRepository.findById(29L);
-        Instructor instructor12 = (Instructor) memberRepository.findById(30L);
-        Instructor instructor13 = (Instructor) memberRepository.findById(31L);
-        Instructor instructor14 = (Instructor) memberRepository.findById(32L);
-        Instructor instructor15 = (Instructor) memberRepository.findById(33L);
-        Instructor instructor16 = (Instructor) memberRepository.findById(34L);
+        Member instructor1 = memberRepository.findById(19L);
+        Member instructor2 = memberRepository.findById(20L);
+        Member instructor3 = memberRepository.findById(21L);
+        Member instructor4 = memberRepository.findById(22L);
+        Member instructor5 = memberRepository.findById(23L);
+        Member instructor6 = memberRepository.findById(24L);
+        Member instructor7 = memberRepository.findById(25L);
+        Member instructor8 = memberRepository.findById(26L);
+        Member instructor9 = memberRepository.findById(27L);
+        Member instructor10 = memberRepository.findById(28L);
+        Member instructor11 = memberRepository.findById(29L);
+        Member instructor12 = memberRepository.findById(30L);
+        Member instructor13 = memberRepository.findById(31L);
+        Member instructor14 = memberRepository.findById(32L);
+        Member instructor15 = memberRepository.findById(33L);
+        Member instructor16 = memberRepository.findById(34L);
 
 
         courseRepository.save(new Course("BBM101", 6, true,
@@ -432,44 +430,44 @@ public class DatabasePopulator {
         Course course16 = courseRepository.findById(16L);
 
 
-        sectionRepository.save(new Section(Semester.FALL, 2022, "D1", 40, course1,
+        sectionRepository.save(new Section(false, 2022, "D1", 40, course1,
                 instructor4));
-        sectionRepository.save(new Section(Semester.FALL, 2022, "D2", 40, course1,
+        sectionRepository.save(new Section(false, 2022, "D2", 40, course1,
                 instructor2));
-        sectionRepository.save(new Section(Semester.FALL, 2022, "D3", 40, course1,
+        sectionRepository.save(new Section(false, 2022, "D3", 40, course1,
                 instructor3));
-        sectionRepository.save(new Section(Semester.SPRING, 2023, "Seminer Hall", 60, course11,
+        sectionRepository.save(new Section(true, 2023, "Seminer Hall", 60, course11,
                 instructor6));
-        sectionRepository.save(new Section(Semester.FALL, 2023, "Seminer Hall", 60, course11,
+        sectionRepository.save(new Section(false, 2023, "Seminer Hall", 60, course11,
                 instructor7));
-        sectionRepository.save(new Section(Semester.FALL, 2022, "Computer Laboratory", 100,
+        sectionRepository.save(new Section(false, 2022, "Computer Laboratory", 100,
                 course2, instructor2));
-        sectionRepository.save(new Section(Semester.FALL, 2022, "Computer Laboratory", 100,
+        sectionRepository.save(new Section(false, 2022, "Computer Laboratory", 100,
                 course2, instructor2));
-        sectionRepository.save(new Section(Semester.SPRING, 2023, "D10", 60, course3,
+        sectionRepository.save(new Section(true, 2023, "D10", 60, course3,
                 instructor1));
-        sectionRepository.save(new Section(Semester.SPRING, 2023, "Computer Laboratory", 60,
+        sectionRepository.save(new Section(true, 2023, "Computer Laboratory", 60,
                 course4, instructor1));
-        sectionRepository.save(new Section(Semester.SPRING, 2023, "D8", 60, course5,
+        sectionRepository.save(new Section(true, 2023, "D8", 60, course5,
                 instructor2));
-        sectionRepository.save(new Section(Semester.SPRING, 2023, "Seminer Hall", 60, course13,
+        sectionRepository.save(new Section(true, 2023, "Seminer Hall", 60, course13,
                 instructor6));
-        sectionRepository.save(new Section(Semester.SPRING, 2023, "Seminer Hall", 60, course10,
+        sectionRepository.save(new Section(true, 2023, "Seminer Hall", 60, course10,
                 instructor7));
-        sectionRepository.save(new Section(Semester.SPRING, 2023, "Z1", 60, course13,
+        sectionRepository.save(new Section(true, 2023, "Z1", 60, course13,
                 instructor8));
-        sectionRepository.save(new Section(Semester.SPRING, 2023, "Z2", 60, course13,
+        sectionRepository.save(new Section(true, 2023, "Z2", 60, course13,
                 instructor9));
-        sectionRepository.save(new Section(Semester.SPRING, 2023, "Seminer Hall", 50, course14,
+        sectionRepository.save(new Section(true, 2023, "Seminer Hall", 50, course14,
                 instructor10));
-        sectionRepository.save(new Section(Semester.SPRING, 2023, "Seminer Hall", 50, course14,
+        sectionRepository.save(new Section(true, 2023, "Seminer Hall", 50, course14,
                 instructor11));
-        sectionRepository.save(new Section(Semester.FALL, 2021, "D1", 40, course1, instructor4));
-        sectionRepository.save(new Section(Semester.FALL, 2021, "D2", 40, course1, instructor2));
-        sectionRepository.save(new Section(Semester.FALL, 2021, "D3", 40, course1, instructor3));
-        sectionRepository.save(new Section(Semester.FALL, 2021, "Computer Laboratory", 100,
+        sectionRepository.save(new Section(false, 2021, "D1", 40, course1, instructor4));
+        sectionRepository.save(new Section(false, 2021, "D2", 40, course1, instructor2));
+        sectionRepository.save(new Section(false, 2021, "D3", 40, course1, instructor3));
+        sectionRepository.save(new Section(false, 2021, "Computer Laboratory", 100,
                 course2, instructor2));
-        sectionRepository.save(new Section(Semester.FALL, 2021, "Computer Laboratory", 100,
+        sectionRepository.save(new Section(false, 2021, "Computer Laboratory", 100,
                 course2, instructor2));
 
 
@@ -570,27 +568,27 @@ public class DatabasePopulator {
         Submission submission11 = submissionRepository.findById(11L);
 
 
-        timeSlotRepository.save(new TimeSlot(Day.MONDAY, LocalTime.of(8, 40),
+        timeSlotRepository.save(new TimeSlot(0, LocalTime.of(8, 40),
                 LocalTime.of(11, 20), section1));
-        timeSlotRepository.save(new TimeSlot(Day.MONDAY, LocalTime.of(13, 40),
+        timeSlotRepository.save(new TimeSlot(0, LocalTime.of(13, 40),
                 LocalTime.of(15, 20), section2));
-        timeSlotRepository.save(new TimeSlot(Day.TUESDAY, LocalTime.of(8, 40),
+        timeSlotRepository.save(new TimeSlot(1, LocalTime.of(8, 40),
                 LocalTime.of(11, 20), section3));
-        timeSlotRepository.save(new TimeSlot(Day.TUESDAY, LocalTime.of(13, 40),
+        timeSlotRepository.save(new TimeSlot(1, LocalTime.of(13, 40),
                 LocalTime.of(15, 20), section4));
-        timeSlotRepository.save(new TimeSlot(Day.WEDNESDAY, LocalTime.of(8, 40),
+        timeSlotRepository.save(new TimeSlot(2, LocalTime.of(8, 40),
                 LocalTime.of(11, 20), section5));
-        timeSlotRepository.save(new TimeSlot(Day.WEDNESDAY, LocalTime.of(13, 40),
+        timeSlotRepository.save(new TimeSlot(2, LocalTime.of(13, 40),
                 LocalTime.of(15, 20), section6));
-        timeSlotRepository.save(new TimeSlot(Day.THURSDAY, LocalTime.of(8, 40),
+        timeSlotRepository.save(new TimeSlot(3, LocalTime.of(8, 40),
                 LocalTime.of(11, 20), section7));
-        timeSlotRepository.save(new TimeSlot(Day.THURSDAY, LocalTime.of(13, 40),
+        timeSlotRepository.save(new TimeSlot(3, LocalTime.of(13, 40),
                 LocalTime.of(15, 20), section8));
-        timeSlotRepository.save(new TimeSlot(Day.FRIDAY, LocalTime.of(8, 40),
+        timeSlotRepository.save(new TimeSlot(4, LocalTime.of(8, 40),
                 LocalTime.of(11, 20), section9));
-        timeSlotRepository.save(new TimeSlot(Day.FRIDAY, LocalTime.of(13, 40),
+        timeSlotRepository.save(new TimeSlot(4, LocalTime.of(13, 40),
                 LocalTime.of(15, 20), section10));
-        timeSlotRepository.save(new TimeSlot(Day.FRIDAY, LocalTime.of(8, 40),
+        timeSlotRepository.save(new TimeSlot(4, LocalTime.of(8, 40),
                 LocalTime.of(11, 20), section11));
     }
 }

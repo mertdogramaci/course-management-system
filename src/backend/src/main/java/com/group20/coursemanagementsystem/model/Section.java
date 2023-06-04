@@ -2,14 +2,11 @@ package com.group20.coursemanagementsystem.model;
 
 import javax.persistence.*;
 
-import com.group20.coursemanagementsystem.enums.Semester;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -25,7 +22,7 @@ public class Section {
     private Long id;
 
     @Column(name = "semester")
-    private Semester semester;
+    private Boolean semester;
 
     @Column(name = "year")
     private Integer year;
@@ -43,10 +40,10 @@ public class Section {
     @ManyToOne
     @JoinColumn(name = "instructor_id", referencedColumnName = "id")
     @ToString.Exclude
-    private Instructor instructor;
+    private Member instructor;
 
-    public Section(Semester semester, Integer year, String classroomInfo, Integer quota, Course course,
-                   Instructor instructor) {
+    public Section(boolean semester, Integer year, String classroomInfo, Integer quota, Course course,
+                   Member instructor) {
         this.semester = semester;
         this.year = year;
         this.classroomInfo = classroomInfo;
