@@ -1,6 +1,7 @@
 package com.group20.coursemanagementsystem.repository;
 
 import com.group20.coursemanagementsystem.model.Instructor;
+import com.group20.coursemanagementsystem.model.Student;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -19,6 +20,13 @@ public class InstructorRepository {
         Query query = entityManager.createNativeQuery("SELECT * FROM instructor_table WHERE id = ?", Instructor.class);
         query.setParameter(1, id);
         return (Instructor) query.getSingleResult();
+    }
+
+    @Transactional
+    public <I extends Instructor> I save(I instructor) {
+        Query query = entityManager.createNativeQuery("INSERT INTO instructor_table (id) VALUES (?, ?, ?)");
+        query.setParameter(1, instructor.getId());
+        return instructor;
     }
 
 //    @Transactional
