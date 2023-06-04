@@ -57,7 +57,7 @@ export default function Header() {
             sx={{ mr: 2 }}
             onClick={() => navigate(PATH_MAIN.feed)}
           >
-            LinkedHU_CENG
+            Hacettepe Üniversitesi
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
@@ -99,6 +99,11 @@ export default function Header() {
               </Box>
             )
           }
+          <Box>
+            <Link component={RouterLink} sx={{ color: 'white' }} to={PATH_MAIN.profile}>
+              <div className='navbar_profile'>{user?.firstName} {user?.lastName}</div>
+            </Link>
+          </Box>
           <Box>
             <Link component={RouterLink} sx={{ color: 'white' }} onClick={logout} to={PATH_AUTH.login}>
               {"Log Out"}

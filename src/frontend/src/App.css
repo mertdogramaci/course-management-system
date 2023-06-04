@@ -39,3 +39,7 @@
 .styled-table tbody th {
   text-align: left;
 }
+
+.navbar_profile {
+  margin-right: 50px;
+}

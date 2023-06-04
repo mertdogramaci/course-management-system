@@ -10,15 +10,6 @@ function AppNavbar() {
             <Collapse navbar>
                 <Nav className="me-auto">
                     <NavItem>
-                        <NavLink href="/courses">Courses</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="/departments">Departments</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="/faculties">Faculties</NavLink>
-                    </NavItem>
-                    <NavItem>
                         <NavLink href="/homeworks">Homeworks</NavLink>
                     </NavItem>
                     <NavItem>

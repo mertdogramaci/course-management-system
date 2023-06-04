@@ -15,7 +15,8 @@ const ApiRoutes = {
   LIST_CONTACTS: '/contact/list',
   CONNECTION_REQUEST: '/contact/request',
   APPROVE_CONNECTION_REQUEST: '/contact/request/approve',
-  DENY_CONNECTION_REQUEST: '/contact/request/deny'
+  DENY_CONNECTION_REQUEST: '/contact/request/deny',
+  STUDENT_ENROLLS_SECTION: '/studentEnrollsSection'
 };
 
 export default ApiRoutes;
