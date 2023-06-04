@@ -38,6 +38,13 @@ public class Submission {
     @ToString.Exclude
     private Homework homework;
 
+    public Submission(int marks, Byte[] content, Student student, Homework homework) {
+        this.marks = marks;
+        this.content = content;
+        this.student = student;
+        this.homework = homework;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

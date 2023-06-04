@@ -1,6 +1,8 @@
 package com.group20.coursemanagementsystem.model;
 
 import javax.persistence.*;
+
+import com.group20.coursemanagementsystem.enums.Semester;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -23,7 +25,7 @@ public class Section {
     private Long id;
 
     @Column(name = "semester")
-    private Boolean semester;
+    private Semester semester;
 
     @Column(name = "year")
     private Integer year;
@@ -43,7 +45,8 @@ public class Section {
     @ToString.Exclude
     private Instructor instructor;
 
-    public Section(Boolean semester, Integer year, String classroomInfo, Integer quota, Course course, Instructor instructor) {
+    public Section(Semester semester, Integer year, String classroomInfo, Integer quota, Course course,
+                   Instructor instructor) {
         this.semester = semester;
         this.year = year;
         this.classroomInfo = classroomInfo;

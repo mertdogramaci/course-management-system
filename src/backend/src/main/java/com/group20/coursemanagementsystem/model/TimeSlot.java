@@ -1,13 +1,14 @@
 package com.group20.coursemanagementsystem.model;
 
 import javax.persistence.*;
+
+import com.group20.coursemanagementsystem.enums.Day;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Timestamp;
-import java.util.List;
+import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
@@ -23,18 +24,25 @@ public class TimeSlot {
     private Long id;
 
     @Column(name = "day")
-    private Integer day;
+    private Day day;
 
     @Column(name = "start_time")
-    private Timestamp startTime;
+    private LocalTime startTime;
 
     @Column(name = "end_time")
-    private Timestamp endTime;
+    private LocalTime endTime;
 
     @ManyToOne
     @JoinColumn(name = "section_id", referencedColumnName = "id")
     @ToString.Exclude
     private Section section;
+
+    public TimeSlot(Day day, LocalTime startTime, LocalTime endTime, Section section) {
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.section = section;
+    }
 
     @Override
     public boolean equals(Object o) {

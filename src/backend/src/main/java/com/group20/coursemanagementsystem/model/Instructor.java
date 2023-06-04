@@ -35,4 +35,9 @@ public class Instructor extends Member {
         this.password = password;
         this.memberType = memberType;
     }
+
+    public Instructor(String firstName, String lastName, String email, String password, String phoneNumber,
+                      String about, MemberType memberType, Set<Authority> authorities, Department department) {
+        super(firstName, lastName, email, password, phoneNumber, about, memberType, authorities, department);
+    }
 }

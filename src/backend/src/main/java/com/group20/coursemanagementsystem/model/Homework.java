@@ -1,6 +1,8 @@
 package com.group20.coursemanagementsystem.model;
 
 import javax.persistence.*;
+
+import com.group20.coursemanagementsystem.repository.HomeworkRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -36,6 +38,14 @@ public class Homework {
     @ManyToOne
     @JoinColumn(name = "section_id", referencedColumnName = "id")
     private Section section;
+
+    public Homework(String title, Byte[] content, LocalDateTime issueDate, LocalDateTime dueDate, Section section) {
+        this.title = title;
+        this.content = content;
+        this.issueDate = issueDate;
+        this.dueDate = dueDate;
+        this.section = section;
+    }
 
     @Override
     public boolean equals(Object o) {
