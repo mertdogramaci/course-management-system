@@ -41,13 +41,16 @@ public class DatabasePopulator {
 
     private final InstructorTeachesSectionRepository instructorTeachesSectionRepository;
 
+    private final InstructorAdvisorStudentRepository instructorAdvisorStudentRepository;
+
     public DatabasePopulator(FacultyRepository facultyRepository, DepartmentRepository departmentRepository,
                              SectionRepository sectionRepository, CourseRepository courseRepository,
                              AuthorityRepository authorityRepository, MemberRepository memberRepository,
                              PasswordEncoder passwordEncoder, HomeworkRepository homeworkRepository,
                              SubmissionRepository submissionRepository, TimeSlotRepository timeSlotRepository,
                              StudentEnrollsSectionRepository studentEnrollsSectionRepository,
-                             InstructorTeachesSectionRepository instructorTeachesSectionRepository) {
+                             InstructorTeachesSectionRepository instructorTeachesSectionRepository,
+                             InstructorAdvisorStudentRepository instructorAdvisorStudentRepository) {
         this.facultyRepository = facultyRepository;
         this.departmentRepository = departmentRepository;
         this.sectionRepository = sectionRepository;
@@ -60,6 +63,7 @@ public class DatabasePopulator {
         this.timeSlotRepository = timeSlotRepository;
         this.studentEnrollsSectionRepository = studentEnrollsSectionRepository;
         this.instructorTeachesSectionRepository = instructorTeachesSectionRepository;
+        this.instructorAdvisorStudentRepository = instructorAdvisorStudentRepository;
     }
 
     @Transactional
@@ -645,5 +649,25 @@ public class DatabasePopulator {
         instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor3, section19));
         instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor2, section20));
         instructorTeachesSectionRepository.save(new InstructorTeachesSection(instructor2, section21));
+
+
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor1, student1));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor1, student2));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor1, student3));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor1, student4));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor2, student5));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor2, student6));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor2, student7));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor2, student8));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor2, student9));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor2, student10));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor3, student11));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor4, student12));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor5, student13));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor6, student14));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor7, student15));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor8, student16));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor9, student17));
+        instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor10, student18));
     }
 }
