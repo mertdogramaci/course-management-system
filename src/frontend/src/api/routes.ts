@@ -1,5 +1,6 @@
 const ApiRoutes = {
   LOGIN: '/login',
+  COURSES: '/courses',
   PROFILE: '/members/profile',
   ENROLLMENT: '/enroll',
   APPROVE_ENROLLMENT: '/enroll/approve',

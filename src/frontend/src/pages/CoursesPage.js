@@ -1,16 +1,28 @@
-import '../../App.css';
+import '../App.css';
 import React, { useEffect, useState } from "react";
-import AppNavbar from "../../AppNavbar";
-import CourseTable from "../tables/CourseTable";
+import AppNavbar from "../AppNavbar";
+import CourseTable from "../components/tables/CourseTable";
+import axios from '../api/axios';
+import ApiRoutes from '../api/routes';
 
 function CoursesPage() {
     const[courses, setCourses] = useState([]);
 
     useEffect(() => {
-        fetch('/courses').then(response => response.json()).then(data => {
-            setCourses(data);
-        })
+        fetchAllCourses();
     }, [])
+
+    const fetchAllCourses = async () => {
+        try {
+          const response = await axios.get(ApiRoutes.COURSES);
+
+          if (response.status === 200) {
+            setCourses(response.data);
+          }
+        } catch (error) {
+            console.log("error!!");
+        }
+      }
 
     return (
         <div className="App">

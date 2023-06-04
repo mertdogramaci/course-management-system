@@ -3,6 +3,7 @@ package com.group20.coursemanagementsystem.controller;
 import com.group20.coursemanagementsystem.model.Course;
 import com.group20.coursemanagementsystem.repository.CourseRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class CourseController {
     public CourseController(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
-
+    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
     @GetMapping
     public ResponseEntity<List> getAllCourses() {
         return ResponseEntity.ok(courseRepository.findAll());
