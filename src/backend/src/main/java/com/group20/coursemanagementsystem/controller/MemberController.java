@@ -7,6 +7,7 @@ import com.group20.coursemanagementsystem.response.MemberResponse;
 import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.response.MemberQueryResponse;
 import com.group20.coursemanagementsystem.response.StudentResponse;
+import com.group20.coursemanagementsystem.security.request.UpdateMemberRequest;
 import com.group20.coursemanagementsystem.security.service.CustomUserDetailsService;
 import com.group20.coursemanagementsystem.service.MemberService;
 import org.springframework.http.ResponseEntity;

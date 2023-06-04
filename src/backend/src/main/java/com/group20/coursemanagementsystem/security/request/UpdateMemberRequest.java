@@ -25,8 +25,10 @@ public class UpdateMemberRequest implements Serializable {
 
     private String about;
 
+    private MultipartFile profilePhoto;
+
     //Map function to Member
-    public Member toMember() {
-        return new Member(firstName, lastName, email, phoneNumber, about);
+    public Member toMember(String profilePhotoPath) {
+        return new Member(firstName, lastName, email, phoneNumber, about, profilePhotoPath);
     }
 }

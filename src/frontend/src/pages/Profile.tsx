@@ -145,6 +145,13 @@ export default function Profile() {
       {profileData ?
         (<>
           <div style={{ marginTop: 2, height: 180, display: 'flex', flexDirection: 'row' }}>
+          <div  style={{ width: 180, display: 'flex', flex: 1, alignItems: 'center', justifyContent:'center' }}>
+            {
+              profileData.profilePhoto
+                ? <Avatar src={profileData.profilePhoto} sx={{ width: 150, height: 150 }} />
+                : <Avatar sx={{ width: 150, height: 150 }} />
+            }
+          </div>
           <div style={{ display: 'flex', flex: 2, justifyContent: 'center', flexDirection: 'column' }}>
             <Typography variant='h6' fontWeight={800} sx={{ marginBottom: 1 }}>
               {profileData.firstName + ' ' + profileData.lastName}
