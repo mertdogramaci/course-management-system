@@ -17,6 +17,7 @@ public class MemberResponse {
     private final MemberType memberType;
     private final String phoneNumber;
     private final String about;
+    private final String profilePhoto;
 
     public MemberResponse(final Member member) {
         this.id = member.getId();
@@ -26,5 +27,6 @@ public class MemberResponse {
         this.memberType = member.getMemberType();
         this.phoneNumber = member.getPhoneNumber();
         this.about = member.getAbout();
+        this.profilePhoto = member.getProfilePhoto();
     }
 }

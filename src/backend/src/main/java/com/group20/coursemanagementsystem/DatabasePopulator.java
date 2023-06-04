@@ -143,7 +143,7 @@ public class DatabasePopulator {
 
         Student member = new Student(
                 "Özgün", "Akyüz", "zgnakyuz@gmail.com",
-                passwordEncoder.encode("özgün"), "507 296 64 91",
+                passwordEncoder.encode("özgün"), "/assets/images/21827005-pp.png", "507 296 64 91",
                 "Hi i'm Özgün Akyüz, I am a 3rd year computer engineering student.",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
@@ -151,7 +151,7 @@ public class DatabasePopulator {
         );
         memberRepository.save(member);
         member = new Student("Mert", "Doğramacı", "mertdogramaci@gmail.com",
-                passwordEncoder.encode("deneme"), "05425252477",
+                passwordEncoder.encode("deneme"), "/assets/images/21946055-pp.png", "05425252477",
                 "Yenibağlar Mah Eti Cad Görenek Sok Final Sit D/8 Tepebaşı/Eskişehir", MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
                 department1, "21946055", 40);
@@ -279,7 +279,7 @@ public class DatabasePopulator {
 
 
         Instructor instructor = new Instructor("Engin", "Demir", "engindemir@gmail.com",
-                passwordEncoder.encode("deneme"), "01128549735", "Ankara",
+                passwordEncoder.encode("deneme"), "01128549735", "/assets/images/engindemir.png", "Ankara",
                 MemberType.INSTRUCTOR,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("INSTRUCTOR")),
                 department1);

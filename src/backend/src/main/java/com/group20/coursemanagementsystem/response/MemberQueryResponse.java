@@ -15,6 +15,7 @@ public class MemberQueryResponse {
     private final String lastName;
     private final String email;
     private final MemberType memberType;
+    private final String profilePhoto;
     private List<LocalDate> joinDates;
 
     public MemberQueryResponse(final Member member) {
@@ -23,6 +24,7 @@ public class MemberQueryResponse {
         this.lastName = member.getLastName();
         this.email = member.getEmail();
         this.memberType = member.getMemberType();
+        this.profilePhoto = member.getProfilePhoto();
         this.joinDates = member.getJoinDates();
     }
 }

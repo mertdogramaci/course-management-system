@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import React, { useEffect, useState } from 'react';
 import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 import { ProfileDataRequestDTO } from '../@types/profile';
-import { MemberType, User } from '../@types/user';
+import { MemberType, User, Student } from '../@types/user';
 import axios from '../api/axios';
 import ApiRoutes from '../api/routes';
 import useAuth from '../hooks/useAuth';
@@ -24,13 +24,13 @@ export default function Profile() {
   const [isFriend, setIsFriend] = useState<boolean>(false);
   const [sentRequests, setSentRequests] = useState<any[]>([]);
   const [isRequestSent, setIsRequestSent] = useState<boolean>(false);
-  const [studentUser, getStudentUser] = useState<any[]>([]);
+  const [studentUser, setStudentUser] = useState<Student | null>(null);
 
   useEffect(() => {
     if (user) {
-      // if (user.memberType === MemberType.STUDENT) { // Check if the user's member type is "Student"
-      //   getStudentData(user.id); // Call the function to get the student data
-      // }
+      if (user.memberType === "STUDENT") { // Check if the user's member type is "Student"
+        getStudentData(user.id); // Call the function to get the student data
+      }
 
       if (id) {
         fetchOtherProfileData(user.id, Number(id));
@@ -60,19 +60,19 @@ export default function Profile() {
     }
   }
 
-  // const getStudentData = async (userId: number) => {
-  //   try {
-  //     const response = await axios.get(`students/${userId}`); // Replace "students/${userId}" with the appropriate API route to fetch student data
+  const getStudentData = async (userId: number) => {
+    try {
+      const response = await axios.get(`members/findStudent/${userId}`); // Replace "students/${userId}" with the appropriate API route to fetch student data
 
-  //     if (response.status === 200) {
-  //       setStudentUser(response.data); // Assign the fetched student data to the studentUser state variable
-  //     }
-  //   } catch (error) {
-  //     setSnackbarAlertType('error');
-  //     setSnackbarMessage(error.response.data.message);
-  //     setSnackbarOpen(true);
-  //   }
-  // };
+      if (response.status === 200) {
+        setStudentUser(response.data); // Assign the fetched student data to the studentUser state variable
+      }
+    } catch (error) {
+      setSnackbarAlertType('error');
+      setSnackbarMessage(error.response.data.message);
+      setSnackbarOpen(true);
+    }
+  };
 
   const fetchOtherProfileData = async (requesterId: number, requestedId: number) => {
     try {
@@ -145,6 +145,13 @@ export default function Profile() {
       {profileData ?
         (<>
           <div style={{ marginTop: 2, height: 180, display: 'flex', flexDirection: 'row' }}>
+          <div  style={{ width: 180, display: 'flex', flex: 1, alignItems: 'center', justifyContent:'center' }}>
+            {
+              profileData.profilePhoto
+                ? <Avatar src={profileData.profilePhoto} sx={{ width: 150, height: 150 }} />
+                : <Avatar sx={{ width: 150, height: 150 }} />
+            }
+          </div>
           <div style={{ display: 'flex', flex: 2, justifyContent: 'center', flexDirection: 'column' }}>
             <Typography variant='h6' fontWeight={800} sx={{ marginBottom: 1 }}>
               {profileData.firstName + ' ' + profileData.lastName}
@@ -152,6 +159,11 @@ export default function Profile() {
             <Typography variant='body2'>
               {MemberType[profileData.memberType]}
             </Typography>
+            {user?.memberType === "STUDENT" && (
+                <Typography variant='body2'>
+                  Hacettepe ID: {studentUser?.hacettepeID}
+                </Typography>
+              )}
           </div>
           <div style={{ display: 'flex', flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end' }}>
             <div style={{ display: 'flex', marginRight: 4 }}>

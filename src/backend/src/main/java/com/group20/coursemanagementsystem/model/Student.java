@@ -42,6 +42,13 @@ public class Student extends Member {
         this.memberType = memberType;
     }
 
+    public Student(String firstName, String lastName, String email, String password, String profilePhoto, String phoneNumber, String about,
+                   MemberType memberType, Set<Authority> authorities, Department department, String hacettepeID, int semesterECTS) {
+        super(firstName, lastName, email, password, phoneNumber, about, profilePhoto, memberType, authorities, department);
+        this.hacettepeID = hacettepeID;
+        this.semesterECTS = semesterECTS;
+    }
+
     public Student(String firstName, String lastName, String email, String password, String phoneNumber, String about,
                    MemberType memberType, Set<Authority> authorities, Department department, String hacettepeID, int semesterECTS) {
         super(firstName, lastName, email, password, phoneNumber, about, memberType, authorities, department);

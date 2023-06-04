@@ -69,15 +69,16 @@ public class MemberRepository {
         }
 
         Query query = entityManager.createNativeQuery("INSERT INTO member_table (first_name, last_name, email, password, " +
-                "phone_number, about, member_type, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                "phone_number, about, profile_photo, member_type, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         query.setParameter(1, member.getFirstName());
         query.setParameter(2, member.getLastName());
         query.setParameter(3, member.getEmail());
         query.setParameter(4, member.getPassword());
         query.setParameter(5, member.getPhoneNumber());
         query.setParameter(6, member.getAbout());
-        query.setParameter(7, member.getMemberType().ordinal());
-        query.setParameter(8, member.getDepartment().getId());
+        query.setParameter(7, member.getProfilePhoto());
+        query.setParameter(8, member.getMemberType().ordinal());
+        query.setParameter(9, member.getDepartment().getId());
         query.executeUpdate();
 
         Member savedMember = findByEmail(member.getEmail());

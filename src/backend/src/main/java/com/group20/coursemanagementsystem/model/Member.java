@@ -42,6 +42,9 @@ public class Member extends BaseEntity implements UserDetails {
     @Column(name = "member_type")
     protected MemberType memberType;
 
+    @Column(name = "profile_photo")
+    protected String profilePhoto;
+
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
@@ -78,25 +81,41 @@ public class Member extends BaseEntity implements UserDetails {
         this.memberType = memberType;
     }
 
-    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String about) {
+    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String about, String profilePhoto) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.about = about;
+        this.profilePhoto = profilePhoto;
     }
 
-    public Member(String firstName, String lastName, String email, String phoneNumber, String about) {
+    public Member(String firstName, String lastName, String email, String phoneNumber, String about, String profilePhoto) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.about = about;
+        this.profilePhoto = profilePhoto;
     }
 
     public Member(String password) {
         this.password = password;
+    }
+
+    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String about,
+                  String profilePhoto, MemberType memberType, Set<Authority> authorities, Department department) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.profilePhoto = profilePhoto;
+        this.about = about;
+        this.memberType = memberType;
+        this.authorities = authorities;
+        this.department = department;
     }
 
     public Member(String firstName, String lastName, String email, String password, String phoneNumber, String about,
@@ -131,6 +150,9 @@ public class Member extends BaseEntity implements UserDetails {
         this.lastName = updatedMember.getLastName();
         this.phoneNumber = updatedMember.getPhoneNumber();
         this.about = updatedMember.getAbout();
+        if (updatedMember.getProfilePhoto() != null) {
+            this.profilePhoto = updatedMember.getProfilePhoto();
+        }
     }
 
     public void updateDepartment(final Department department) {
