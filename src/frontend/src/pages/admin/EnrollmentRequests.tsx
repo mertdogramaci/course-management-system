@@ -55,12 +55,12 @@ export default function EnrollmentRequests() {
 
 
   let TABLE_HEAD = [
-    { id: 'firstName', label: "header.manage-button.enrollment-requests.first-name"},
-    { id: 'lastName', label: "header.manage-button.enrollment-requests.last-name"},
+    { id: 'firstName', label: "First Name"},
+    { id: 'lastName', label: "Last Name"},
     { id: 'hacettepeID', label: 'Hacettepe ID' },
     { id: 'email', label: 'Email'  },
-    { id: 'memberType', label: "header.manage-button.enrollment-requests.role"},
-    { id: 'approve-deny', label: "header.manage-button.enrollment-requests.approve-deny"}
+    { id: 'memberType', label: "Member Type"},
+    { id: 'approve-deny', label: "Approve / Deny"}
   ];
 
   useEffect(() => {

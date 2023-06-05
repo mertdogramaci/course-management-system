@@ -20,7 +20,7 @@ export default function Header() {
 
   let ADMIN_MENU_OPTIONS = [
     {
-      label: "header.manage-button.enrollment-requests.text",
+      label: "Enrollment Requests",
       linkTo: PATH_ADMIN.enrollmentRequests
     }
   ];
