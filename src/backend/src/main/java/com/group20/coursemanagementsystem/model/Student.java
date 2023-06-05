@@ -4,8 +4,10 @@ import com.group20.coursemanagementsystem.enums.MemberType;
 import com.group20.coursemanagementsystem.security.domain.Authority;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 
 
@@ -22,6 +24,9 @@ public class Student extends Member {
 
     @Column(name = "semester_ects")
     protected int semesterECTS;
+
+    @Column(name = "school_enrollment_date")
+    private LocalDate schoolEnrollmentDate;
 
     public Student(String firstName, String lastName, String email,
                    String password, MemberType memberType, Set<Authority> authorities) {
@@ -41,18 +46,22 @@ public class Student extends Member {
         this.memberType = memberType;
     }
 
-    public Student(String firstName, String lastName, String email, String password, String profilePhoto, String phoneNumber, String address,
-                   MemberType memberType, Set<Authority> authorities, Department department, String hacettepeID, int semesterECTS) {
+    public Student(String firstName, String lastName, String email, String password, String profilePhoto, String phoneNumber,
+                   String address, MemberType memberType, Set<Authority> authorities, Department department,
+                   String hacettepeID, int semesterECTS, LocalDate schoolEnrollmentDate) {
         super(firstName, lastName, email, password, phoneNumber, address, profilePhoto, memberType, authorities, department);
         this.hacettepeID = hacettepeID;
         this.semesterECTS = semesterECTS;
+        this.schoolEnrollmentDate = schoolEnrollmentDate;
     }
 
     public Student(String firstName, String lastName, String email, String password, String phoneNumber, String address,
-                   MemberType memberType, Set<Authority> authorities, Department department, String hacettepeID, int semesterECTS) {
+                   MemberType memberType, Set<Authority> authorities, Department department, String hacettepeID,
+                   int semesterECTS, LocalDate schoolEnrollmentDate) {
         super(firstName, lastName, email, password, phoneNumber, address, memberType, authorities, department);
         this.hacettepeID = hacettepeID;
         this.semesterECTS = semesterECTS;
+        this.schoolEnrollmentDate = schoolEnrollmentDate;
     }
 
     public void updateMemberFields(Member m) {

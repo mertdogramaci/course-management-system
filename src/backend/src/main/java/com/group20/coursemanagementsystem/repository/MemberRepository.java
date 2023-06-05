@@ -106,10 +106,11 @@ public class MemberRepository {
 
         if (savedMember.getMemberType() == MemberType.STUDENT) {
             Student student = (Student) member;
-            query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects) VALUES (?, ?, ?)");
+            query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects, school_enrollment_date) VALUES (?, ?, ?, ?)");
             query.setParameter(1, savedMember.getId());
             query.setParameter(2, student.getHacettepeID());
             query.setParameter(3, student.getSemesterECTS());
+            query.setParameter(4, student.getSchoolEnrollmentDate());
             query.executeUpdate();
         }
 

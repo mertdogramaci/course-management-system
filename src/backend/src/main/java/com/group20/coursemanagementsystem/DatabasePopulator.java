@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.group20.coursemanagementsystem.enums.MemberType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -151,110 +152,110 @@ public class DatabasePopulator {
                 "Yukarı Bahçelievler Mah. Aşkabat Cad. 59/7 Çankaya/Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department1, "21827005", 40
+                department1, "21827005", 40, LocalDate.now()
         );
         memberRepository.save(member);
         member = new Student("Mert", "Doğramacı", "mertdogramaci@gmail.com",
                 passwordEncoder.encode("deneme"), "/assets/images/21946055-pp.png", "05425252477",
                 "Yenibağlar Mah Eti Cad Görenek Sok Final Sit D/8 Tepebaşı/Eskişehir", MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department1, "21946055", 40);
+                department1, "21946055", 40, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Emre", "Akdeniz", "emreakdeniz@gmail.com",
                 passwordEncoder.encode("deneme"), "02134567899", "Eskişehir",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department4, "21945102", 40);
+                department4, "21945102", 40, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Eser", "Vatansever", "eservatansever@gmail.com",
                 passwordEncoder.encode("deneme"), "01234567899", "İstanbul",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department2, "21947727", 40);
+                department2, "21947727", 40, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Abdurrahman", "Özçağlayan", "abdurrahman@gmail.com",
                 passwordEncoder.encode("deneme"), "05421234567", "Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department1, "21296013", 40);
+                department1, "21296013", 40, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Efe", "Çelik", "efecelik@gmail.com",
                 passwordEncoder.encode("deneme"), "05987654321", "Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department3, "2200356833", 30);
+                department3, "2200356833", 30, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Tuğçe", "Dönmez", "tugcedonmez@gmail.com",
                 passwordEncoder.encode("deneme"), "09638527411", "Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department5, "2212345678", 30);
+                department5, "2212345678", 30, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Ayşe Buket", "Yağız", "aysebuketyagiz@gmail.com",
                 passwordEncoder.encode("deneme"), "07418529633", "Kocaeli",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department6, "2214545678", 30);
+                department6, "2214545678", 30, LocalDate.now());
         memberRepository.save(member);
         member = new Student("İrem", "Yağız", "iremyagiz@gmail.com",
                 passwordEncoder.encode("deneme"), "08527419633", "Tokat",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department15, "2202345698", 30);
+                department15, "2202345698", 30, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Osman", "Portakal", "osmanportakal@gmail.com",
                 passwordEncoder.encode("deneme"), "08529637411", "Mersin",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department2, "2222345678", 30);
+                department2, "2222345678", 30, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Damla", "Özdağ", "damlaozdag@gmail.com",
                 passwordEncoder.encode("deneme"), "08529637411", "Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department2, "2202345678", 30);
+                department2, "2202345678", 30, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Emrah", "Duman", "emrahduman@gmail.com",
                 passwordEncoder.encode("deneme"), "08498496489", "Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department2, "21745102", 40);
+                department2, "21745102", 40, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Melek", "Baykal", "melekbaykal@gmail.com",
                 passwordEncoder.encode("deneme"), "08656565163", "Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department1, "21645102", 40);
+                department1, "21645102", 40, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Özge", "Burak", "ozgeburak@gmail.com",
                 passwordEncoder.encode("deneme"), "07894561232", "Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department1, "21945177", 40);
+                department1, "21945177", 40, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Alperen", "Doğru", "alperendogru@gmail.com",
                 passwordEncoder.encode("deneme"), "08527891235", "Edirne",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department1, "21845102", 40);
+                department1, "21845102", 40, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Ali", "Veli", "aliveli@gmail.com",
                 passwordEncoder.encode("deneme"), "09637411237", "Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department1, "21845112", 40);
+                department1, "21845112", 40, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Burcu", "Çiçek", "burcucicek@gmail.com",
                 passwordEncoder.encode("deneme"), "05550337285", "Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department1, "2212895678", 30);
+                department1, "2212895678", 30, LocalDate.now());
         memberRepository.save(member);
         member = new Student("Almila", "Dağlar", "almiladaglar@gmail.com",
                 passwordEncoder.encode("deneme"), "06190555252", "Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department1, "2200895678", 30);
+                department1, "2200895678", 30, LocalDate.now());
         memberRepository.save(member);
 
         Member admin = new Member("admin@admin.com",
