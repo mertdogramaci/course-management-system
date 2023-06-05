@@ -186,7 +186,7 @@ export default function Profile() {
               )
             }
             {
-              user?.id === 1 && (
+              user?.memberType === "ADMIN" && (
                 <Button variant='contained' color='error' size='small' onClick={handleDeleteUser}>Delete User</Button>
               )
             }
