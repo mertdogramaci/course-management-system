@@ -1,7 +1,7 @@
 export enum MemberType {
   ADMIN = "Admin",
   STUDENT = "Student",
-  ACADEMICIAN = "Academician",
+  INSTRUCTOR = "Instructor",
 }
 
 export class User {

@@ -88,7 +88,7 @@ export default function Login() {
             mb: 2
           }}
         >
-          LinkedHU_CENG
+          HU Student Affairs Information System
         </Typography>
         <Card
           elevation={4}

@@ -32,7 +32,7 @@ export const fetchUserData = () => {
 }
 
 export let isStudent =
-	!(getToken() === null) ? !atob(getToken()!.split('.')[1]).includes("ADMIN") && !atob(getToken()!.split('.')[1]).includes("STUDENT_REPRESENTATIVE")
-  && !atob(getToken()!.split('.')[1]).includes("GRADUATE") && !atob(getToken()!.split('.')[1]).includes("ACADEMICIAN")  : false;
+	!(getToken() === null) ? !atob(getToken()!.split('.')[1]).includes("ADMIN")
+  && !atob(getToken()!.split('.')[1]).includes("INSTRUCTOR")  : false;
 
 export { isValidToken, setSession };
