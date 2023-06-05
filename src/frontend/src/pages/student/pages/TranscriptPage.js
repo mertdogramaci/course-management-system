@@ -5,3 +5,36 @@ import axios from '../../../api/axios';
 import ApiRoutes from '../../../api/routes';
 import useAuth from '../../../hooks/useAuth';
 
+function TranscriptPage() {
+    const[sections, setSections] = useState([]);
+    const { user } = useAuth();
+
+    useEffect(() => {
+        fetchAllCourses();
+    }, [])
+
+    const fetchAllCourses = async () => {
+        try {
+          const response = await axios.get(ApiRoutes.COURSES + '/' + user.id);
+
+          if (response.status === 200) {
+            setSections(response.data);
+          }
+        } catch (error) {
+            console.log("error!!");
+        }
+      }
+
+    return(
+        <div className='App'>
+            <header className="App-header">
+                <div className="App-intro">
+                    <h2>T.C. Hacettepe Üniversitesi Öğrenci İşleri Daire Başkanlığı Not Durum Belgesi \(Transkript\)</h2>
+                    <CourseTable sections={sections} setSections={setSections}/>
+                </div>
+            </header>
+        </div>
+    );
+}
+
+export default TranscriptPage;
