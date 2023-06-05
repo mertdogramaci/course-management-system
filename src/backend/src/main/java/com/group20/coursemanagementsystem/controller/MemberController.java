@@ -1,14 +1,17 @@
 package com.group20.coursemanagementsystem.controller;
 
 import com.group20.coursemanagementsystem.dto.MessageResponse;
+import com.group20.coursemanagementsystem.enums.MessageType;
 import com.group20.coursemanagementsystem.model.Student;
 import com.group20.coursemanagementsystem.request.ProfileDataRequest;
 import com.group20.coursemanagementsystem.response.MemberResponse;
 import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.response.MemberQueryResponse;
 import com.group20.coursemanagementsystem.response.StudentResponse;
+import com.group20.coursemanagementsystem.security.request.ChangePasswordRequest;
 import com.group20.coursemanagementsystem.security.request.UpdateMemberRequest;
 import com.group20.coursemanagementsystem.security.service.CustomUserDetailsService;
+import com.group20.coursemanagementsystem.service.FileService;
 import com.group20.coursemanagementsystem.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,10 +32,13 @@ public class MemberController {
     private final MemberService memberService;
     private final CustomUserDetailsService customUserDetailsService;
 
+    private final FileService fileService;
+
     public MemberController(final MemberService memberService,
-                            final CustomUserDetailsService customUserDetailsService) {
+                            final CustomUserDetailsService customUserDetailsService, FileService fileService) {
         this.memberService = memberService;
         this.customUserDetailsService = customUserDetailsService;
+        this.fileService = fileService;
     }
 
     @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
@@ -100,19 +106,19 @@ public class MemberController {
 //        return new MemberQueryResponse(member);
 //    }
 
-//    @PutMapping("/{id}")
-//    public MessageResponse updateMember(@PathVariable Long id, @ModelAttribute UpdateMemberRequest request) {
-//        if (request.getProfilePhoto() != null) {
-//            try {
-//                String photoPath = fileService.store(request.getProfilePhoto(), request.getHacettepeId());
-//                return memberService.updateMember(id, request.toMember(photoPath));
-//            } catch (Exception e) {
-//                return new MessageResponse(MessageType.ERROR, String.format("Could not upload the file: %s", request.getProfilePhoto().getOriginalFilename()));
-//            }
-//        } else {
-//            return memberService.updateMember(id, request.toMember(null));
-//        }
-//    }
+    @PutMapping("/{id}")
+    public MessageResponse updateMember(@PathVariable Long id, @ModelAttribute UpdateMemberRequest request) {
+        if (request.getProfilePhoto() != null) {
+            try {
+                String photoPath = fileService.store(request.getProfilePhoto(), request.getEmail());
+                return memberService.updateMember(id, request.toMember(photoPath));
+            } catch (Exception e) {
+                return new MessageResponse(MessageType.ERROR, String.format("Could not upload the file: %s", request.getProfilePhoto().getOriginalFilename()));
+            }
+        } else {
+            return memberService.updateMember(id, request.toMember(null));
+        }
+    }
 
     // Cannot be used by members!
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -121,10 +127,10 @@ public class MemberController {
         return memberService.deleteMember(id);
     }
 
-//    @PostMapping("/change-password")
-//    public MessageResponse changePassword(@RequestBody ChangePasswordRequest changePasswordRequest){
-//        return memberService.changePassword(changePasswordRequest.getUserID(), changePasswordRequest.getOldPassword(), changePasswordRequest.getNewPassword());
-//    }
+    @PostMapping("/change-password")
+    public MessageResponse changePassword(@RequestBody ChangePasswordRequest changePasswordRequest){
+        return memberService.changePassword(changePasswordRequest.getUserID(), changePasswordRequest.getOldPassword(), changePasswordRequest.getNewPassword());
+    }
 
     @GetMapping("/userinfo")
     public ResponseEntity<?> getUserInfo(Principal user) {

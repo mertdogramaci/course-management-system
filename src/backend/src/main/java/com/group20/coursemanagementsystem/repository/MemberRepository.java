@@ -108,6 +108,35 @@ public class MemberRepository {
     }
 
     @Transactional
+    public <M extends Member> M update(M member) {
+        Query query = entityManager.createNativeQuery("UPDATE member_table SET first_name = ?, last_name = ?, email = ?, password = ?, " +
+                "phone_number = ?, about = ?, profile_photo = ?, member_type = ?, department_id = ? WHERE id = ?");
+        query.setParameter(1, member.getFirstName());
+        query.setParameter(2, member.getLastName());
+        query.setParameter(3, member.getEmail());
+        query.setParameter(4, member.getPassword());
+        query.setParameter(5, member.getPhoneNumber());
+        query.setParameter(6, member.getAbout());
+        query.setParameter(7, member.getProfilePhoto());
+        query.setParameter(8, member.getMemberType().ordinal());
+        query.setParameter(9, member.getDepartment().getId());
+        query.setParameter(10, member.getId());
+        query.executeUpdate();
+
+        if (member.getMemberType() == MemberType.STUDENT) {
+            Student student = (Student) member;
+            query = entityManager.createNativeQuery("UPDATE student_table SET hacettepe_id = ?, semester_ects = ? WHERE id = ?");
+            query.setParameter(1, student.getHacettepeID());
+            query.setParameter(2, student.getSemesterECTS());
+            query.setParameter(3, member.getId());
+            query.executeUpdate();
+        }
+
+        return member;
+    }
+
+
+    @Transactional
     public void deleteById(Long id) {
         Query query = entityManager.createNativeQuery("DELETE FROM member_table WHERE id = ?");
         query.setParameter(1, id);

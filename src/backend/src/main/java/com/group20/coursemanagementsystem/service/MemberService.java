@@ -125,7 +125,7 @@ public class MemberService {
         }
 
         memberFromDB.updateMember(updatedMember);
-        memberRepository.save(memberFromDB);
+        memberRepository.update(memberFromDB);
         return new MessageResponse(MessageType.SUCCESS, MEMBER_UPDATED_MESSAGE);
     }
 
