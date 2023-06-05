@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -26,7 +27,8 @@ public class EnrolmentRequest extends BaseEntity {
     @NotEmpty(message = "Last name cannot be empty!")
     private String lastName;
 
-    private String hacettepeId;
+    @Column(name = "hacettepe_id")
+    private String hacettepeID;
 
     // TODO check email if it ends with @hacettepe.edu.tr etc
     @Email(message = "Please enter a valid e-mail address")
@@ -38,10 +40,10 @@ public class EnrolmentRequest extends BaseEntity {
 
     private MemberType memberType;
 
-    public EnrolmentRequest(String firstName, String lastName, String hacettepeId, String email, String password, MemberType memberType) {
+    public EnrolmentRequest(String firstName, String lastName, String hacettepeID, String email, String password, MemberType memberType) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.hacettepeId = hacettepeId;
+        this.hacettepeID = hacettepeID;
         this.email = email;
         this.password = password;
         this.memberType = memberType;
@@ -52,14 +54,12 @@ public class EnrolmentRequest extends BaseEntity {
         return new Member(firstName, lastName, email, memberType);
     }
 
-    //Map function to Student
     public Student toStudent() {
         return new Student(firstName, lastName, email, password, memberType);
     }
 
-    //Map function to Academician
     public Instructor toInstructor() {
-        return new Instructor(firstName, lastName, hacettepeId, email, memberType);
+        return new Instructor(firstName, lastName, hacettepeID, email, memberType);
     }
 }
 

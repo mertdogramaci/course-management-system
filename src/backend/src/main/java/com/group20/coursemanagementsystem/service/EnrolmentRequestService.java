@@ -35,14 +35,14 @@ public class EnrolmentRequestService {
     }
 
     public MessageResponse addEnrolmentRequest(EnrolmentRequest newEnrolmentRequest) {
-        if (enrolmentRequestRepository.existsByHacettepeId(newEnrolmentRequest.getHacettepeId()))
-            return new MessageResponse(MessageType.ERROR, ENROLMENT_REQUEST_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeId()));
+        if (enrolmentRequestRepository.existsByHacettepeID(newEnrolmentRequest.getHacettepeID()))
+            return new MessageResponse(MessageType.ERROR, ENROLMENT_REQUEST_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeID()));
         if (enrolmentRequestRepository.existsByEmail(newEnrolmentRequest.getEmail()))
-            return new MessageResponse(MessageType.ERROR, ENROLMENT_REQUEST_EMAIL_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeId()));
-//        if (memberRepository.existsByHacettepeId(newEnrolmentRequest.getHacettepeId()))
-//            return new MessageResponse(MessageType.ERROR, MEMBER_WITH_HACETTEPE_ID_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeId()));
+            return new MessageResponse(MessageType.ERROR, ENROLMENT_REQUEST_EMAIL_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeID()));
+        if (memberRepository.existsByHacettepeID(newEnrolmentRequest.getHacettepeID()))
+            return new MessageResponse(MessageType.ERROR, MEMBER_WITH_HACETTEPE_ID_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeID()));
         if (memberRepository.existsByEmail(newEnrolmentRequest.getEmail()))
-            return new MessageResponse(MessageType.ERROR, MEMBER_WITH_EMAIL_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeId()));
+            return new MessageResponse(MessageType.ERROR, MEMBER_WITH_EMAIL_ALREADY_EXISTS_MESSAGE.formatted(newEnrolmentRequest.getHacettepeID()));
         newEnrolmentRequest.setPassword(passwordEncoder.encode(newEnrolmentRequest.getPassword()));
         enrolmentRequestRepository.save(newEnrolmentRequest);
         return new MessageResponse(MessageType.SUCCESS, REQUEST_SENT_MESSAGE);
@@ -52,11 +52,13 @@ public class EnrolmentRequestService {
         if (!enrolmentRequestRepository.existsById(id)) {
             return new MessageResponse(MessageType.ERROR, ENROLMENT_ID_DOES_NOT_EXIST_MESSAGE.formatted(id));
         }
-        EnrolmentRequest enrolmentRequestFromDB = enrolmentRequestRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(REQUEST_ID_DOES_NOT_EXIST_MESSAGE.formatted(id)));
+        EnrolmentRequest enrolmentRequestFromDB = enrolmentRequestRepository.findById(id);
+        if (enrolmentRequestFromDB == null) {
+            throw new EntityNotFoundException(REQUEST_ID_DOES_NOT_EXIST_MESSAGE.formatted(id));
+        }
         enrolmentRequestRepository.deleteById(id);
 
-        return new MessageResponse(MessageType.SUCCESS, ENROLMENT_REQUEST_DELETED_MESSAGE.formatted(enrolmentRequestFromDB.getHacettepeId()));
+        return new MessageResponse(MessageType.SUCCESS, ENROLMENT_REQUEST_DELETED_MESSAGE.formatted(enrolmentRequestFromDB.getHacettepeID()));
     }
 
     public List<EnrolmentRequest> getAllEnrolmentRequests() {

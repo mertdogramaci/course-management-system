@@ -16,7 +16,7 @@ import { PATH_AUTH } from '../../routes/paths';
 type InitialValues = {
   name: string;
   surname: string;
-  hacettepeId: string;
+  hacettepeID: string;
   memberType: MemberType;
   email: string;
   password: string;
@@ -35,7 +35,7 @@ export default function Enrollment() {
   const EnrollmentSchema = Yup.object().shape({
     name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
     surname: Yup.string().min(1, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
-    hacettepeId: Yup.string().min(8, 'Student ID cannot be shorter than 8 characters!').max(15, 'Too Long!').required('Student ID required'),
+    hacettepeID: Yup.string().min(8, 'Student ID cannot be shorter than 8 characters!').max(15, 'Too Long!').required('Student ID required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required').min(8, 'Password cannot be shorter than 8 characters!').matches(/^(?=.*[a-z])/, 'Must contain at least one lowercase character')
     .matches(/^(?=.*[A-Z])/, 'Must contain at least one uppercase character'),
@@ -49,7 +49,7 @@ export default function Enrollment() {
     initialValues: {
       name: '',
       surname: '',
-      hacettepeId: '',
+      hacettepeID: '',
       memberType: MemberType.STUDENT,
       email: '',
       password: '',
@@ -59,7 +59,7 @@ export default function Enrollment() {
     onSubmit: async (values, { setErrors, setSubmitting, resetForm }) => {
       try {
         let memberEnumKey = Object.keys(MemberType)[Object.values(MemberType).indexOf(values.memberType)];
-        const enrollmentRequestDTO = new EnrollmentRequestDTO(values.name, values.surname, values.hacettepeId, values.email, values.password, memberEnumKey);
+        const enrollmentRequestDTO = new EnrollmentRequestDTO(values.name, values.surname, values.hacettepeID, values.email, values.password, memberEnumKey);
         const response = await axios.post(ApiRoutes.ENROLLMENT, enrollmentRequestDTO);
 
         if (response.status === 200) {
@@ -173,9 +173,9 @@ export default function Enrollment() {
                     fullWidth
                     type="text"
                     label="Hacettepe ID"
-                    {...getFieldProps('hacettepeId')}
-                    error={Boolean(touched.hacettepeId && errors.hacettepeId)}
-                    helperText={touched.hacettepeId && errors.hacettepeId}
+                    {...getFieldProps('hacettepeID')}
+                    error={Boolean(touched.hacettepeID && errors.hacettepeID)}
+                    helperText={touched.hacettepeID && errors.hacettepeID}
                   />
 
                   <TextField

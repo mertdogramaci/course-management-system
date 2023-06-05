@@ -18,7 +18,7 @@ export class EnrollmentRequestDTO {
   constructor(
     public firstName: string,
     public lastName: string,
-    public hacettepeId: string,
+    public hacettepeID: string,
     public email: string,
     public password: string,
     public memberType: string
