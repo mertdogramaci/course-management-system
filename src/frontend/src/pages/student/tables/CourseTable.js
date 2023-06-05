@@ -3,18 +3,6 @@ import { Button, ButtonGroup } from "reactstrap";
 import axios from '../../../api/axios';
 
 function CourseTable(props) {
-  const remove = async (id) => {
-    try {
-      const response = await axios.delete(`/studentEnrollsSection/${id}`);
-      if (response.status === 200) {
-        const updatedSections = props.sections.filter(i => i.id !== id);
-        props.setSections(updatedSections);
-      }
-    } catch (error) {
-      console.log("error!!");
-    }
-  };
-
   return (
     <table className="styled-table">
       <thead>
@@ -24,7 +12,6 @@ function CourseTable(props) {
           <th>Course Name</th>
           <th>Compulsory</th>
           <th>Grade</th>
-          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -35,16 +22,6 @@ function CourseTable(props) {
             <td>{section.section.course.description}</td>
             <td>{section.section.course.isCompulsory ? "Yes" : "No"}</td>
             <td>{section.grade}</td>
-            <td>
-              <ButtonGroup>
-                <Button
-                  color="danger"
-                  onClick={() => remove(section.id)}
-                >
-                  Drop
-                </Button>
-              </ButtonGroup>
-            </td>
           </tr>
         ))}
       </tbody>

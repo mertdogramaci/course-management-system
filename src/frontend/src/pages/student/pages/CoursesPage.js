@@ -9,16 +9,18 @@ import { Input } from "reactstrap";
 function CoursesPage() {
     const [sections, setSections] = useState([]);
     const { user } = useAuth();
-    const [semester, setSemester] = useState([]);
-    const [year, setYear] = useState([]);
+    const [semester, setSemester] = useState(true);
+    const [year, setYear] = useState(2023);
 
     useEffect(() => {
         fetchAllCourses();
-    }, [])
+    }, [semester, year])
 
     const fetchAllCourses = async () => {
         try {
-            const response = await axios.get(ApiRoutes.COURSES + '/' + user.id);
+            const response = await axios.get(ApiRoutes.COURSES + '/' + user.id + '/' + semester + '/' + year);
+
+            console.log(response);
 
             if (response.status === 200) {
                 setSections(response.data);
@@ -28,9 +30,23 @@ function CoursesPage() {
         }
     }
 
-    function selectTerm(semester, year) {
-        setSemester(semester);
-        setYear(year);
+    const selectTerm = async (event) => {
+        if (event.target.value === "0") {
+            setSemester(true);
+            setYear(2023);
+        } else if (event.target.value === "1") {
+            setSemester(false);
+            setYear(2022);
+        } else if (event.target.value === "2") {
+            setSemester(true);
+            setYear(2022);
+        } else if (event.target.value === "3") {
+            setSemester(false);
+            setYear(2021);
+        } else if (event.target.value === "4") {
+            setSemester(true);
+            setYear(2021);
+        }
     }
 
     return (
@@ -40,12 +56,12 @@ function CoursesPage() {
                     <span>
                         Term
                         &nbsp;&nbsp;
-                        <Input type="select" name="term" className="dropdownTerm">
-                            <option onClick={selectTerm}>2022 - 2023 Spring</option>
-                            <option onClick={selectTerm}>2022 - 2023 Fall</option>
-                            <option onClick={selectTerm}>2021 - 2022 Spring</option>
-                            <option onClick={selectTerm}>2021 - 2022 Fall</option>
-                            <option onClick={selectTerm}>2020 - 2021 Spring</option>
+                        <Input type="select" name="term" className="dropdownTerm" onClick={selectTerm}>
+                            <option value={"0"}>2022 - 2023 Spring</option>
+                            <option value={"1"}>2022 - 2023 Fall</option>
+                            <option value={"2"}>2021 - 2022 Spring</option>
+                            <option value={"3"}>2021 - 2022 Fall</option>
+                            <option value={"4"}>2020 - 2021 Spring</option>
                         </Input>
                     </span>
                     <h2>Course List</h2>
