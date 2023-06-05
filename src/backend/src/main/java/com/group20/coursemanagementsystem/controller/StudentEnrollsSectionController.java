@@ -22,4 +22,11 @@ public class StudentEnrollsSectionController {
     public ResponseEntity<List> getSectionsByStudentID(@PathVariable Long id) {
         return ResponseEntity.ok(studentEnrollsSectionRepository.findByStudentId(id));
     }
+
+    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
+    @GetMapping("/{id}/{semester}/{year}")
+    public ResponseEntity<List> getSectionsByStudentID(@PathVariable Long id, @PathVariable boolean semester,
+                                                       @PathVariable int year) {
+        return ResponseEntity.ok(studentEnrollsSectionRepository.findByTerm(id, semester, year));
+    }
 }
