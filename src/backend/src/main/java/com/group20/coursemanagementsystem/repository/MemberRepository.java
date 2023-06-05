@@ -6,6 +6,7 @@ import com.group20.coursemanagementsystem.model.Student;
 
 import javax.persistence.Query;
 
+import com.group20.coursemanagementsystem.request.EnrolmentRequest;
 import com.group20.coursemanagementsystem.security.domain.Authority;
 import org.springframework.stereotype.Repository;
 
@@ -23,29 +24,43 @@ public class MemberRepository {
     public Member findById(Long id) {
         Query query = entityManager.createQuery("SELECT m FROM Member m WHERE m.id = :id", Member.class);
         query.setParameter("id", id);
-        return (Member) query.getSingleResult();
+        List resultList = query.getResultList();
+
+        if (resultList.isEmpty()) { return null; }
+
+        return (Member) resultList.get(0);
     }
 
     public Member findByEmail(String email) {
         Query query = entityManager.createQuery("SELECT m FROM Member m WHERE m.email = :email", Member.class);
         query.setParameter("email", email);
-        return (Member) query.getSingleResult();
+        List resultList = query.getResultList();
+
+        if (resultList.isEmpty()) { return null; }
+
+        return (Member) resultList.get(0);
     }
 
     public boolean existsById(Long id) {
-        if (findById(id) == null) {
-            return false;
-        }
-
-        return true;
+        return findById(id) != null;
     }
 
     public boolean existsByEmail(String email) {
-        if (findByEmail(email) == null) {
-            return false;
-        }
+        return findByEmail(email) != null;
+    }
 
-        return true;
+    public Student findByHacettepeID(String hacettepeID) {
+        Query query = entityManager.createQuery("SELECT s FROM Student s WHERE s.hacettepeID = :hacettepeID", Student.class);
+        query.setParameter("hacettepeID", hacettepeID);
+        List resultList = query.getResultList();
+
+        if (resultList.isEmpty()) { return null; }
+
+        return (Student) resultList.get(0);
+    }
+
+    public boolean existsByHacettepeID(String hacettepeID) {
+        return findByHacettepeID(hacettepeID) != null;
     }
 
     @Transactional
@@ -106,6 +121,52 @@ public class MemberRepository {
 
         return member;
     }
+
+    @Transactional
+    public <M extends Member> M saveFromEnrolmentRequest(M member) {
+//        Query query = entityManager.createNativeQuery("INSERT INTO member_table (first_name, last_name, email, password, member_type, department_id) VALUES (?, ?, ?, ?, ?, ?)");
+//        query.setParameter(1, member.getFirstName());
+//        query.setParameter(2, member.getLastName());
+//        query.setParameter(3, member.getEmail());
+//        query.setParameter(4, member.getPassword());
+//        query.setParameter(5, member.getMemberType().ordinal());
+//        query.setParameter(6, member.getDepartment().getId());
+//        query.executeUpdate();
+
+        Query query = entityManager.createNativeQuery("INSERT INTO member_table (first_name, last_name, email, password, member_type) VALUES (?, ?, ?, ?, ?)");
+        query.setParameter(1, member.getFirstName());
+        query.setParameter(2, member.getLastName());
+        query.setParameter(3, member.getEmail());
+        query.setParameter(4, member.getPassword());
+        query.setParameter(5, member.getMemberType().ordinal());
+        query.executeUpdate();
+
+        Member savedMember = findByEmail(member.getEmail());
+        for (Authority auth : member.getAuthorities()) {
+            query = entityManager.createNativeQuery("INSERT INTO member_authorities (member_id, authority_id) VALUES (?, ?)");
+            query.setParameter(1, savedMember.getId());
+            query.setParameter(2, auth.getId());
+            query.executeUpdate();
+        }
+
+        if (savedMember.getMemberType() == MemberType.STUDENT) {
+            Student student = (Student) member;
+            query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects) VALUES (?, ?, ?)");
+            query.setParameter(1, savedMember.getId());
+            query.setParameter(2, student.getHacettepeID());
+            query.setParameter(3, student.getSemesterECTS());
+            query.executeUpdate();
+        }
+
+        if (savedMember.getMemberType() == MemberType.INSTRUCTOR) {
+            query = entityManager.createNativeQuery("INSERT INTO instructor_table (id) VALUES (?)");
+            query.setParameter(1, savedMember.getId());
+            query.executeUpdate();
+        }
+
+        return member;
+    }
+
 
     @Transactional
     public <M extends Member> M update(M member) {
