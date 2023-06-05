@@ -34,5 +34,6 @@ export const PATH_MAIN = {
   settings: '/settings',
   courses: '/studentEnrollsSection',
   faculties: '/faculties',
-  departments: '/departments'
+  departments: '/departments',
+  timetable: '/sectionHasTimeSlot'
 };

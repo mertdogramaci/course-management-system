@@ -6,7 +6,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import CourseIcon from '@mui/icons-material/Book'
 import TranscriptIcon from '@mui/icons-material/Pages'
 import Timetable from '@mui/icons-material/Timeline'
-import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import List from '@mui/material/List';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -33,6 +33,8 @@ export default function Sidebar() {
         <ListItemText primary={"Main Page"}/>
       </ListItemButton>
 
+      <Divider/>
+
       <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
         <ListItemIcon>
           <CourseIcon color = "primary" />
@@ -47,7 +49,7 @@ export default function Sidebar() {
         <ListItemText primary={"Transcript"} />
       </ListItemButton>
 
-      <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
+      <ListItemButton onClick={() => handleClick(PATH_MAIN.timetable)}>
         <ListItemIcon>
           <Timetable color = "primary" />
         </ListItemIcon>
