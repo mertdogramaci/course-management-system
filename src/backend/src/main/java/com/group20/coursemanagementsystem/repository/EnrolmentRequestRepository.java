@@ -5,7 +5,6 @@ import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.model.Student;
 import com.group20.coursemanagementsystem.request.EnrolmentRequest;
 import com.group20.coursemanagementsystem.security.domain.Authority;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -23,19 +22,21 @@ public class EnrolmentRequestRepository {
     public EnrolmentRequest findByHacettepeID(String hacettepeID) {
         Query query = entityManager.createQuery("SELECT e FROM EnrolmentRequest e WHERE e.hacettepeID = :hacettepeID", EnrolmentRequest.class);
         query.setParameter("hacettepeID", hacettepeID);
+        List resultList = query.getResultList();
 
-        if (query.getResultList().isEmpty()) { return null; }
+        if (resultList.isEmpty()) { return null; }
 
-        return (EnrolmentRequest) query.getSingleResult();
+        return (EnrolmentRequest) resultList.get(0);
     }
 
     public EnrolmentRequest findByEmail(String email) {
         Query query = entityManager.createQuery("SELECT e FROM EnrolmentRequest e WHERE e.email = :email", EnrolmentRequest.class);
         query.setParameter("email", email);
+        List resultList = query.getResultList();
 
-        if (query.getResultList().isEmpty()) { return null; }
+        if (resultList.isEmpty()) { return null; }
 
-        return (EnrolmentRequest) query.getSingleResult();
+        return (EnrolmentRequest) resultList.get(0);
     }
 
     public boolean existsByHacettepeID(String hacettepeID) {
@@ -49,7 +50,11 @@ public class EnrolmentRequestRepository {
     public EnrolmentRequest findById(Long id) {
         Query query = entityManager.createQuery("SELECT e FROM EnrolmentRequest e WHERE e.id = :id", EnrolmentRequest.class);
         query.setParameter("id", id);
-        return (EnrolmentRequest) query.getSingleResult();
+        List resultList = query.getResultList();
+
+        if (resultList.isEmpty()) { return null; }
+
+        return (EnrolmentRequest) resultList.get(0);
     }
 
     public boolean existsById(Long id) {

@@ -57,11 +57,6 @@ public class Member extends BaseEntity implements UserDetails {
     )
     protected Set<Authority> authorities;
 
-    @ElementCollection
-    private List<LocalDate> joinDates = new ArrayList<>();
-
-    //TODO: friends, isOnline, mailbox, isAccountVerified, isBanned
-
     protected Member() {} //No args constructor is needed for Entity
 
     public Member(String firstName, String lastName, String email, String password, MemberType memberType, Set<Authority> authorities) {
