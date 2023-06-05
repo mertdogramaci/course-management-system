@@ -71,4 +71,15 @@ public class StudentEnrollsSectionRepository {
         query.setParameter(1, id);
         return query.getResultList();
     }
+
+    public List findByTerm(Long id, boolean semester, int year) {
+        Query query = entityManager.createNativeQuery(
+                "SELECT * FROM student_enrolls_section ss inner join section s on (ss.section_id = s.id) " +
+                        "WHERE ss.student_id = ? and s.semester = ? and s.year = ?",
+                StudentEnrollsSection.class);
+        query.setParameter(1, id);
+        query.setParameter(2, semester);
+        query.setParameter(3, year);
+        return query.getResultList();
+    }
 }
