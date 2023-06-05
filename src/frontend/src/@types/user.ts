@@ -12,7 +12,7 @@ export class User {
     public email: string,
     public memberType: string,
     public phoneNumber: string,
-    public about: string,
+    public address: string,
     public profilePhoto: string,
   ) {}
 
@@ -24,11 +24,11 @@ export class Student extends User {
     lastName: string,
     email: string,
     phoneNumber: string,
-    about: string,
+    address: string,
     profilePhoto: string,
     public hacettepeID: string,
     public semesterECTS: number
   ) {
-    super(id, firstName, lastName, email, MemberType.STUDENT, phoneNumber, about, profilePhoto);
+    super(id, firstName, lastName, email, MemberType.STUDENT, phoneNumber, address, profilePhoto);
   }
 }

@@ -1,6 +1,5 @@
 package com.group20.coursemanagementsystem.model;
 
-import com.group20.coursemanagementsystem.model.BaseEntity;
 import com.group20.coursemanagementsystem.enums.MemberType;
 import com.group20.coursemanagementsystem.security.domain.Authority;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -36,8 +35,8 @@ public class Member extends BaseEntity implements UserDetails {
     @Column(name = "phone_number")
     protected String phoneNumber;
 
-    @Column(name = "about") //TODO: Change this as Address
-    protected String about;
+    @Column(name = "address") //TODO: Change this as Address
+    protected String address;
 
     @Column(name = "member_type")
     protected MemberType memberType;
@@ -81,22 +80,22 @@ public class Member extends BaseEntity implements UserDetails {
         this.memberType = memberType;
     }
 
-    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String about, String profilePhoto) {
+    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String address, String profilePhoto) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.about = about;
+        this.address = address;
         this.profilePhoto = profilePhoto;
     }
 
-    public Member(String firstName, String lastName, String email, String phoneNumber, String about, String profilePhoto) {
+    public Member(String firstName, String lastName, String email, String phoneNumber, String address, String profilePhoto) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.about = about;
+        this.address = address;
         this.profilePhoto = profilePhoto;
     }
 
@@ -104,7 +103,7 @@ public class Member extends BaseEntity implements UserDetails {
         this.password = password;
     }
 
-    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String about,
+    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String address,
                   String profilePhoto, MemberType memberType, Set<Authority> authorities, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -112,20 +111,20 @@ public class Member extends BaseEntity implements UserDetails {
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.profilePhoto = profilePhoto;
-        this.about = about;
+        this.address = address;
         this.memberType = memberType;
         this.authorities = authorities;
         this.department = department;
     }
 
-    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String about,
+    public Member(String firstName, String lastName, String email, String password, String phoneNumber, String address,
                   MemberType memberType, Set<Authority> authorities, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.about = about;
+        this.address = address;
         this.memberType = memberType;
         this.authorities = authorities;
         this.department = department;
@@ -149,7 +148,7 @@ public class Member extends BaseEntity implements UserDetails {
         this.firstName = updatedMember.getFirstName();
         this.lastName = updatedMember.getLastName();
         this.phoneNumber = updatedMember.getPhoneNumber();
-        this.about = updatedMember.getAbout();
+        this.address = updatedMember.getAddress();
         if (updatedMember.getProfilePhoto() != null) {
             this.profilePhoto = updatedMember.getProfilePhoto();
         }

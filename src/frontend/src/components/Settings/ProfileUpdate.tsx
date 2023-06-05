@@ -14,7 +14,7 @@ type InitialValues = {
   email: string;
   profilePhoto?: string;
   phoneNumber?: string;
-  about?: string;
+  address?: string;
   afterSubmit?: string;
 };
 
@@ -47,7 +47,7 @@ export default function ProfileUpdate() {
       setFieldValue('email', userData.email);
       setFieldValue('profilePhoto', userData.profilePhoto);
       setFieldValue('phoneNumber', userData.phoneNumber);
-      setFieldValue('about', userData.about);
+      setFieldValue('address', userData.address);
     }
   }, [userData]);
 
@@ -123,7 +123,7 @@ export default function ProfileUpdate() {
     formData.append('email', values.email);
     imageData && formData.append('profilePhoto', imageData);
     values.phoneNumber && formData.append('phoneNumber', values.phoneNumber);
-    values.about && formData.append('about', values.about);
+    values.address && formData.append('address', values.address);
 
     return formData;
   }
@@ -223,13 +223,13 @@ export default function ProfileUpdate() {
               />
 
               <TextField
-                label={"About"}
+                label={"Address"}
                 sx={{ m: 1, width: '97.5%' }}
                 multiline
                 rows={5}
-                {...getFieldProps('about')}
-                error={Boolean(touched.about && errors.about)}
-                helperText={touched.about && errors.about}
+                {...getFieldProps('address')}
+                error={Boolean(touched.address && errors.address)}
+                helperText={touched.address && errors.address}
               />
 
               <div style ={{ display: "flex", alignItems: 'center', justifyContent: "flex-end", marginTop: 8 }}>

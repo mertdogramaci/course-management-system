@@ -1,11 +1,8 @@
 package com.group20.coursemanagementsystem.response;
 
 import com.group20.coursemanagementsystem.enums.MemberType;
-import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.model.Student;
 import lombok.Getter;
-
-import javax.persistence.Column;
 
 @Getter
 public class StudentResponse {
@@ -16,7 +13,7 @@ public class StudentResponse {
     private final String email;
     private final MemberType memberType;
     private final String phoneNumber;
-    private final String about;
+    private final String address;
     private final String hacettepeID;
     private final int semesterECTS;
 
@@ -27,7 +24,7 @@ public class StudentResponse {
         this.email = student.getEmail();
         this.memberType = student.getMemberType();
         this.phoneNumber = student.getPhoneNumber();
-        this.about = student.getAbout();
+        this.address = student.getAddress();
         this.hacettepeID = student.getHacettepeID();
         this.semesterECTS = student.getSemesterECTS();
     }

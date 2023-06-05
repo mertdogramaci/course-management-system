@@ -144,7 +144,7 @@ public class DatabasePopulator {
         Student member = new Student(
                 "Özgün", "Akyüz", "zgnakyuz@gmail.com",
                 passwordEncoder.encode("özgün"), "/assets/images/21827005-pp.png", "507 296 64 91",
-                "Hi i'm Özgün Akyüz, I am a 3rd year computer engineering student.",
+                "Yukarı Bahçelievler Mah. Aşkabat Cad. 59/7 Çankaya/Ankara",
                 MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
                 department1, "21827005", 40

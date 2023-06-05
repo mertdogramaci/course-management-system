@@ -197,16 +197,16 @@ export default function Profile() {
             }
           </div>
         </div>
-        {profileData.about && (
+        {profileData.address && (
           <div style={{ display: 'flex', marginTop: 12, paddingLeft: 12, paddingRight: 12 }}>
             <Card sx={{ width: '100%', backgroundColor: 'rgba(255,255,255,0.2)'}}>
               <CardContent>
                 <Typography gutterBottom variant="h6" component="div" sx={{ marginBottom: 0.5 }}>
-                  {"About"}
+                  {"Address"}
                 </Typography>
                 <Divider />
                 <Typography variant="body1" color="text.primary" sx={{ marginTop: 0.5, whiteSpace: 'pre-line'  }}>
-                  {profileData.about}
+                  {profileData.address}
                 </Typography>
               </CardContent>
             </Card>

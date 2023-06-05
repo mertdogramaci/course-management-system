@@ -4,8 +4,6 @@ import com.group20.coursemanagementsystem.enums.MemberType;
 import com.group20.coursemanagementsystem.model.Member;
 import lombok.Getter;
 
-import java.util.Set;
-
 // Get members all fields
 @Getter
 public class MemberResponse {
@@ -16,7 +14,7 @@ public class MemberResponse {
     private final String email;
     private final MemberType memberType;
     private final String phoneNumber;
-    private final String about;
+    private final String address;
     private final String profilePhoto;
 
     public MemberResponse(final Member member) {
@@ -26,7 +24,7 @@ public class MemberResponse {
         this.email = member.getEmail();
         this.memberType = member.getMemberType();
         this.phoneNumber = member.getPhoneNumber();
-        this.about = member.getAbout();
+        this.address = member.getAddress();
         this.profilePhoto = member.getProfilePhoto();
     }
 }

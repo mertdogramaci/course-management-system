@@ -37,12 +37,12 @@ public class Instructor extends Member {
     }
 
     public Instructor(String firstName, String lastName, String email, String password, String phoneNumber,
-                      String profilePhoto, String about, MemberType memberType, Set<Authority> authorities, Department department) {
-        super(firstName, lastName, email, password, phoneNumber, about, profilePhoto, memberType, authorities, department);
+                      String profilePhoto, String address, MemberType memberType, Set<Authority> authorities, Department department) {
+        super(firstName, lastName, email, password, phoneNumber, address, profilePhoto, memberType, authorities, department);
     }
 
     public Instructor(String firstName, String lastName, String email, String password, String phoneNumber,
-                      String about, MemberType memberType, Set<Authority> authorities, Department department) {
-        super(firstName, lastName, email, password, phoneNumber, about, memberType, authorities, department);
+                      String address, MemberType memberType, Set<Authority> authorities, Department department) {
+        super(firstName, lastName, email, password, phoneNumber, address, memberType, authorities, department);
     }
 }

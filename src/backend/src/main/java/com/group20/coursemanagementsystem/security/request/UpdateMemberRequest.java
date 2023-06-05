@@ -23,12 +23,12 @@ public class UpdateMemberRequest implements Serializable {
 
     private String phoneNumber;
 
-    private String about;
+    private String address;
 
     private MultipartFile profilePhoto;
 
     //Map function to Member
     public Member toMember(String profilePhotoPath) {
-        return new Member(firstName, lastName, email, phoneNumber, about, profilePhotoPath);
+        return new Member(firstName, lastName, email, phoneNumber, address, profilePhotoPath);
     }
 }

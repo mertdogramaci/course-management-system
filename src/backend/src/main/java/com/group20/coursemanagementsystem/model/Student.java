@@ -1,7 +1,6 @@
 package com.group20.coursemanagementsystem.model;
 
 import com.group20.coursemanagementsystem.enums.MemberType;
-import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.security.domain.Authority;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,16 +41,16 @@ public class Student extends Member {
         this.memberType = memberType;
     }
 
-    public Student(String firstName, String lastName, String email, String password, String profilePhoto, String phoneNumber, String about,
+    public Student(String firstName, String lastName, String email, String password, String profilePhoto, String phoneNumber, String address,
                    MemberType memberType, Set<Authority> authorities, Department department, String hacettepeID, int semesterECTS) {
-        super(firstName, lastName, email, password, phoneNumber, about, profilePhoto, memberType, authorities, department);
+        super(firstName, lastName, email, password, phoneNumber, address, profilePhoto, memberType, authorities, department);
         this.hacettepeID = hacettepeID;
         this.semesterECTS = semesterECTS;
     }
 
-    public Student(String firstName, String lastName, String email, String password, String phoneNumber, String about,
+    public Student(String firstName, String lastName, String email, String password, String phoneNumber, String address,
                    MemberType memberType, Set<Authority> authorities, Department department, String hacettepeID, int semesterECTS) {
-        super(firstName, lastName, email, password, phoneNumber, about, memberType, authorities, department);
+        super(firstName, lastName, email, password, phoneNumber, address, memberType, authorities, department);
         this.hacettepeID = hacettepeID;
         this.semesterECTS = semesterECTS;
     }
@@ -62,7 +61,7 @@ public class Student extends Member {
         this.email = m.getEmail();
         this.password = m.getPassword();
         this.phoneNumber = m.getPhoneNumber();
-        this.about = m.getAbout();
+        this.address = m.getAddress();
         this.memberType = m.getMemberType();
         this.authorities = m.getAuthorities();
         updateDepartment(m.getDepartment());
