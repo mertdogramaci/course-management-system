@@ -1,5 +1,6 @@
 package com.group20.coursemanagementsystem.controller;
 
+import com.group20.coursemanagementsystem.repository.ProcessingHistoryRepository;
 import com.group20.coursemanagementsystem.request.LoginRequest;
 import com.group20.coursemanagementsystem.response.LoginQueryResponse;
 import com.group20.coursemanagementsystem.service.LoginService;
