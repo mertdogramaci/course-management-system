@@ -150,9 +150,6 @@ export default function Login() {
                   <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.register}>
                     Create an Account
                   </Link>
-                  <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.forgotPassword}>
-                    Forgot password?
-                  </Link>
                 </Stack>
               </Form>
             </FormikProvider>

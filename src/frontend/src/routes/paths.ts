@@ -11,13 +11,11 @@ export const PATH_AUTH = {
   root: ROOTS_AUTH,
   login: path(ROOTS_AUTH, '/login'),
   register: path(ROOTS_AUTH, '/enroll'),
-  forgotPassword: path(ROOTS_AUTH, '/forgot-password'),
 };
 
 export const PATH_ADMIN = {
   root: ROOTS_MAIN,
-  enrollmentRequests: path(ROOTS_ADMIN, '/enrollment-requests'),
-  forgotPasswordRequests: path(ROOTS_ADMIN, '/forgot-password-requests')
+  enrollmentRequests: path(ROOTS_ADMIN, '/enrollment-requests')
 };
 
 export const PATH_PAGE = {

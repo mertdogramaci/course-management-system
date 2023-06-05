@@ -22,10 +22,6 @@ export default function Header() {
     {
       label: "header.manage-button.enrollment-requests.text",
       linkTo: PATH_ADMIN.enrollmentRequests
-    },
-    {
-      label: "header.manage-button.fp-requests.text",
-      linkTo: PATH_ADMIN.forgotPasswordRequests
     }
   ];
 

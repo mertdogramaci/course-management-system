@@ -35,13 +35,6 @@ export default function Router() {
             </GuestGuard>
           )
         },
-        { path: 'forgot-password',
-          element: (
-          <GuestGuard>
-            <ForgotPassword />
-          </GuestGuard>
-          )
-        },
       ]
     },
 
@@ -55,7 +48,6 @@ export default function Router() {
       children: [
         { path: '', element: <HomePage /> },
         { path: 'enrollment-requests', element: <EnrollmentRequests /> },
-        { path: 'forgot-password-requests', element: <ForgotPasswordRequests /> },
       ]
     },
 
@@ -85,10 +77,8 @@ export default function Router() {
 
 const Login = Loadable(lazy(() => import('../pages/authentication/Login')))
 const Enrollment = Loadable(lazy(() => import('../pages/authentication/Enrollment')))
-const ForgotPassword = Loadable(lazy(() => import('../pages/authentication/ForgotPassword')))
 
 const EnrollmentRequests= Loadable(lazy(() => import('../pages/admin/EnrollmentRequests')))
-const ForgotPasswordRequests = Loadable(lazy(() => import('../pages/admin/ForgotPasswordRequests')))
 
 const HomePage = Loadable(lazy(() => import('../components/HomePage')));
 const Profile = Loadable(lazy(() => import('../pages/student/Profile')))
