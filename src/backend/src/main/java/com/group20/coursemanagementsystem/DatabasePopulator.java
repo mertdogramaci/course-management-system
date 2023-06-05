@@ -43,6 +43,8 @@ public class DatabasePopulator {
 
     private final InstructorAdvisorStudentRepository instructorAdvisorStudentRepository;
 
+    private final SectionHasTimeSlotRepository sectionHasTimeSlotRepository;
+
     public DatabasePopulator(FacultyRepository facultyRepository, DepartmentRepository departmentRepository,
                              SectionRepository sectionRepository, CourseRepository courseRepository,
                              AuthorityRepository authorityRepository, MemberRepository memberRepository,
@@ -50,7 +52,8 @@ public class DatabasePopulator {
                              SubmissionRepository submissionRepository, TimeSlotRepository timeSlotRepository,
                              StudentEnrollsSectionRepository studentEnrollsSectionRepository,
                              InstructorTeachesSectionRepository instructorTeachesSectionRepository,
-                             InstructorAdvisorStudentRepository instructorAdvisorStudentRepository) {
+                             InstructorAdvisorStudentRepository instructorAdvisorStudentRepository,
+                             SectionHasTimeSlotRepository sectionHasTimeSlotRepository) {
         this.facultyRepository = facultyRepository;
         this.departmentRepository = departmentRepository;
         this.sectionRepository = sectionRepository;
@@ -64,6 +67,7 @@ public class DatabasePopulator {
         this.studentEnrollsSectionRepository = studentEnrollsSectionRepository;
         this.instructorTeachesSectionRepository = instructorTeachesSectionRepository;
         this.instructorAdvisorStudentRepository = instructorAdvisorStudentRepository;
+        this.sectionHasTimeSlotRepository = sectionHasTimeSlotRepository;
     }
 
     @Transactional
@@ -608,9 +612,28 @@ public class DatabasePopulator {
                 LocalTime.of(11, 20), section11));
 
 
+        TimeSlot timeSlot1 = timeSlotRepository.findById(1L);
+        TimeSlot timeSlot2 = timeSlotRepository.findById(2L);
+        TimeSlot timeSlot3 = timeSlotRepository.findById(3L);
+        TimeSlot timeSlot4 = timeSlotRepository.findById(4L);
+        TimeSlot timeSlot5 = timeSlotRepository.findById(5L);
+        TimeSlot timeSlot6 = timeSlotRepository.findById(6L);
+        TimeSlot timeSlot7 = timeSlotRepository.findById(7L);
+        TimeSlot timeSlot8 = timeSlotRepository.findById(8L);
+        TimeSlot timeSlot9 = timeSlotRepository.findById(9L);
+        TimeSlot timeSlot10 = timeSlotRepository.findById(10L);
+        TimeSlot timeSlot11 = timeSlotRepository.findById(11L);
+
+
         studentEnrollsSectionRepository.save(new StudentEnrollsSection(student1, section1, 0, 0,
                 true));
-        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student2, section1, 0, 0,
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student2, section1, 75, 2,
+                true));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student2, section6, 100, 0,
+                true));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student2, section8, 85, 1,
+                true));
+        studentEnrollsSectionRepository.save(new StudentEnrollsSection(student2, section9, 90, 0,
                 true));
         studentEnrollsSectionRepository.save(new StudentEnrollsSection(student3, section1, 0, 0,
                 true));
@@ -673,5 +696,29 @@ public class DatabasePopulator {
         instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor8, student16));
         instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor9, student17));
         instructorAdvisorStudentRepository.save(new InstructorAdvisorStudent(instructor10, student18));
+
+
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section1, timeSlot1));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section1, timeSlot2));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section2, timeSlot2));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section3, timeSlot3));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section4, timeSlot4));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section5, timeSlot5));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section6, timeSlot6));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section7, timeSlot7));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section8, timeSlot8));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section9, timeSlot9));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section10, timeSlot10));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section11, timeSlot11));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section12, timeSlot2));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section13, timeSlot3));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section14, timeSlot4));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section15, timeSlot5));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section16, timeSlot6));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section17, timeSlot7));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section18, timeSlot8));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section19, timeSlot9));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section20, timeSlot10));
+        sectionHasTimeSlotRepository.save(new SectionHasTimeSlot(section21, timeSlot11));
     }
 }
