@@ -1,6 +1,4 @@
 import EmailIcon from '@mui/icons-material/Email';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import { Alert, AlertColor, Avatar, Button, Card, CardContent, Container, Divider, IconButton, Link, Snackbar, Typography } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -28,8 +26,8 @@ export default function Profile() {
 
   useEffect(() => {
     if (user) {
-      if (user.memberType === "STUDENT") { // Check if the user's member type is "Student"
-        getStudentData(user.id); // Call the function to get the student data
+      if (user.memberType === "STUDENT") {
+        getStudentData(user.id);
       }
 
       if (id) {
@@ -62,10 +60,10 @@ export default function Profile() {
 
   const getStudentData = async (userId: number) => {
     try {
-      const response = await axios.get(`members/findStudent/${userId}`); // Replace "students/${userId}" with the appropriate API route to fetch student data
+      const response = await axios.get(`members/findStudent/${userId}`);
 
       if (response.status === 200) {
-        setStudentUser(response.data); // Assign the fetched student data to the studentUser state variable
+        setStudentUser(response.data);
       }
     } catch (error) {
       setSnackbarAlertType('error');

@@ -1,10 +1,11 @@
 import { Alert, AlertColor, Avatar, Box, Button, Card, CardContent, Grid, Snackbar, TextField } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { User } from '../../@types/user';
+import { User, Student } from '../../@types/user';
 import axios from '../../api/axios';
 import ApiRoutes from '../../api/routes';
 import useIsMountedRef from '../../hooks/useIsMountedRef';
+import useAuth from '../../hooks/useAuth';
 
 type InitialValues = {
   firstName: string;
@@ -25,16 +26,24 @@ export default function ProfileUpdate() {
   const [snackbarMessage, setSnackbarMessage] = useState<string>("");
   const [snackbarAlertType, setSnackbarAlertType] = useState<AlertColor | undefined>(undefined);
   const isMountedRef = useIsMountedRef();
+  const { user } = useAuth();
+  const [studentUser, setStudentUser] = useState<Student | null>(null);
 
   useEffect(() => {
+    if (user) {
+        if (user.memberType === "STUDENT") {
+            getStudentData(user.id);
+          }
+    }
+
     fetchUserData();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (userData) {
       setFieldValue('firstName', userData.firstName);
       setFieldValue('lastName', userData.lastName);
-    //   setFieldValue('hacettepeId', userData.hacettepeId);
+      setFieldValue('hacettepeId', studentUser?.hacettepeID);
       setFieldValue('email', userData.email);
       setFieldValue('profilePhoto', userData.profilePhoto);
       setFieldValue('phoneNumber', userData.phoneNumber);
@@ -49,6 +58,21 @@ export default function ProfileUpdate() {
       setUserData(response.data);
     }
   }
+
+  const getStudentData = async (userId: number) => {
+    try {
+      const response = await axios.get(`members/findStudent/${userId}`);
+
+      if (response.status === 200) {
+        setStudentUser(response.data);
+      }
+    } catch (error) {
+      setSnackbarAlertType('error');
+      setSnackbarMessage(error.response.data.message);
+      setSnackbarOpen(true);
+    }
+  };
+
 
   const formik = useFormik<InitialValues>({
     initialValues: {
