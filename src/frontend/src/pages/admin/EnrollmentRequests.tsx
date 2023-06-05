@@ -57,7 +57,7 @@ export default function EnrollmentRequests() {
   let TABLE_HEAD = [
     { id: 'firstName', label: "header.manage-button.enrollment-requests.first-name"},
     { id: 'lastName', label: "header.manage-button.enrollment-requests.last-name"},
-    { id: 'hacettepeId', label: 'Hacettepe ID' },
+    { id: 'hacettepeID', label: 'Hacettepe ID' },
     { id: 'email', label: 'Email'  },
     { id: 'memberType', label: "header.manage-button.enrollment-requests.role"},
     { id: 'approve-deny', label: "header.manage-button.enrollment-requests.approve-deny"}
@@ -156,12 +156,12 @@ export default function EnrollmentRequests() {
           <TableBody>
             {filteredRequests
               .map((row, index) => {
-                const { id, firstName, lastName, hacettepeId, email, memberType } = row;
+                const { id, firstName, lastName, hacettepeID, email, memberType } = row;
 
                 return (
                   <TableRow
                     hover
-                    key={hacettepeId}
+                    key={hacettepeID}
                     tabIndex={-1}
                     role="cell"
                   >
@@ -177,7 +177,7 @@ export default function EnrollmentRequests() {
                     </TableCell>
                     <TableCell component="th" scope="row" padding="none" align="center">
                       <Typography variant="subtitle2" noWrap>
-                        {hacettepeId}
+                        {hacettepeID}
                       </Typography>
                     </TableCell>
                     <TableCell component="th" scope="row" padding="none" align="center">

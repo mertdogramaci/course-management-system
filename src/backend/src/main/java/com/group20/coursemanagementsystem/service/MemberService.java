@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Set;
 import java.util.List;
 
@@ -59,24 +58,27 @@ public class MemberService {
     }
 
     public MessageResponse addMember(final Long requestId) {
-        EnrolmentRequest enrolmentRequestFromDB = enrolmentRequestRepository.findById(requestId)
-                .orElseThrow(() -> new EntityNotFoundException(REQUEST_ID_DOES_NOT_EXIST_MESSAGE.formatted(requestId)));
+        EnrolmentRequest enrolmentRequestFromDB = enrolmentRequestRepository.findById(requestId);
+
+        if (enrolmentRequestFromDB == null) {
+            throw new EntityNotFoundException(REQUEST_ID_DOES_NOT_EXIST_MESSAGE.formatted(requestId));
+        }
 
         if (enrolmentRequestFromDB.getMemberType() == MemberType.STUDENT) {
             Student newStudent = enrolmentRequestFromDB.toStudent();
             newStudent.giveAuthorities(Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")));
-            studentRepository.save(newStudent);
+            memberRepository.saveFromEnrolmentRequest(newStudent);
         }
         else if (enrolmentRequestFromDB.getMemberType() == MemberType.INSTRUCTOR) {
             Instructor newInstructor = enrolmentRequestFromDB.toInstructor();
             newInstructor.giveAuthorities(Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("INSTRUCTOR")));
-//            instructorRepository.save(newInstructor);
+            memberRepository.saveFromEnrolmentRequest(newInstructor);
         }
         else {
             System.out.println("Other type of member is not possible!");
         }
         enrolmentRequestService.deleteEnrolmentRequest(requestId);
-        return new MessageResponse(MessageType.SUCCESS, MEMBER_ADDED_MESSAGE.formatted(enrolmentRequestFromDB.getHacettepeId()));
+        return new MessageResponse(MessageType.SUCCESS, MEMBER_ADDED_MESSAGE.formatted(enrolmentRequestFromDB.getHacettepeID()));
     }
 
 //    public Member getMemberByHacettepeId(final String hacettepeId) {
