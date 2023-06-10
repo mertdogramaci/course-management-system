@@ -66,7 +66,8 @@ export default function Router() {
         ] },
         { path: 'studentEnrollsSection', element: <CoursesPage /> },
         { path: 'settings', element: <Settings />},
-        { path: 'sectionHasTimeSlot', element: <TimeTable/>}
+        { path: 'sectionHasTimeSlot', element: <TimeTable/>},
+        { path: 'courseRegistration', element: <CourseRegistration/>}
       ]
     },
 
@@ -86,6 +87,7 @@ const Profile = Loadable(lazy(() => import('../pages/student/Profile')))
 const CoursesPage = Loadable(lazy(() => import('../pages/student/pages/CoursesPage')))
 const Settings = Loadable(lazy(() => import('../pages/Settings')))
 const TimeTable = Loadable(lazy(() => import('../pages/student/pages/TimeTable')))
+const CourseRegistration = Loadable(lazy(() => import('../pages/student/pages/CourseRegistration')))
 
 
 const NotFound = Loadable(lazy(() => import('../pages/NotFound')))
