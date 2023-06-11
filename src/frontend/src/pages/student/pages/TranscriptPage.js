@@ -4,9 +4,11 @@ import CourseTable from "../tables/CourseTable";
 import axios from '../../../api/axios';
 import ApiRoutes from '../../../api/routes';
 import useAuth from '../../../hooks/useAuth';
+import Transcript from '../../../components/transcript/Transcript';
+import { PDFViewer } from '@react-pdf/renderer';
 
 function TranscriptPage() {
-    const[sections, setSections] = useState([]);
+    const [sections, setSections] = useState([]);
     const { user } = useAuth();
 
     useEffect(() => {
@@ -15,24 +17,21 @@ function TranscriptPage() {
 
     const fetchAllCourses = async () => {
         try {
-          const response = await axios.get(ApiRoutes.COURSES + '/' + user.id);
+            const response = await axios.get(ApiRoutes.COURSES + '/' + user.id);
 
-          if (response.status === 200) {
-            setSections(response.data);
-          }
+            if (response.status === 200) {
+                setSections(response.data);
+            }
         } catch (error) {
             console.log("error!!");
         }
-      }
+    }
 
-    return(
-        <div className='App'>
-            <header className="App-header">
-                <div className="App-intro">
-                    <h2>T.C. Hacettepe Üniversitesi Öğrenci İşleri Daire Başkanlığı Not Durum Belgesi \(Transkript\)</h2>
-                    <CourseTable sections={sections} setSections={setSections}/>
-                </div>
-            </header>
+    return (
+        <div>
+            <PDFViewer width={1000} height={760} >
+                <Transcript />
+            </PDFViewer>
         </div>
     );
 }

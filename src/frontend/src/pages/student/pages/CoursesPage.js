@@ -20,8 +20,6 @@ function CoursesPage() {
         try {
             const response = await axios.get(ApiRoutes.COURSES + '/' + user.id + '/' + semester + '/' + year);
 
-            console.log(response);
-
             if (response.status === 200) {
                 setSections(response.data);
             }

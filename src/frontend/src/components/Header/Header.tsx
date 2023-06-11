@@ -54,7 +54,7 @@ export default function Header() {
             sx={{ mr: 2 }}
             onClick={() => navigate(PATH_MAIN.feed)}
           >
-            Hacettepe University Student Affairs Information System
+          Hacettepe University Student Affairs Information System
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>

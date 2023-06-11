@@ -4,7 +4,6 @@ import com.group20.coursemanagementsystem.enums.MemberType;
 import com.group20.coursemanagementsystem.security.domain.Authority;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDate;

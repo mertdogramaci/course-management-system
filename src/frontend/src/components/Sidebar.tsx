@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CourseIcon from '@mui/icons-material/Book'
 import TranscriptIcon from '@mui/icons-material/Pages'
-import Timetable from '@mui/icons-material/Timeline'
+import Timetable from '@mui/icons-material/CalendarMonth'
 import { Divider, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import List from '@mui/material/List';
 import React from 'react';
@@ -28,74 +28,69 @@ export default function Sidebar() {
     >
       <ListItemButton onClick={() => handleClick(ROOTS_MAIN)}>
         <ListItemIcon>
-          <HomeIcon color = "primary" />
+          <HomeIcon color="primary" />
         </ListItemIcon>
-        <ListItemText primary={"Main Page"}/>
+        <ListItemText primary={"Main Page"} />
       </ListItemButton>
 
-      <Divider/>
-
-      <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
-        <ListItemIcon>
-          <CourseIcon color = "primary" />
-        </ListItemIcon>
-        <ListItemText primary={"My Courses"} />
-      </ListItemButton>
-
-      <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
-        <ListItemIcon>
-          <TranscriptIcon color = "primary" />
-        </ListItemIcon>
-        <ListItemText primary={"Transcript"} />
-      </ListItemButton>
-
-      <ListItemButton onClick={() => handleClick(PATH_MAIN.timetable)}>
-        <ListItemIcon>
-          <Timetable color = "primary" />
-        </ListItemIcon>
-        <ListItemText primary={"Weekly Timetable"} />
-      </ListItemButton>
-
-      <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
-        <ListItemIcon>
-          <Timetable color = "primary" />
-        </ListItemIcon>
-        <ListItemText primary={"Homeworks"} />
-      </ListItemButton>
-
-      <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
-        <ListItemIcon>
-          <Timetable color = "primary" />
-        </ListItemIcon>
-        <ListItemText primary={"Homeworks"} />
-      </ListItemButton>
-
-
-      { user?.memberType !== "ADMIN" && (
+      <Divider />
+      {user?.memberType !== "ADMIN" && (
         <>
-        <ListItemButton onClick={() => handleClick(PATH_MAIN.chat)}>
-         <ListItemIcon>
-           <ChatIcon  color = "primary"/>
-         </ListItemIcon>
-         <ListItemText primary={"Chat"} />
-        </ListItemButton>
-          <ListItemButton onClick={() => handleClick(PATH_MAIN.myNetwork)}>
-          <ListItemIcon>
-            <PeopleIcon color = "primary" />
-          </ListItemIcon>
-          <ListItemText primary={"My Network"} />
-        </ListItemButton>
-        <ListItemButton onClick={() => handleClick(PATH_MAIN.profile)}>
-          <ListItemIcon>
-            <PersonIcon color = "primary" />
-          </ListItemIcon>
-          <ListItemText primary={"Profile"} />
-        </ListItemButton>
-       </>
+          <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
+            <ListItemIcon>
+              <CourseIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText primary={"My Courses"} />
+          </ListItemButton>
+
+          <ListItemButton onClick={() => handleClick(PATH_MAIN.transcript)}>
+            <ListItemIcon>
+              <TranscriptIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText primary={"Transcript"} />
+          </ListItemButton>
+
+          <ListItemButton onClick={() => handleClick(PATH_MAIN.timetable)}>
+            <ListItemIcon>
+              <Timetable color="primary" />
+            </ListItemIcon>
+            <ListItemText primary={"Weekly Timetable"} />
+          </ListItemButton>
+
+          <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
+            <ListItemIcon>
+              <Timetable color="primary" />
+            </ListItemIcon>
+            <ListItemText primary={"Homeworks"} />
+          </ListItemButton>
+
+          <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
+            <ListItemIcon>
+              <Timetable color="primary" />
+            </ListItemIcon>
+            <ListItemText primary={"Add Course"} />
+          </ListItemButton>
+          <ListItemButton onClick={() => handleClick(PATH_MAIN.profile)}>
+            <ListItemIcon>
+              <PersonIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText primary={"Profile"} />
+          </ListItemButton>
+        </>
+      )}
+      {user?.memberType === "ADMIN" && (
+        <>
+          <ListItemButton onClick={() => handleClick(PATH_MAIN.students)}>
+            <ListItemIcon>
+              <HomeIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText primary={"Students"} />
+          </ListItemButton>
+        </>
       )}
       <ListItemButton onClick={() => handleClick(PATH_MAIN.settings)}>
         <ListItemIcon>
-          <SettingsIcon color = "primary" />
+          <SettingsIcon color="primary" />
         </ListItemIcon>
         <ListItemText primary={"Settings"} />
       </ListItemButton>

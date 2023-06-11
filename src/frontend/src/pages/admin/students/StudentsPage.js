@@ -1,22 +1,33 @@
-import '../../App.css';
+import '../../../App.css';
 import React, { useEffect, useState } from "react";
-import AppNavbar from "../../AppNavbar";
-import StudentTable from "../tables/StudentTable";
+import StudentTable from "./StudentTable";
+import axios from '../../../api/axios';
+import ApiRoutes from '../../../api/routes';
 
 function StudentsPage() {
     const[students, setStudents] = useState([]);
 
     useEffect(() => {
-        fetch('/students').then(response => response.json()).then(data => {
-            setStudents(data);
-        })
+        fetchAllStudents();
     }, [])
+
+    const fetchAllStudents = async () => {
+        try {
+            const response = await axios.get(ApiRoutes.STUDENTS);
+    
+            if (response.status === 200) {
+                setStudents(response.data);
+            }
+        } catch (error) {
+            console.log("error!!");
+        }
+    }
+
 
     return (
         <div className="App">
             <header className="App-header">
                 <div className="App-intro">
-                    <AppNavbar/>
                     <h2>Student List</h2>
                     <StudentTable students={students} setStudents={setStudents}/>
                 </div>

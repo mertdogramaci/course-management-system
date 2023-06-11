@@ -2,6 +2,7 @@ package com.group20.coursemanagementsystem.controller;
 
 import com.group20.coursemanagementsystem.dto.MessageResponse;
 import com.group20.coursemanagementsystem.enums.MessageType;
+import com.group20.coursemanagementsystem.model.Department;
 import com.group20.coursemanagementsystem.model.Student;
 import com.group20.coursemanagementsystem.request.ProfileDataRequest;
 import com.group20.coursemanagementsystem.response.MemberResponse;
@@ -137,5 +138,12 @@ public class MemberController {
         Member member = (Member) customUserDetailsService.loadUserByUsername(user.getName());
 
         return ResponseEntity.ok(member);
+    }
+
+    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
+    @GetMapping("/getDepartment/{memberId}")
+    public ResponseEntity<Department> getDepartmentOfMember(@PathVariable Long memberId) {
+        Member student = memberService.getStudentById(memberId);
+        return ResponseEntity.ok(student.getDepartment());
     }
 }

@@ -21,25 +21,28 @@ function StudentTable(probs) {
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Student ID</th>
-                    <th>School Enrollment Date</th>
-                    <th>Semester ECTS</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
                     <th>Department Name</th>
+                    <th>Hacettepe ID</th>
+                    <th>Semester ECTS</th>
+                    <th>School Enrollment Date</th>
                 </tr>
             </thead>
             <tbody>
                 {probs.students.map((student) => {
                     return (
-                        <tr key={student.id}>
-                            <th>{student.id}</th>
-                            <th>{student.name}</th>
-                            <th>{student.surname}</th>
-                            <th>{student.studentID}</th>
+                        <tr key={student.student.id}>
+                            <th>{student.student.id}</th>
+                            <th>{student.student.firstName}</th>
+                            <th>{student.student.lastName}</th>
+                            <th>{student.student.hacettepeID}</th>
                             <th>{student.schoolEnrollmentDate}</th>
                             <th>{student.semesterECTS}</th>
-                            <th>{student.department.name}</th>
+                            <th>{student.student.department.name}</th>
                         </tr>
                     );
                 })}

@@ -4,6 +4,8 @@ import LoadingScreen from '../components/LoadingScreen';
 import AuthGuard from '../guards/AuthGuard';
 import GuestGuard from '../guards/GuestGuard';
 import MainLayout from '../layouts/MainLayout';
+import TranscriptPage from '../pages/student/pages/TranscriptPage';
+import StudentsPage from '../pages/admin/students/StudentsPage';
 
 const Loadable = (Component: any) => (props: any) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -66,7 +68,9 @@ export default function Router() {
         ] },
         { path: 'studentEnrollsSection', element: <CoursesPage /> },
         { path: 'settings', element: <Settings />},
-        { path: 'sectionHasTimeSlot', element: <TimeTable/>}
+        { path: 'sectionHasTimeSlot', element: <TimeTable/>},
+        {path: 'transcript', element: <TranscriptPage/>},
+        {path: 'members/fetchAllMembers', element: <StudentsPage/>}
       ]
     },
 

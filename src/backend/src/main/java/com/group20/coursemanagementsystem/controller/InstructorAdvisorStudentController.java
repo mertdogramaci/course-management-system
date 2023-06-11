@@ -25,7 +25,7 @@ public class InstructorAdvisorStudentController {
     }
 
     @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
-    @GetMapping("/studentId={id}")
+    @GetMapping("/studentId/{id}")
     public ResponseEntity<InstructorAdvisorStudent> getInstructorByStudentID(@PathVariable Long id) {
         return ResponseEntity.ok(instructorAdvisorStudentRepository.findByStudentId(id));
     }

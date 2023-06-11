@@ -1,6 +1,7 @@
 package com.group20.coursemanagementsystem.repository;
 
 import com.group20.coursemanagementsystem.enums.MemberType;
+import com.group20.coursemanagementsystem.model.Department;
 import com.group20.coursemanagementsystem.model.Member;
 import com.group20.coursemanagementsystem.model.Student;
 
@@ -208,6 +209,16 @@ public class MemberRepository {
     public List findAll() {
         Query query = entityManager.createQuery("SELECT m FROM Member m", Member.class);
         return query.getResultList();
+    }
+
+    public Department getDepartmentOfMember(Long memberId) {
+        Query query = entityManager.createNativeQuery(
+                "SELECT d.* FROM member_table m inner join department d on (m.department_id = d.id) WHERE id = ?",
+                Department.class);
+        query.setParameter(1, memberId);
+        query.executeUpdate();
+
+        return (Department) query.getResultList().get(0);
     }
 
 //    @Query("SELECT m FROM Member m WHERE CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE LOWER(CONCAT('%', ?1, '%'))")

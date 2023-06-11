@@ -1,5 +1,6 @@
 package com.group20.coursemanagementsystem.service;
 
+import com.group20.coursemanagementsystem.model.Department;
 import com.group20.coursemanagementsystem.model.Instructor;
 import com.group20.coursemanagementsystem.repository.InstructorRepository;
 import com.group20.coursemanagementsystem.dto.MessageResponse;
@@ -171,5 +172,9 @@ public class MemberService {
     }
     public List<Member> getAll() {
         return memberRepository.findAll();
+    }
+
+    public Department getDepartmentOfMember(Long memberId) {
+        return memberRepository.getDepartmentOfMember(memberId);
     }
 }

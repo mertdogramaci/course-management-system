@@ -13,7 +13,11 @@ const ApiRoutes = {
   CONNECTION_REQUEST: '/contact/request',
   APPROVE_CONNECTION_REQUEST: '/contact/request/approve',
   DENY_CONNECTION_REQUEST: '/contact/request/deny',
-  TIMETABLE: '/sectionHasTimeSlot'
+  TIMETABLE: '/sectionHasTimeSlot',
+  TRANSCRIPT: '/transcript',
+  STUDENTS: '/members/fetchAllMembers',
+  ADVISOR: '/instructorAdvisorStudent',
+  MEMBER: '/members'
 };
 
 export default ApiRoutes;
