@@ -17,7 +17,7 @@ public class SectionRepository {
     @Transactional
     public Section save(Section section) {
         Query query = entityManager.createNativeQuery(
-                "INSERT INTO section (semester, year, classroom_info, quota, course_id, instructor_id) VALUES (?, ?, ?, ?, ?, ?)");
+                "INSERT INTO section_table (semester, year, classroom_info, quota, course_id, instructor_id) VALUES (?, ?, ?, ?, ?, ?)");
         query.setParameter(1, section.getSemester());
         query.setParameter(2, section.getYear());
         query.setParameter(3, section.getClassroomInfo());
@@ -30,7 +30,7 @@ public class SectionRepository {
     }
 
     public Section findById(Long id) {
-        Query query = entityManager.createNativeQuery("SELECT * FROM section WHERE id = ?", Section.class);
+        Query query = entityManager.createNativeQuery("SELECT * FROM section_table WHERE id = ?", Section.class);
         query.setParameter(1, id);
         return (Section) query.getSingleResult();
     }
@@ -38,7 +38,7 @@ public class SectionRepository {
     @Transactional
     public Section update(Long id, Section section) {
         Query query = entityManager.createNativeQuery(
-                "UPDATE section SET semester = ?, year = ?, classroom_info = ?, quota = ?, course_id = ?, instructor_id WHERE ID = ?");
+                "UPDATE section_table SET semester = ?, year = ?, classroom_info = ?, quota = ?, course_id = ?, instructor_id WHERE ID = ?");
         query.setParameter(1, section.getSemester());
         query.setParameter(2, section.getYear());
         query.setParameter(3, section.getClassroomInfo());
@@ -53,7 +53,7 @@ public class SectionRepository {
 
     @Transactional
     public void deleteById(Long id) {
-        Query query = entityManager.createNativeQuery("DELETE FROM section WHERE id = ?");
+        Query query = entityManager.createNativeQuery("DELETE FROM section_table WHERE id = ?");
         query.setParameter(1, id);
         query.executeUpdate();
     }

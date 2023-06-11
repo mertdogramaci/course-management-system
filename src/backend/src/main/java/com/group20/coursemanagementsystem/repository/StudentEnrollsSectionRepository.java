@@ -1,5 +1,6 @@
 package com.group20.coursemanagementsystem.repository;
 
+import com.group20.coursemanagementsystem.model.Section;
 import com.group20.coursemanagementsystem.model.StudentEnrollsSection;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,7 +75,7 @@ public class StudentEnrollsSectionRepository {
 
     public List findByTerm(Long id, boolean semester, int year) {
         Query query = entityManager.createNativeQuery(
-                "SELECT * FROM student_enrolls_section ss inner join section s on (ss.section_id = s.id) " +
+                "SELECT * FROM student_enrolls_section ss inner join section_table s on (ss.section_id = s.id) " +
                         "WHERE ss.student_id = ? and s.semester = ? and s.year = ?",
                 StudentEnrollsSection.class);
         query.setParameter(1, id);
@@ -82,4 +83,27 @@ public class StudentEnrollsSectionRepository {
         query.setParameter(3, year);
         return query.getResultList();
     }
+
+
+//    SELECT DISTINCT s.* FROM section_table s " +
+//            "INNER JOIN course crs ON s.course_id = crs.id " +
+//            "WHERE s.semester = ? AND s.year = ? " +
+//            "AND crs.department_id = (SELECT department_id FROM member_table mt WHERE mt.id = ?)" +
+//            "AND NOT EXISTS(SELECT * FROM student_enrolls_section ses WHERE ses.section_id = s.id AND ses.student_id = ?)"
+    public List findSectionsToEnroll(Long student_id, boolean semester, int year) {
+        Query query = entityManager.createNativeQuery(
+                "SELECT DISTINCT s.* FROM section_table s " +
+                        "JOIN course crs ON s.course_id = crs.id " +
+                        "LEFT JOIN student_enrolls_section ses ON ses.section_id = s.id AND ses.student_id = ? " +
+                        "WHERE s.semester = ? AND s.year = ? " +
+                        "AND crs.department_id = (SELECT department_id FROM member_table mt WHERE mt.id = ?)" +
+                        "AND ses.section_id IS NULL;",
+                Section.class);
+        query.setParameter(1, student_id);
+        query.setParameter(2, semester);
+        query.setParameter(3, year);
+        query.setParameter(4, student_id);
+        return query.getResultList();
+    }
+
 }

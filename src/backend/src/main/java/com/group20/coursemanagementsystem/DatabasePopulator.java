@@ -258,10 +258,6 @@ public class DatabasePopulator {
                 department1, "2200895678", 30, LocalDate.now());
         memberRepository.save(member);
 
-        Member admin = new Member("admin@admin.com",
-                passwordEncoder.encode("admin"), MemberType.ADMIN, Set.of(authorityRepository.findByAuthority("ADMIN")));
-        memberRepository.save(admin);
-
 
         Member student1 = memberRepository.findById(1L);
         Member student2 = memberRepository.findById(2L);
@@ -380,6 +376,9 @@ public class DatabasePopulator {
                 department14);
         memberRepository.save(instructor);
 
+        Member admin = new Member("admin@admin.com",
+                passwordEncoder.encode("admin"), MemberType.ADMIN, Set.of(authorityRepository.findByAuthority("ADMIN")));
+        memberRepository.save(admin);
 
         Member instructor1 = memberRepository.findById(20L);
         Member instructor2 = memberRepository.findById(21L);
@@ -633,9 +632,9 @@ public class DatabasePopulator {
         studentEnrollsSectionRepository.save(new StudentEnrollsSection(student2, section6, 100, 0,
                 true));
         studentEnrollsSectionRepository.save(new StudentEnrollsSection(student2, section8, 85, 1,
-                true));
+                    true));
         studentEnrollsSectionRepository.save(new StudentEnrollsSection(student2, section9, 90, 0,
-                true));
+                    true));
         studentEnrollsSectionRepository.save(new StudentEnrollsSection(student3, section1, 0, 0,
                 true));
         studentEnrollsSectionRepository.save(new StudentEnrollsSection(student4, section2, 0, 0,

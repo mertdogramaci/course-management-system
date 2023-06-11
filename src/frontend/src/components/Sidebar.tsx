@@ -12,6 +12,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { PATH_MAIN, ROOTS_MAIN } from '../routes/paths';
+import HistoryIcon from '@mui/icons-material/History';
+import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
 export default function Sidebar() {
   const { user } = useAuth();
@@ -33,15 +35,33 @@ export default function Sidebar() {
         <ListItemText primary={"Main Page"} />
       </ListItemButton>
 
-      <Divider />
-      {user?.memberType !== "ADMIN" && (
+      <Divider/>
+
+      { user?.memberType === "ADMIN" && (
         <>
-          <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
-            <ListItemIcon>
-              <CourseIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText primary={"My Courses"} />
-          </ListItemButton>
+        <ListItemButton onClick={() => handleClick(PATH_MAIN.log)}>
+        <ListItemIcon>
+          <HistoryIcon color = "primary" />
+        </ListItemIcon>
+        <ListItemText primary={"Process history"} />
+      </ListItemButton>
+       </>
+      )}
+
+      { user?.memberType !== "ADMIN" && (
+        <>
+        <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
+        <ListItemIcon>
+          <CourseIcon color = "primary" />
+        </ListItemIcon>
+        <ListItemText primary={"My Courses"} />
+        </ListItemButton>
+        <ListItemButton onClick={() => handleClick(PATH_MAIN.courseRegistration)}>
+        <ListItemIcon>
+          <LibraryAddCheckIcon color = "primary" />
+        </ListItemIcon>
+        <ListItemText primary={"Course Registration"} />
+      </ListItemButton>
 
           <ListItemButton onClick={() => handleClick(PATH_MAIN.transcript)}>
             <ListItemIcon>
@@ -64,36 +84,27 @@ export default function Sidebar() {
             <ListItemText primary={"Homeworks"} />
           </ListItemButton>
 
-          <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
-            <ListItemIcon>
-              <Timetable color="primary" />
-            </ListItemIcon>
-            <ListItemText primary={"Add Course"} />
-          </ListItemButton>
-          <ListItemButton onClick={() => handleClick(PATH_MAIN.profile)}>
-            <ListItemIcon>
-              <PersonIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText primary={"Profile"} />
-          </ListItemButton>
-        </>
-      )}
-      {user?.memberType === "ADMIN" && (
-        <>
-          <ListItemButton onClick={() => handleClick(PATH_MAIN.students)}>
-            <ListItemIcon>
-              <HomeIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText primary={"Students"} />
-          </ListItemButton>
-        </>
-      )}
-      <ListItemButton onClick={() => handleClick(PATH_MAIN.settings)}>
+      <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
+        <ListItemIcon>
+          <Timetable color = "primary" />
+        </ListItemIcon>
+        <ListItemText primary={"Course Registration"} />
+      </ListItemButton>
+        <ListItemButton onClick={() => handleClick(PATH_MAIN.profile)}>
+          <ListItemIcon>
+            <PersonIcon color = "primary" />
+          </ListItemIcon>
+          <ListItemText primary={"Profile"} />
+        </ListItemButton>
+        <ListItemButton onClick={() => handleClick(PATH_MAIN.settings)}>
         <ListItemIcon>
           <SettingsIcon color="primary" />
         </ListItemIcon>
         <ListItemText primary={"Settings"} />
       </ListItemButton>
+       </>
+      )}
+
     </List>
   )
 }

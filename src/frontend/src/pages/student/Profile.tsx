@@ -143,7 +143,7 @@ export default function Profile() {
       {profileData ?
         (<>
           <div style={{ marginTop: 2, height: 180, display: 'flex', flexDirection: 'row' }}>
-          <div  style={{ width: 180, display: 'flex', flex: 1, alignItems: 'center', justifyContent:'center' }}>
+          <div style={{ width: 180, display: 'flex', flex: 1, alignItems: 'center', justifyContent:'center' }}>
             {
               profileData.profilePhoto
                 ? <Avatar src={profileData.profilePhoto} sx={{ width: 150, height: 150 }} />

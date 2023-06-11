@@ -1,6 +1,8 @@
 const ApiRoutes = {
   LOGIN: '/login',
   COURSES: '/studentEnrollsSection',
+  SECTIONS_TO_ENROLL: '/studentEnrollsSection/getSectionsToEnroll',
+  ENROLL_SECTION: '/studentEnrollsSection/enroll',
   PROFILE: '/members/profile',
   ENROLLMENT: '/enroll',
   APPROVE_ENROLLMENT: '/enroll/approve',

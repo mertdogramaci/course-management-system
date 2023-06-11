@@ -59,7 +59,7 @@ public class MemberController {
         return new MemberResponse(member);
     }
 
-    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MEMBER')")
     @GetMapping("/profile")
     public MemberResponse getMyAccountInfo(HttpServletRequest req) {
         String token = req.getHeader("Authorization");

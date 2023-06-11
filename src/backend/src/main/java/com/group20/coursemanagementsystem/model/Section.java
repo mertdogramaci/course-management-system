@@ -10,7 +10,7 @@ import lombok.ToString;
 import java.util.Objects;
 
 @Entity
-@Table(name = "section")
+@Table(name = "section_table")
 @Getter
 @Setter
 @ToString
