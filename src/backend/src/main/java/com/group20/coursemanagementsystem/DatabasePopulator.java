@@ -159,7 +159,7 @@ public class DatabasePopulator {
                 passwordEncoder.encode("deneme"), "/assets/images/21946055-pp.png", "05425252477",
                 "Yenibağlar Mah Eti Cad Görenek Sok Final Sit D/8 Tepebaşı/Eskişehir", MemberType.STUDENT,
                 Set.of(authorityRepository.findByAuthority("MEMBER"), authorityRepository.findByAuthority("STUDENT")),
-                department1, "21946055", 40, LocalDate.now());
+                department1, "21946055", 40, LocalDate.of(2019, 8, 10));
         memberRepository.save(member);
         member = new Student("Emre", "Akdeniz", "emreakdeniz@gmail.com",
                 passwordEncoder.encode("deneme"), "02134567899", "Eskişehir",

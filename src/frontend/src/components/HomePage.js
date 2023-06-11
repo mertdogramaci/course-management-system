@@ -3,19 +3,41 @@ import useAuth from '../hooks/useAuth';
 import ApiRoutes from '../api/routes';
 import axios from '../api/axios';
 import { Button } from "reactstrap";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function HomePage() {
     const { user } = useAuth();
     const [advisor, setAdvisor] = useState([]);
     const [department, setDepartment] = useState([]);
+    const [grade, setGrade] = useState([]);
+    const [theWord, setTheWord] = useState([]);
+
+    let navigate = useNavigate();
+
+    const routeChange = () => {
+        let path = `/advisor`;
+        navigate(path);
+    }
 
     useEffect(() => {
         fetchAdvisor();
     }, [])
 
     useEffect(() => {
-        fetchStudent();
+        fetchDepartment();
+    }, [])
+
+    useEffect(() => {
+        fetchGrade();
+        if (grade === 1) {
+            setTheWord("st");
+        } else if (grade === 2) {
+            setTheWord("nd");
+        } else if (grade === 3) {
+            setTheWord("rd");
+        } else {
+            setTheWord("th");
+        }
     }, [])
 
     const fetchAdvisor = async () => {
@@ -30,13 +52,24 @@ function HomePage() {
         }
     }
 
-    const fetchStudent = async () => {
+    const fetchDepartment = async () => {
         try {
             const response = await axios.get(ApiRoutes.MEMBER + '/getDepartment/' + user.id);
 
             if (response.status === 200) {
-                setDepartment(response);
-                console.log(department);
+                setDepartment(response.data);
+            }
+        } catch (error) {
+            console.log("error!!");
+        }
+    }
+
+    const fetchGrade = async () => {
+        try {
+            const response = await axios.get(ApiRoutes.MEMBER + '/getYear/' + user.id);
+
+            if (response.status === 200) {
+                setGrade(response.data);
             }
         } catch (error) {
             console.log("error!!");
@@ -45,19 +78,20 @@ function HomePage() {
 
     return (
         <div>
-            <div>
-                <h4>Aktif Akademik Dönem Bilgileri</h4>
-
+            <div className="home">
+                <h4>Active Academic Term Information</h4>
+                <p>2022-2023 Spring</p>
             </div>
-            <div>
+            <div className="home">
                 <h4>Advisor Information</h4>
                 <p>{advisor.firstName} {advisor.lastName}</p>
                 <p>{advisor.email}</p>
-                <Button onClick={Navigate(``)}>Detail</Button>
+                <Button onClick={routeChange}>Detail</Button>
             </div>
-            <div>
-                <h4>Öğrenim Bilgileri</h4>
-                <p>{department.name}</p>
+            <div className="home">
+                <h4>Education Information</h4>
+                <p>Faculty of {(department.faculty === undefined) ? null : department.faculty.name} / {department.name}</p>
+                <p> {grade}{theWord} year</p>
             </div>
         </div>
     );

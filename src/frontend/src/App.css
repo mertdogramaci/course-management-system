@@ -55,3 +55,9 @@
 .App-intro {
   margin-top: 10px;
 }
+
+.home {
+  display: inline-block; 
+  width:300px; 
+  vertical-align:top
+}

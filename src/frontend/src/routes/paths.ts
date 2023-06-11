@@ -39,5 +39,6 @@ export const PATH_MAIN = {
   transcript: '/transcript',
   students: '/members/fetchAllMembers',
   log: '/log',
-  courseRegistration: '/courseRegistration'
+  courseRegistration: '/courseRegistration',
+  advisor: '/advisor'
 };

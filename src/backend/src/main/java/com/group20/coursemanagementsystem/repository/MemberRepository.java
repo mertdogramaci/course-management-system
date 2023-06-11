@@ -14,6 +14,9 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.sql.Date;
+import java.time.ZoneId;
 import java.util.List;
 
 @Repository
@@ -219,6 +222,14 @@ public class MemberRepository {
         query.executeUpdate();
 
         return (Department) query.getResultList().get(0);
+    }
+
+    public int getEnrollmentDate(Long id) {
+        Query query = entityManager.createNativeQuery(
+                "SELECT s.school_enrollment_date FROM member_table m inner join student_table s on (m.id = s.id) WHERE m.id = ?");
+        query.setParameter(1, id);
+
+        return Integer.parseInt(query.getResultList().get(0).toString().split("-")[0]);
     }
 
 //    @Query("SELECT m FROM Member m WHERE CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE LOWER(CONCAT('%', ?1, '%'))")

@@ -4,6 +4,7 @@ import com.group20.coursemanagementsystem.dto.MessageResponse;
 import com.group20.coursemanagementsystem.enums.MessageType;
 import com.group20.coursemanagementsystem.model.Department;
 import com.group20.coursemanagementsystem.model.Student;
+import com.group20.coursemanagementsystem.repository.StudentRepository;
 import com.group20.coursemanagementsystem.request.ProfileDataRequest;
 import com.group20.coursemanagementsystem.response.MemberResponse;
 import com.group20.coursemanagementsystem.model.Member;
@@ -34,12 +35,15 @@ public class MemberController {
     private final CustomUserDetailsService customUserDetailsService;
 
     private final FileService fileService;
+    private final StudentRepository studentRepository;
 
     public MemberController(final MemberService memberService,
-                            final CustomUserDetailsService customUserDetailsService, FileService fileService) {
+                            final CustomUserDetailsService customUserDetailsService, FileService fileService,
+                            StudentRepository studentRepository) {
         this.memberService = memberService;
         this.customUserDetailsService = customUserDetailsService;
         this.fileService = fileService;
+        this.studentRepository = studentRepository;
     }
 
     @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
@@ -145,5 +149,11 @@ public class MemberController {
     public ResponseEntity<Department> getDepartmentOfMember(@PathVariable Long memberId) {
         Member student = memberService.getStudentById(memberId);
         return ResponseEntity.ok(student.getDepartment());
+    }
+
+    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
+    @GetMapping("/getYear/{id}")
+    public ResponseEntity<Integer> getYear(@PathVariable Long id) {
+        return ResponseEntity.ok(memberService.getGradeOfStudent(id));
     }
 }

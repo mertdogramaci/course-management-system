@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.List;
 
@@ -174,7 +175,12 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Department getDepartmentOfMember(Long memberId) {
-        return memberRepository.getDepartmentOfMember(memberId);
+    public int getGradeOfStudent(Long id) {
+        int year = LocalDate.now().getYear() - memberRepository.getEnrollmentDate(id);
+        if (year == 0) {
+            return 1;
+        } else {
+            return year;
+        }
     }
 }

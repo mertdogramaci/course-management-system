@@ -96,6 +96,14 @@ export default function Sidebar() {
           </ListItemIcon>
           <ListItemText primary={"Profile"} />
         </ListItemButton>
+
+        <ListItemButton onClick={() => handleClick(PATH_MAIN.advisor)}>
+          <ListItemIcon>
+            <PersonIcon color = "primary" />
+          </ListItemIcon>
+          <ListItemText primary={"Advisor Information"} />
+        </ListItemButton>
+
         <ListItemButton onClick={() => handleClick(PATH_MAIN.settings)}>
         <ListItemIcon>
           <SettingsIcon color="primary" />
