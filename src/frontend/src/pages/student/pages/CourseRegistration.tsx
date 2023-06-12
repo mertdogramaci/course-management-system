@@ -51,7 +51,7 @@ function CourseRegistration() {
         <div className="App">
             <header className="App-header">
                 <div className="App-intro">
-                    <h2>Course List</h2>
+                <h2>{`${year} ${semester ? 'Fall' : 'Spring'} Courses to Enroll`}</h2>
                     <SectionEnrollTable sections={sections} setSections={setSections} fetchSectionsToEnroll={fetchSectionsToEnroll} />
                 </div>
             </header>
