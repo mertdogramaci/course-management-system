@@ -13,7 +13,7 @@ export default function MainLayout() {
       <Grid
         container
         sx={{
-          maxWidth: '91rem',
+          maxWidth: '92rem',
           mx: 'auto',
           spacing: 0,
         }}
@@ -25,7 +25,7 @@ export default function MainLayout() {
             position: 'sticky',
             top: 0,
             pt: 8,
-            height: '1000vh'
+            minHeight: '100vh',
           }}
         >
           <Sidebar />
@@ -39,7 +39,6 @@ export default function MainLayout() {
             flex: 1,
             flexDirection: 'column',
             overflow: 'auto',
-            alignItems: 'center',
             borderLeftColor: 'gray',
             borderLeftStyle: 'solid',
             borderLeftWidth: 1,
