@@ -7,16 +7,12 @@ import com.group20.coursemanagementsystem.model.Student;
 
 import javax.persistence.Query;
 
-import com.group20.coursemanagementsystem.request.EnrolmentRequest;
 import com.group20.coursemanagementsystem.security.domain.Authority;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.sql.Date;
-import java.time.ZoneId;
 import java.util.List;
 
 @Repository
@@ -54,7 +50,8 @@ public class MemberRepository {
     }
 
     public Student findByHacettepeID(String hacettepeID) {
-        Query query = entityManager.createQuery("SELECT s FROM Student s WHERE s.hacettepeID = :hacettepeID", Student.class);
+        Query query = entityManager.createQuery("SELECT s FROM Student s WHERE s.hacettepeID = :hacettepeID",
+                Student.class);
         query.setParameter("hacettepeID", hacettepeID);
         List resultList = query.getResultList();
 
@@ -70,7 +67,8 @@ public class MemberRepository {
     @Transactional
     public <M extends Member> M save(M member) {
         if (member.getMemberType() == MemberType.ADMIN) {
-            Query query = entityManager.createNativeQuery("INSERT INTO member_table (email, password, member_type) VALUES (?, ?, ?)");
+            Query query = entityManager.createNativeQuery("INSERT INTO member_table (email, password, member_type) " +
+                    "VALUES (?, ?, ?)");
             query.setParameter(1, member.getEmail());
             query.setParameter(2, member.getPassword());
             query.setParameter(3, member.getMemberType().ordinal());
@@ -78,7 +76,8 @@ public class MemberRepository {
 
             Member savedMember = findByEmail(member.getEmail());
             for (Authority auth : member.getAuthorities()) {
-                query = entityManager.createNativeQuery("INSERT INTO member_authorities (member_id, authority_id) VALUES (?, ?)");
+                query = entityManager.createNativeQuery("INSERT INTO member_authorities (member_id, authority_id) " +
+                        "VALUES (?, ?)");
                 query.setParameter(1, savedMember.getId());
                 query.setParameter(2, auth.getId());
                 query.executeUpdate();
@@ -87,7 +86,8 @@ public class MemberRepository {
             return member;
         }
 
-        Query query = entityManager.createNativeQuery("INSERT INTO member_table (first_name, last_name, email, password, " +
+        Query query = entityManager.createNativeQuery("INSERT INTO member_table (first_name, last_name, email, " +
+                "password, " +
                 "phone_number, address, profile_photo, member_type, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         query.setParameter(1, member.getFirstName());
         query.setParameter(2, member.getLastName());
@@ -102,7 +102,8 @@ public class MemberRepository {
 
         Member savedMember = findByEmail(member.getEmail());
         for (Authority auth : member.getAuthorities()) {
-            query = entityManager.createNativeQuery("INSERT INTO member_authorities (member_id, authority_id) VALUES (?, ?)");
+            query = entityManager.createNativeQuery("INSERT INTO member_authorities (member_id, authority_id) " +
+                    "VALUES (?, ?)");
             query.setParameter(1, savedMember.getId());
             query.setParameter(2, auth.getId());
             query.executeUpdate();
@@ -110,7 +111,8 @@ public class MemberRepository {
 
         if (savedMember.getMemberType() == MemberType.STUDENT) {
             Student student = (Student) member;
-            query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects, school_enrollment_date) VALUES (?, ?, ?, ?)");
+            query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects, " +
+                    "school_enrollment_date) VALUES (?, ?, ?, ?)");
             query.setParameter(1, savedMember.getId());
             query.setParameter(2, student.getHacettepeID());
             query.setParameter(3, student.getSemesterECTS());
@@ -129,16 +131,8 @@ public class MemberRepository {
 
     @Transactional
     public <M extends Member> M saveFromEnrolmentRequest(M member) {
-//        Query query = entityManager.createNativeQuery("INSERT INTO member_table (first_name, last_name, email, password, member_type, department_id) VALUES (?, ?, ?, ?, ?, ?)");
-//        query.setParameter(1, member.getFirstName());
-//        query.setParameter(2, member.getLastName());
-//        query.setParameter(3, member.getEmail());
-//        query.setParameter(4, member.getPassword());
-//        query.setParameter(5, member.getMemberType().ordinal());
-//        query.setParameter(6, member.getDepartment().getId());
-//        query.executeUpdate();
-
-        Query query = entityManager.createNativeQuery("INSERT INTO member_table (first_name, last_name, email, password, member_type) VALUES (?, ?, ?, ?, ?)");
+        Query query = entityManager.createNativeQuery("INSERT INTO member_table (first_name, last_name, email, " +
+                "password, member_type) VALUES (?, ?, ?, ?, ?)");
         query.setParameter(1, member.getFirstName());
         query.setParameter(2, member.getLastName());
         query.setParameter(3, member.getEmail());
@@ -148,7 +142,8 @@ public class MemberRepository {
 
         Member savedMember = findByEmail(member.getEmail());
         for (Authority auth : member.getAuthorities()) {
-            query = entityManager.createNativeQuery("INSERT INTO member_authorities (member_id, authority_id) VALUES (?, ?)");
+            query = entityManager.createNativeQuery("INSERT INTO member_authorities (member_id, authority_id) " +
+                    "VALUES (?, ?)");
             query.setParameter(1, savedMember.getId());
             query.setParameter(2, auth.getId());
             query.executeUpdate();
@@ -156,7 +151,8 @@ public class MemberRepository {
 
         if (savedMember.getMemberType() == MemberType.STUDENT) {
             Student student = (Student) member;
-            query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects) VALUES (?, ?, ?)");
+            query = entityManager.createNativeQuery("INSERT INTO student_table (id, hacettepe_id, semester_ects) " +
+                    "VALUES (?, ?, ?)");
             query.setParameter(1, savedMember.getId());
             query.setParameter(2, student.getHacettepeID());
             query.setParameter(3, student.getSemesterECTS());
@@ -175,7 +171,8 @@ public class MemberRepository {
 
     @Transactional
     public <M extends Member> M update(M member) {
-        Query query = entityManager.createNativeQuery("UPDATE member_table SET first_name = ?, last_name = ?, email = ?, password = ?, " +
+        Query query = entityManager.createNativeQuery("UPDATE member_table SET first_name = ?, last_name = ?, " +
+                "email = ?, password = ?, " +
                 "phone_number = ?, address = ?, profile_photo = ?, member_type = ?, department_id = ? WHERE id = ?");
         query.setParameter(1, member.getFirstName());
         query.setParameter(2, member.getLastName());
@@ -191,7 +188,8 @@ public class MemberRepository {
 
         if (member.getMemberType() == MemberType.STUDENT) {
             Student student = (Student) member;
-            query = entityManager.createNativeQuery("UPDATE student_table SET hacettepe_id = ?, semester_ects = ? WHERE id = ?");
+            query = entityManager.createNativeQuery("UPDATE student_table SET hacettepe_id = ?, semester_ects = ? " +
+                    "WHERE id = ?");
             query.setParameter(1, student.getHacettepeID());
             query.setParameter(2, student.getSemesterECTS());
             query.setParameter(3, member.getId());
@@ -210,7 +208,7 @@ public class MemberRepository {
     }
 
     public List findAll() {
-        Query query = entityManager.createQuery("SELECT m FROM Member m", Member.class);
+        Query query = entityManager.createQuery("SELECT m FROM Member m where m.memberType <> 2", Member.class);
         return query.getResultList();
     }
 
@@ -226,11 +224,58 @@ public class MemberRepository {
 
     public int getEnrollmentDate(Long id) {
         Query query = entityManager.createNativeQuery(
-                "SELECT s.school_enrollment_date FROM member_table m inner join student_table s on (m.id = s.id) WHERE m.id = ?");
+                "SELECT s.school_enrollment_date FROM member_table m inner join student_table s on (m.id = s.id) " +
+                        "WHERE m.id = ?");
         query.setParameter(1, id);
 
         return Integer.parseInt(query.getResultList().get(0).toString().split("-")[0]);
     }
+
+    public List findAllStudents() {
+        Query query = entityManager.createQuery("SELECT m FROM Member m WHERE m.memberType = 0", Member.class);
+        return query.getResultList();
+    }
+
+    public Long memberStatistics() {
+        Query query = entityManager.createQuery("SELECT COUNT(m) FROM Member m WHERE m.memberType <> 2", Long.class);
+        return (long) query.getResultList().get(0);
+    }
+
+    public Long studentStatistics() {
+        Query query = entityManager.createQuery("SELECT COUNT(m) FROM Member m WHERE m.memberType = 0", Long.class);
+        return (long) query.getResultList().get(0);
+    }
+
+    public Long instructorStatistics() {
+        Query query = entityManager.createQuery("SELECT COUNT(m) FROM Member m WHERE m.memberType = 1", Long.class);
+        return (long) query.getResultList().get(0);
+    }
+
+    public Object departmentStatistics() {
+        Query query = entityManager.createNativeQuery(
+                "select count(*), d.name  from member_table m inner join department d on (d.id = m.department_id) " +
+                        "where m.member_type = 0 group by d.name order by count(*) desc limit 1");
+        return query.getResultList().get(0);
+    }
+
+    public Object lastMemberStatistics() {
+        Query query = entityManager.createNativeQuery(
+                "SELECT m.first_name, m.last_name, d.name, s.school_enrollment_date" +
+                        " FROM member_table m inner join student_table s on s.id = m.id " +
+                        "inner join department d on d.id = m.department_id WHERE m.member_type = 0 " +
+                        "ORDER BY (s.school_enrollment_date, m.id) DESC LIMIT 1");
+        return query.getResultList().get(0);
+    }
+
+    public Object firstMemberStatistics() {
+        Query query = entityManager.createNativeQuery(
+                "SELECT m.first_name, m.last_name, d.name, s.school_enrollment_date" +
+                        " FROM member_table m inner join student_table s on s.id = m.id " +
+                        "inner join department d on d.id = m.department_id WHERE m.member_type = 0 " +
+                        "ORDER BY (s.school_enrollment_date, m.id) ASC LIMIT 1");
+        return query.getResultList().get(0);
+    }
+
 
 //    @Query("SELECT m FROM Member m WHERE CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE LOWER(CONCAT('%', ?1, '%'))")
 //    List<Member> search(String keyword);

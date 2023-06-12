@@ -33,7 +33,7 @@ function SectionEnrollTable(props) {
             <td>{section.id}</td>
             <td>{section.course.title}</td>
             <td>{section.course.description}</td>
-            <td>{section.course.isCompulsory ? "Yes" : "No"}</td>
+            <td>{(section.course.isCompulsory) ? "Yes" : "No"}</td>
             <td>
             <Button onClick={() => handleEnrollClick(section.id)}>Enroll</Button>
             </td>

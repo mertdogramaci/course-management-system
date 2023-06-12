@@ -49,4 +49,16 @@ public class StudentEnrollsSectionController {
                                                        @PathVariable Long section_id) {
         return ResponseEntity.ok(studentEnrollsSectionService.enroll(student_id, section_id));
     }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/courseStatistics")
+    public ResponseEntity<Object> getSectionStatistics() {
+        return ResponseEntity.ok(studentEnrollsSectionRepository.sectionStatistics());
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/courseAverageStatistics")
+    public ResponseEntity<Object> getSectionAverageStatistics() {
+        return ResponseEntity.ok(studentEnrollsSectionRepository.sectionAverageStatistics());
+    }
 }

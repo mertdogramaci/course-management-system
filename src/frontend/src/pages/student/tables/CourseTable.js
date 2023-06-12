@@ -20,7 +20,7 @@ function CourseTable(props) {
             <td>{section.id}</td>
             <td>{section.section.course.title}</td>
             <td>{section.section.course.description}</td>
-            <td>{section.section.course.isCompulsory ? "Yes" : "No"}</td>
+            <td>{(section.section.course.isCompulsory) ? "Yes" : "No"}</td>
             <td>{section.grade}</td>
           </tr>
         ))}

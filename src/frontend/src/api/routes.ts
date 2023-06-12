@@ -19,7 +19,8 @@ const ApiRoutes = {
   TRANSCRIPT: '/transcript',
   STUDENTS: '/members/fetchAllMembers',
   ADVISOR: '/instructorAdvisorStudent',
-  MEMBER: '/members'
+  MEMBER: '/members',
+  ALLSTUDENTS: '/members/fetchAllStudents'
 };
 
 export default ApiRoutes;

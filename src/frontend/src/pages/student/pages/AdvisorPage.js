@@ -25,11 +25,11 @@ function AdvisorPage() {
 
     return (
         <div className="advisor">
-            <p>Name Surname:&nbsp;{advisor.firstName} {advisor.lastName}</p>
-            <p>Faculty:&nbsp;{(advisor.department === undefined) ? null : advisor.department.faculty.name}</p>
-            <p>Department:&nbsp;{(advisor.department === undefined) ? null : advisor.department.name}</p>
-            <p>Phone Number:&nbsp;{advisor.phoneNumber}</p>
-            <p>Email:&nbsp;{advisor.email}</p>
+            <p>Name Surname:&emsp;{advisor.firstName} {advisor.lastName}</p>
+            <p>Faculty:&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp;{(advisor.department === undefined) ? null : advisor.department.faculty.name}</p>
+            <p>Department:&emsp;&emsp;&ensp;&nbsp;{(advisor.department === undefined) ? null : advisor.department.name}</p>
+            <p>Phone Number:&emsp;{advisor.phoneNumber}</p>
+            <p>Email:&emsp;&emsp;&emsp;&emsp;&emsp;{advisor.email}</p>
         </div>
     );
 }

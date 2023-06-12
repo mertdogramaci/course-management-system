@@ -62,4 +62,18 @@ public class SectionRepository {
         Query query = entityManager.createQuery("SELECT s FROM Section s", Section.class);
         return query.getResultList();
     }
+
+    public List maxQuotaSections() {
+        Query query = entityManager.createNativeQuery("select s.id, c.title, c.description, s.semester, s.year, s.quota " +
+                "from section s inner join course c on c.id = s.course_id " +
+                "where s.quota = (select max(s2.quota) from section s2)");
+        return query.getResultList();
+    }
+
+    public List minQuotaSections() {
+        Query query = entityManager.createNativeQuery("select s.id, c.title, c.description, s.semester, s.year, s.quota " +
+                "from section s inner join course c on c.id = s.course_id " +
+                "where s.quota = (select min(s2.quota) from section s2)");
+        return query.getResultList();
+    }
 }

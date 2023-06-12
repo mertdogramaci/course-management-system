@@ -399,9 +399,9 @@ public class DatabasePopulator {
 
 
         courseRepository.save(new Course("BBM101", 6, true,
-                "Introducion to Programming I", department1));
+                "Introduction to Programming I", department1));
         courseRepository.save(new Course("BBM103", 4, true,
-                "Introducion to Programming Lab I", department1));
+                "Introduction to Programming Lab I", department1));
         courseRepository.save(new Course("BBM471", 6, false,
                 "Database Management Systems", department1));
         courseRepository.save(new Course("BBM473", 4, false,
@@ -409,9 +409,9 @@ public class DatabasePopulator {
         courseRepository.save(new Course("BBM405", 6, false,
                 "Fundamentals of Artificial Intelligence", department1));
         courseRepository.save(new Course("BBM102", 6, true,
-                "Introducion to Programming II", department1));
+                "Introduction to Programming II", department1));
         courseRepository.save(new Course("BBM104", 4, true,
-                "Introducion to Programming Lab II", department1));
+                "Introduction to Programming Lab II", department1));
         courseRepository.save(new Course("BBM201", 6, true, "Data Structures",
                 department1));
         courseRepository.save(new Course("BBM203", 4, true, "Software Laboratory I",

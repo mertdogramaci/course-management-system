@@ -16,6 +16,8 @@ function StudentTable(probs) {
         });
     }
 
+    console.log(probs.students);
+
     return (
         <table className="styled-table">
             <thead>

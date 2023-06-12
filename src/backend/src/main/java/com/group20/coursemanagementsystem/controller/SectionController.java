@@ -3,10 +3,12 @@ package com.group20.coursemanagementsystem.controller;
 import com.group20.coursemanagementsystem.model.Section;
 import com.group20.coursemanagementsystem.repository.SectionRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/sections")
 public class SectionController {
@@ -40,5 +42,17 @@ public class SectionController {
     public ResponseEntity<?> deleteSection(@PathVariable Long id) {
         sectionRepository.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/maxQuotaSections")
+    public ResponseEntity<List> maxQuotaSections() {
+        return ResponseEntity.ok(sectionRepository.maxQuotaSections());
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/minQuotaSections")
+    public ResponseEntity<List> minQuotaSections() {
+        return ResponseEntity.ok(sectionRepository.minQuotaSections());
     }
 }

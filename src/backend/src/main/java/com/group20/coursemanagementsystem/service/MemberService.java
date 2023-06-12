@@ -1,6 +1,5 @@
 package com.group20.coursemanagementsystem.service;
 
-import com.group20.coursemanagementsystem.model.Department;
 import com.group20.coursemanagementsystem.model.Instructor;
 import com.group20.coursemanagementsystem.repository.InstructorRepository;
 import com.group20.coursemanagementsystem.dto.MessageResponse;
@@ -182,5 +181,33 @@ public class MemberService {
         } else {
             return year;
         }
+    }
+
+    public List<Member> getAllStudents() {
+        return memberRepository.findAllStudents();
+    }
+
+    public Long memberStatistics() {
+        return memberRepository.memberStatistics();
+    }
+
+    public Long studentStatistics() {
+        return memberRepository.studentStatistics();
+    }
+
+    public Long instructorStatistics() {
+        return memberRepository.instructorStatistics();
+    }
+
+    public Object departmentStatistics() {
+        return memberRepository.departmentStatistics();
+    }
+
+    public Object lastMemberStatistics() {
+        return memberRepository.lastMemberStatistics();
+    }
+
+    public Object firstMemberStatistics() {
+        return memberRepository.firstMemberStatistics();
     }
 }

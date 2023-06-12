@@ -82,17 +82,21 @@ function HomePage() {
                 <h4>Active Academic Term Information</h4>
                 <p>2022-2023 Spring</p>
             </div>
-            <div className="home">
-                <h4>Advisor Information</h4>
-                <p>{advisor.firstName} {advisor.lastName}</p>
-                <p>{advisor.email}</p>
-                <Button onClick={routeChange}>Detail</Button>
-            </div>
-            <div className="home">
-                <h4>Education Information</h4>
-                <p>Faculty of {(department.faculty === undefined) ? null : department.faculty.name} / {department.name}</p>
-                <p> {grade}{theWord} year</p>
-            </div>
+            {user?.memberType !== "ADMIN" &&
+                <div className="home">
+                    <h4>Advisor Information</h4>
+                    <p>{advisor.firstName} {advisor.lastName}</p>
+                    <p>{advisor.email}</p>
+                    <Button onClick={routeChange}>Detail</Button>
+                </div>
+            }
+            {user?.memberType !== "ADMIN" &&
+                <div className="home">
+                    <h4>Education Information</h4>
+                    <p>Faculty of {(department.faculty === undefined) ? null : department.faculty.name} / {department.name}</p>
+                    <p> {grade}{theWord} year</p>
+                </div>
+            }
         </div>
     );
 }

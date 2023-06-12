@@ -6,7 +6,8 @@ import GuestGuard from '../guards/GuestGuard';
 import MainLayout from '../layouts/MainLayout';
 import TranscriptPage from '../pages/student/pages/TranscriptPage';
 import StudentsPage from '../pages/admin/students/StudentsPage';
-import AdvisorPage from '../pages/admin/students/AdvisorPage';
+import AdvisorPage from '../pages/student/pages/AdvisorPage';
+import StatisticsPage from '../pages/admin/StatisticsPage';
 
 const Loadable = (Component: any) => (props: any) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -64,16 +65,19 @@ export default function Router() {
       ),
       children: [
         { path: '', element: <HomePage /> },
-        { path: 'profile', element: <Profile />, children: [
-          { path: ':id', element: <Profile /> }
-        ] },
+        {
+          path: 'profile', element: <Profile />, children: [
+            { path: ':id', element: <Profile /> }
+          ]
+        },
         { path: 'studentEnrollsSection', element: <CoursesPage /> },
-        { path: 'settings', element: <Settings />},
-        { path: 'sectionHasTimeSlot', element: <TimeTable/>},
-        {path: 'transcript', element: <TranscriptPage/>},
-        {path: 'members/fetchAllMembers', element: <StudentsPage/>},
-        { path: 'courseRegistration', element: <CourseRegistration/>},
-        {path: 'advisor', element: <AdvisorPage/>}
+        { path: 'settings', element: <Settings /> },
+        { path: 'sectionHasTimeSlot', element: <TimeTable /> },
+        { path: 'transcript', element: <TranscriptPage /> },
+        { path: 'members/fetchAllMembers', element: <StudentsPage /> },
+        { path: 'courseRegistration', element: <CourseRegistration /> },
+        { path: 'advisor', element: <AdvisorPage /> },
+        { path: 'statistics', element: <StatisticsPage /> }
       ]
     },
 
@@ -86,7 +90,7 @@ export default function Router() {
 const Login = Loadable(lazy(() => import('../pages/authentication/Login')))
 const Enrollment = Loadable(lazy(() => import('../pages/authentication/Enrollment')))
 
-const EnrollmentRequests= Loadable(lazy(() => import('../pages/admin/EnrollmentRequests')))
+const EnrollmentRequests = Loadable(lazy(() => import('../pages/admin/EnrollmentRequests')))
 
 const HomePage = Loadable(lazy(() => import('../components/HomePage')));
 const Profile = Loadable(lazy(() => import('../pages/student/Profile')))
@@ -94,6 +98,7 @@ const CoursesPage = Loadable(lazy(() => import('../pages/student/pages/CoursesPa
 const Settings = Loadable(lazy(() => import('../pages/Settings')))
 const TimeTable = Loadable(lazy(() => import('../pages/student/pages/TimeTable')))
 const CourseRegistration = Loadable(lazy(() => import('../pages/student/pages/CourseRegistration')))
+const Statistics = Loadable(lazy(() => import('../pages/admin/StatisticsPage')))
 
 
 const NotFound = Loadable(lazy(() => import('../pages/NotFound')))

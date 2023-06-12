@@ -1,7 +1,9 @@
 .App {
   text-align: -webkit-center;
+  margin-left: 10px;
   width: 100vw;
   height: 80vh;
+  margin-top: 10px;
 }
 
 .styled-table {
@@ -60,4 +62,15 @@
   display: inline-block; 
   width:300px; 
   vertical-align:top
+}
+
+.advisor {
+  margin-left: 100px;
+  width: 100%;
+  text-align:left;
+}
+
+.Statistics {
+  display: list-item;
+  list-style-position: inside;
 }

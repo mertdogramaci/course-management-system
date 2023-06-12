@@ -106,4 +106,26 @@ public class StudentEnrollsSectionRepository {
         return query.getResultList();
     }
 
+    public Object sectionStatistics() {
+        Query query = entityManager.createNativeQuery(
+                "select ss_table.count, c.title, c.description, s.semester, s.year, d.name\n" +
+                        "from (select count(*), ss.section_id\n" +
+                        "from student_enrolls_section ss\n" +
+                        "group by ss.section_id) as ss_table, section s inner join course c on c.id = s.course_id\n" +
+                        "inner join department d on d.id = c.department_id\n" +
+                        "where ss_table.section_id = s.id\n" +
+                        "order by ss_table.count desc limit 1");
+        return query.getResultList().get(0);
+    }
+
+    public Object sectionAverageStatistics() {
+        Query query = entityManager.createNativeQuery(
+                "select avg_grade.avg, c.title, c.description\n" +
+                        "from (select avg(ss.grade), c.id\n" +
+                        "from student_enrolls_section ss inner join section s on (s.id = ss.section_id)\n" +
+                        "inner join course c on (c.id = s.course_id)\n" +
+                        "group by ss.section_id, c.id \n" +
+                        "having c.title like 'BBM471') as avg_grade inner join course c on c.id = avg_grade.id");
+        return query.getResultList().get(0);
+    }
 }

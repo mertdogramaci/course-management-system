@@ -156,4 +156,50 @@ public class MemberController {
     public ResponseEntity<Integer> getYear(@PathVariable Long id) {
         return ResponseEntity.ok(memberService.getGradeOfStudent(id));
     }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/fetchAllStudents")
+    public ResponseEntity<List<Member>> getAllStudents() {
+        List<Member> students = memberService.getAllStudents();
+        return ResponseEntity.ok(students);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/memberStatistics")
+    public ResponseEntity<Long> memberStatistics() {
+        Long numberOfMembers = memberService.memberStatistics();
+        return ResponseEntity.ok(numberOfMembers);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/studentStatistics")
+    public ResponseEntity<Long> studentStatistics() {
+        Long numberOfMembers = memberService.studentStatistics();
+        return ResponseEntity.ok(numberOfMembers);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/instructorStatistics")
+    public ResponseEntity<Long> instructorStatistics() {
+        Long numberOfMembers = memberService.instructorStatistics();
+        return ResponseEntity.ok(numberOfMembers);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/departmentStatistics")
+    public ResponseEntity<Object> departmentStatistics() {
+        return ResponseEntity.ok(memberService.departmentStatistics());
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/lastMemberStatistics")
+    public ResponseEntity<Object> lastMemberStatistics() {
+        return ResponseEntity.ok(memberService.lastMemberStatistics());
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/firstMemberStatistics")
+    public ResponseEntity<Object> firstMemberStatistics() {
+        return ResponseEntity.ok(memberService.firstMemberStatistics());
+    }
 }
