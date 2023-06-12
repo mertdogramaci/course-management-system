@@ -18,6 +18,7 @@ public class SectionController {
         this.sectionRepository = sectionRepository;
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping
     public ResponseEntity<List> getAllSections() {
         return ResponseEntity.ok(sectionRepository.findAll());
