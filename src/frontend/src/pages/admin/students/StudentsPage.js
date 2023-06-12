@@ -29,7 +29,7 @@ function StudentsPage() {
         <div className="App">
             <header className="App-header">
                 <div className="App-intro">
-                    <h2>Student List</h2>
+                    <h2>Students List</h2>
                     <StudentTable students={students} setStudents={setStudents} />
                 </div>
             </header>

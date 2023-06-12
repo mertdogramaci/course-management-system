@@ -20,7 +20,8 @@ const ApiRoutes = {
   STUDENTS: '/members/fetchAllMembers',
   ADVISOR: '/instructorAdvisorStudent',
   MEMBER: '/members',
-  ALLSTUDENTS: '/members/fetchAllStudents'
+  ALLSTUDENTS: '/members/fetchAllStudents',
+  SECTIONS: '/sections'
 };
 
 export default ApiRoutes;

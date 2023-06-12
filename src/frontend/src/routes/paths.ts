@@ -41,5 +41,6 @@ export const PATH_MAIN = {
   log: '/log',
   courseRegistration: '/courseRegistration',
   advisor: '/advisor',
-  statistics: '/statistics'
+  statistics: '/statistics',
+  sections: '/sections/fetchAllSections'
 };

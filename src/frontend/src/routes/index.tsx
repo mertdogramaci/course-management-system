@@ -8,6 +8,7 @@ import TranscriptPage from '../pages/student/pages/TranscriptPage';
 import StudentsPage from '../pages/admin/students/StudentsPage';
 import AdvisorPage from '../pages/student/pages/AdvisorPage';
 import StatisticsPage from '../pages/admin/StatisticsPage';
+import SectionsPage from '../pages/admin/sections/SectionsPage';
 
 const Loadable = (Component: any) => (props: any) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -77,7 +78,8 @@ export default function Router() {
         { path: 'members/fetchAllMembers', element: <StudentsPage /> },
         { path: 'courseRegistration', element: <CourseRegistration /> },
         { path: 'advisor', element: <AdvisorPage /> },
-        { path: 'statistics', element: <StatisticsPage /> }
+        { path: 'statistics', element: <StatisticsPage /> },
+        {path: 'sections/fetchAllSections', element: <SectionsPage/>}
       ]
     },
 

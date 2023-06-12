@@ -63,6 +63,17 @@ export default function Sidebar() {
 
       {user?.memberType === "ADMIN" && (
         <>
+          <ListItemButton onClick={() => handleClick(PATH_MAIN.sections)}>
+            <ListItemIcon>
+              <CourseIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText primary={"Sections"} />
+          </ListItemButton>
+        </>
+      )}
+
+      {user?.memberType === "ADMIN" && (
+        <>
           <ListItemButton onClick={() => handleClick(PATH_MAIN.statistics)}>
             <ListItemIcon>
               <GraphIcon color="primary" />
