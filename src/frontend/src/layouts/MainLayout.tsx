@@ -13,19 +13,19 @@ export default function MainLayout() {
       <Grid
         container
         sx={{
-          maxWidth: '90rem',
+          maxWidth: '91rem',
           mx: 'auto',
           spacing: 0,
         }}
       >
         <Grid
           item
-          xs={3}
+          xs={2}
           sx={{
             position: 'sticky',
             top: 0,
             pt: 8,
-            height: '100vh'
+            height: '1000vh'
           }}
         >
           <Sidebar />
