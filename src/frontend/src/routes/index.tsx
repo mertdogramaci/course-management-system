@@ -9,6 +9,8 @@ import StudentsPage from '../pages/admin/students/StudentsPage';
 import AdvisorPage from '../pages/student/pages/AdvisorPage';
 import StatisticsPage from '../pages/admin/StatisticsPage';
 import SectionsPage from '../pages/admin/sections/SectionsPage';
+import EditStudent from '../pages/admin/students/EditStudent';
+import EnrolledSections from '../pages/admin/sections/EnrolledSections';
 
 const Loadable = (Component: any) => (props: any) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -79,8 +81,10 @@ export default function Router() {
         { path: 'courseRegistration', element: <CourseRegistration /> },
         { path: 'advisor', element: <AdvisorPage /> },
         { path: 'statistics', element: <StatisticsPage /> },
-        {path: 'sections/fetchAllSections', element: <SectionsPage/>},
+        { path: 'sections/fetchAllSections', element: <SectionsPage /> },
+        { path: 'members/:id', element: <EditStudent /> },
         { path: 'log', element: <ProcessHistory /> },
+        { path: 'studentEnrollsSection/:id', element: <EnrolledSections /> }
       ]
     },
 

@@ -111,6 +111,7 @@ public class MemberController {
 //        return new MemberQueryResponse(member);
 //    }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
     public MessageResponse updateMember(@PathVariable Long id, @ModelAttribute UpdateMemberRequest request) {
         if (request.getProfilePhoto() != null) {
