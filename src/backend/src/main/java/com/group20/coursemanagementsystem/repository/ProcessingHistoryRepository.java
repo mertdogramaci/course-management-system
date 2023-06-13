@@ -24,9 +24,10 @@ public class ProcessingHistoryRepository {
 
     @Transactional
     public <P extends ProcessingHistory> P save(P processingHistory) {
-        Query query = entityManager.createNativeQuery("INSERT INTO processing_history (time_stamp, process) VALUES (?, ?)");
+        Query query = entityManager.createNativeQuery("INSERT INTO processing_history (time_stamp, user_email, activity) VALUES (?, ?, ?)");
         query.setParameter(1, processingHistory.getTimeStamp());
-        query.setParameter(2, processingHistory.getProcess());
+        query.setParameter(2, processingHistory.getUserEmail());
+        query.setParameter(3, processingHistory.getActivity());
         query.executeUpdate();
         return processingHistory;
     }

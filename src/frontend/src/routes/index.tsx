@@ -79,7 +79,8 @@ export default function Router() {
         { path: 'courseRegistration', element: <CourseRegistration /> },
         { path: 'advisor', element: <AdvisorPage /> },
         { path: 'statistics', element: <StatisticsPage /> },
-        {path: 'sections/fetchAllSections', element: <SectionsPage/>}
+        {path: 'sections/fetchAllSections', element: <SectionsPage/>},
+        { path: 'log', element: <ProcessHistory /> },
       ]
     },
 
@@ -101,7 +102,7 @@ const Settings = Loadable(lazy(() => import('../pages/Settings')))
 const TimeTable = Loadable(lazy(() => import('../pages/student/pages/TimeTable')))
 const CourseRegistration = Loadable(lazy(() => import('../pages/student/pages/CourseRegistration')))
 const Statistics = Loadable(lazy(() => import('../pages/admin/StatisticsPage')))
-
+const ProcessHistory = Loadable(lazy(() => import('../pages/admin/ProcessHistory')))
 
 const NotFound = Loadable(lazy(() => import('../pages/NotFound')))
 

@@ -18,14 +18,18 @@ public class ProcessingHistory {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "user_email")
+    private String userEmail;
+
     @Column(name = "time_stamp")
     private LocalDateTime timeStamp;
 
-    @Column(name = "process")
-    private String process;
+    @Column(name = "activity")
+    private String activity;
 
-    public ProcessingHistory(LocalDateTime timeStamp, String process) {
+    public ProcessingHistory(LocalDateTime timeStamp, String userEmail, String activity) {
         this.timeStamp = timeStamp;
-        this.process = process;
+        this.userEmail = userEmail;
+        this.activity = activity;
     }
 }

@@ -43,7 +43,7 @@ public class LoginService {
             String jwt = JwtUtil.generateToken(authenticatedToken, secretKey);
 
             MemberQueryResponse memberQueryResponse = new MemberQueryResponse(memberService.getMemberByEmail(loginRequest.getEmail()));
-            processingHistoryRepository.save(new ProcessingHistory(LocalDateTime.now(), "User with %s email address logged in".formatted(loginRequest.getEmail())));
+            processingHistoryRepository.save(new ProcessingHistory(LocalDateTime.now(), loginRequest.getEmail(), "User logged in"));
             return new LoginQueryResponse(jwt, memberQueryResponse);
         }
         catch (AuthenticationException ex) {

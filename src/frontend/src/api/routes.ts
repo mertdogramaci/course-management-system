@@ -2,6 +2,7 @@ const ApiRoutes = {
   LOGIN: '/login',
   COURSES: '/studentEnrollsSection',
   SECTIONS_TO_ENROLL: '/studentEnrollsSection/getSectionsToEnroll',
+  FETCH_LOG: '/log',
   ENROLL_SECTION: '/studentEnrollsSection/enroll',
   PROFILE: '/members/profile',
   ENROLLMENT: '/enroll',

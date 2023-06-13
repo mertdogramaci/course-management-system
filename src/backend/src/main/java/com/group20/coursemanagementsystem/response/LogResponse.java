@@ -10,11 +10,13 @@ public class LogResponse {
 
     private final Long id;
     private final LocalDateTime timeStamp;
-    private final String process;
+    private final String activity;
+    private final String userEmail;
 
     public LogResponse(ProcessingHistory processingHistory) {
         this.id = processingHistory.getId();
         this.timeStamp = processingHistory.getTimeStamp();
-        this.process = processingHistory.getProcess();
+        this.activity = processingHistory.getActivity();
+        this.userEmail = processingHistory.getUserEmail();
     }
 }
