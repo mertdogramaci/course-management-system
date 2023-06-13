@@ -5,17 +5,26 @@ import ApiRoutes from '../../../api/routes';
 import useAuth from '../../../hooks/useAuth';
 
 function SectionEnrollTable(props) {
-    const { user } = useAuth();
-    const SweetAlert = require('sweetalert2');
+  const { user } = useAuth();
+  const SweetAlert = require('sweetalert2');
 
-    const handleEnrollClick = (section_id) => {
-        const response = axios.post(ApiRoutes.ENROLL_SECTION + "/" + user.id + "/" + section_id);
+  const handleEnrollClick = async (section_id) => {
+    try {
+      const response = await axios.post(ApiRoutes.ENROLL_SECTION + "/" + user.id + "/" + section_id);
+      console.log(response.data);
 
-        console.log("finished");
-
+      SweetAlert.fire({
+        title: "Enrolled!",
+        text: response.data.message,
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
         window.location.reload();
-        // new SweetAlert("Member approved", response.data.message , "success");
-    };
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <table className="styled-table">
@@ -33,9 +42,9 @@ function SectionEnrollTable(props) {
             <td>{section.id}</td>
             <td>{section.course.title}</td>
             <td>{section.course.description}</td>
-            <td>{(section.course.isCompulsory) ? "Yes" : "No"}</td>
+            <td>{section.course.isCompulsory ? "Yes" : "No"}</td>
             <td>
-            <Button onClick={() => handleEnrollClick(section.id)}>Enroll</Button>
+              <Button onClick={() => handleEnrollClick(section.id)}>Enroll</Button>
             </td>
           </tr>
         ))}
