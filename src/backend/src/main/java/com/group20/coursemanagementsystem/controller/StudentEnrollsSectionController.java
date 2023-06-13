@@ -45,7 +45,7 @@ public class StudentEnrollsSectionController {
 
     @PreAuthorize("hasAnyAuthority('STUDENT')")
     @PostMapping("/enroll/{student_id}/{section_id}")
-    public ResponseEntity<Section> getSectionsToEnroll(@PathVariable Long student_id,
+    public ResponseEntity<Section> enrollToSection(@PathVariable Long student_id,
                                                        @PathVariable Long section_id) {
         return ResponseEntity.ok(studentEnrollsSectionService.enroll(student_id, section_id));
     }
