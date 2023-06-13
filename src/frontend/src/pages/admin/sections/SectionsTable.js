@@ -29,7 +29,11 @@ function SectionsTable(probs) {
                             <th>{(section[5] === null) ? 0 : section[5]} / {section[6]}</th>
                             <th>{section[7]} {section[8]}</th>
                             <th>
-                                
+                                <ButtonGroup>
+                                    <Button size="sm" color="primary" tag={Link} to={"/studentEnrollsSection/section/" + section[0]}>Show Student List</Button>
+                                    &ensp;
+                                    <Button size="sm" color="primary" tag={Link} to={"/sections/" + section[0]}>Edit</Button>
+                                </ButtonGroup>
                             </th>
                         </tr>
                     );

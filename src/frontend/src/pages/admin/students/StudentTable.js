@@ -1,20 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button, ButtonGroup } from "reactstrap";
+import axios from '../../../api/axios';
+import ApiRoutes from '../../../api/routes';
+import useAuth from '../../../hooks/useAuth';
 
 function StudentTable(probs) {
-    function remove(id) {
-        fetch(`/members/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(() => {
-            const updatedStudents = [...probs.students].filter(i => i.id !== id);
-            probs.setStudents(updatedStudents);
-        });
-    }
 
     return (
         <table className="styled-table">
@@ -50,8 +41,6 @@ function StudentTable(probs) {
                                     <Button size="sm" color="primary" tag={Link} to={"/studentEnrollsSection/" + student.id}>Show Enrolled Sections</Button>
                                     &ensp;
                                     <Button size="sm" color="primary" tag={Link} to={"/members/" + student.id}>Edit</Button>
-                                    &ensp;
-                                    <Button size="sm" color="primary" onClick={() => remove(student.id)}>Delete</Button>
                                 </ButtonGroup>
                             </th>
                         </tr>

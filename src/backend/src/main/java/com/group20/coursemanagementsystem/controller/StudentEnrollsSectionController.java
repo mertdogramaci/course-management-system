@@ -68,4 +68,10 @@ public class StudentEnrollsSectionController {
     public ResponseEntity<Object> getSectionAverageStatistics() {
         return ResponseEntity.ok(studentEnrollsSectionRepository.sectionAverageStatistics());
     }
+
+    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
+    @GetMapping("/section/{id}")
+    public ResponseEntity<List> getStudentsBySectionID(@PathVariable Long id) {
+        return ResponseEntity.ok(studentEnrollsSectionRepository.findStudentBySectionId(id));
+    }
 }

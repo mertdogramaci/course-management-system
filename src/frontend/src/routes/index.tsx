@@ -11,6 +11,7 @@ import StatisticsPage from '../pages/admin/StatisticsPage';
 import SectionsPage from '../pages/admin/sections/SectionsPage';
 import EditStudent from '../pages/admin/students/EditStudent';
 import EnrolledSections from '../pages/admin/sections/EnrolledSections';
+import StudentsOfSection from '../pages/admin/students/StudentsOfSection';
 
 const Loadable = (Component: any) => (props: any) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -84,7 +85,8 @@ export default function Router() {
         { path: 'sections/fetchAllSections', element: <SectionsPage /> },
         { path: 'members/:id', element: <EditStudent /> },
         { path: 'log', element: <ProcessHistory /> },
-        { path: 'studentEnrollsSection/:id', element: <EnrolledSections /> }
+        { path: 'studentEnrollsSection/:id', element: <EnrolledSections /> },
+        { path: 'studentEnrollsSection/section/:id', element: <StudentsOfSection /> }
       ]
     },
 

@@ -130,6 +130,7 @@ public class MemberController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public MessageResponse deleteMember(@PathVariable Long id) {
+        System.out.println("burda");
         return memberService.deleteMember(id);
     }
 

@@ -39,4 +39,9 @@ public class AuthorityRepository {
     public boolean existsByAuthority(String authority) {
         return findByAuthority(authority) != null;
     }
+
+    public void deleteByMemberId(Long id) {
+        Query query = entityManager.createQuery("SELECT a FROM Authority a WHERE a.member_id = :id", Authority.class);
+        query.setParameter("id", id);
+    }
 }

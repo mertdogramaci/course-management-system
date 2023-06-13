@@ -58,7 +58,11 @@ function EditStudent() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         
-        await axios.put(ApiRoutes.MEMBER + id, student);
+        try {
+            const response = await axios.put(ApiRoutes.MEMBER + id, student);
+        } catch (error) {
+            console.log("error");
+        }
         
         navigate('/members/fetchAllMembers');
     }

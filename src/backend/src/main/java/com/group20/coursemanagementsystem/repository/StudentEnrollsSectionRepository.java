@@ -128,4 +128,13 @@ public class StudentEnrollsSectionRepository {
                         "having c.title like 'BBM471') as avg_grade inner join course c on c.id = avg_grade.id");
         return query.getResultList().get(0);
     }
+
+    public List findStudentBySectionId(Long id) {
+        Query query = entityManager.createNativeQuery(
+                "SELECT s.first_name, s.last_name, ss.grade " +
+                        "FROM student_enrolls_section ss inner join member_table s on s.id = ss.student_id " +
+                        "WHERE ss.section_id = ?");
+        query.setParameter(1, id);
+        return query.getResultList();
+    }
 }

@@ -1,17 +1,14 @@
 package com.group20.coursemanagementsystem.service;
 
 import com.group20.coursemanagementsystem.model.Instructor;
-import com.group20.coursemanagementsystem.repository.InstructorRepository;
+import com.group20.coursemanagementsystem.repository.*;
 import com.group20.coursemanagementsystem.dto.MessageResponse;
 import com.group20.coursemanagementsystem.enums.MemberType;
 import com.group20.coursemanagementsystem.enums.MessageType;
 import com.group20.coursemanagementsystem.request.EnrolmentRequest;
-import com.group20.coursemanagementsystem.repository.EnrolmentRequestRepository;
 import com.group20.coursemanagementsystem.model.Member;
-import com.group20.coursemanagementsystem.repository.MemberRepository;
 import com.group20.coursemanagementsystem.security.repositories.AuthorityRepository;
 import com.group20.coursemanagementsystem.model.Student;
-import com.group20.coursemanagementsystem.repository.StudentRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +20,8 @@ import java.util.List;
 
 @Service
 public class MemberService {
+
+    private final InstructorAdvisorStudentRepository instructorAdvisorStudentRepository;
 
     private final MemberRepository memberRepository;
     private final StudentRepository studentRepository;
@@ -48,7 +47,8 @@ public class MemberService {
                          final AuthorityRepository authorityRepository,
                          final EnrolmentRequestRepository enrolmentRequestRepository,
                          final PasswordEncoder passwordEncoder,
-                         final EnrolmentRequestService enrolmentRequestService) {
+                         final EnrolmentRequestService enrolmentRequestService,
+                         InstructorAdvisorStudentRepository instructorAdvisorStudentRepository) {
         this.memberRepository = memberRepository;
         this.studentRepository = studentRepository;
         this.instructorRepository = instructorRepository;
@@ -56,6 +56,7 @@ public class MemberService {
         this.enrolmentRequestRepository = enrolmentRequestRepository;
         this.enrolmentRequestService = enrolmentRequestService;
         this.passwordEncoder = passwordEncoder;
+        this.instructorAdvisorStudentRepository = instructorAdvisorStudentRepository;
     }
 
     public MessageResponse addMember(final Long requestId) {
@@ -134,6 +135,10 @@ public class MemberService {
 
     // Cannot be used by members!
     public MessageResponse deleteMember(Long id) {
+        studentRepository.deleteById(id);
+        instructorAdvisorStudentRepository.deleteById(instructorAdvisorStudentRepository.findByStudentId(id).getId());
+        authorityRepository.deleteByMemberId(id);
+
         if (!memberRepository.existsById(id)) {
             return new MessageResponse(MessageType.ERROR, MEMBER_ID_DOES_NOT_EXIST_MESSAGE.formatted(id));
         }
