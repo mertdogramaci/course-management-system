@@ -34,6 +34,7 @@ function CourseTable(props) {
           <th>Course Name</th>
           <th>Compulsory</th>
           <th>Grade</th>
+          {props.showDropButton && <th>Actions</th>}
         </tr>
       </thead>
       <tbody>
@@ -42,11 +43,13 @@ function CourseTable(props) {
             <td>{section.section.id}</td>
             <td>{section.section.course.title}</td>
             <td>{section.section.course.description}</td>
-            <td>{(section.section.course.isCompulsory) ? "Yes" : "No"}</td>
+            <td>{section.section.course.isCompulsory ? "Yes" : "No"}</td>
             <td>{section.grade}</td>
-            <td>
-              <Button onClick={() => handleDropClick(section.id)}>Drop Course</Button>
-            </td>
+            {props.showDropButton && (
+              <td>
+                <Button onClick={() => handleDropClick(section.id)}>Drop Course</Button>
+              </td>
+            )}
           </tr>
         ))}
       </tbody>

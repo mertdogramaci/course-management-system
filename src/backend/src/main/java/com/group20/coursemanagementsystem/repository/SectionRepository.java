@@ -63,7 +63,7 @@ public class SectionRepository {
                 "student_count.count, s.quota, i.first_name, i.last_name " +
                 "from (select count(*), section_id " +
                 "from student_enrolls_section " +
-                "group by section_id) as student_count right outer join section s on s.id = student_count.section_id " +
+                "group by section_id) as student_count right outer join section_table s on s.id = student_count.section_id " +
                 "inner join course c on c.id = s.course_id " +
                 "inner join member_table i on s.instructor_id = i.id order by s.id");
         return query.getResultList();

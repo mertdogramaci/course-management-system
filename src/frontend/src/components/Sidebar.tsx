@@ -119,13 +119,6 @@ export default function Sidebar() {
             <ListItemText primary={"Homeworks"} />
           </ListItemButton>
 
-          <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
-            <ListItemIcon>
-              <Timetable color="primary" />
-            </ListItemIcon>
-            <ListItemText primary={"Course Registration"} />
-          </ListItemButton>
-
           <ListItemButton onClick={() => handleClick(PATH_MAIN.advisor)}>
             <ListItemIcon>
               <PersonIcon color="primary" />

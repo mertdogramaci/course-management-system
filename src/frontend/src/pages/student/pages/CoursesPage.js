@@ -11,6 +11,7 @@ function CoursesPage() {
     const { user } = useAuth();
     const [semester, setSemester] = useState(true);
     const [year, setYear] = useState(2023);
+    const [showDropButton, setShowDropButton] = useState(false);
 
     useEffect(() => {
         fetchAllCourses();
@@ -22,6 +23,7 @@ function CoursesPage() {
 
             if (response.status === 200) {
                 setSections(response.data);
+                setShowDropButton(semester && year === 2023); // Set the value based on the selected option
             }
         } catch (error) {
             console.log("error!!");
@@ -63,7 +65,7 @@ function CoursesPage() {
                         </Input>
                     </span>
                     <h2>Course List</h2>
-                    <CourseTable sections={sections} setSections={setSections} />
+                    <CourseTable sections={sections} setSections={setSections} showDropButton={showDropButton} />
                 </div>
             </header>
         </div>
