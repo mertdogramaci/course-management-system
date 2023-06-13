@@ -83,7 +83,7 @@ export default function Sidebar() {
         </>
       )}
 
-      {user?.memberType !== "ADMIN" && (
+      {user?.memberType === "STUDENT" && (
         <>
           <ListItemButton onClick={() => handleClick(PATH_MAIN.courses)}>
             <ListItemIcon>
@@ -125,18 +125,25 @@ export default function Sidebar() {
             </ListItemIcon>
             <ListItemText primary={"Course Registration"} />
           </ListItemButton>
-          <ListItemButton onClick={() => handleClick(PATH_MAIN.profile)}>
-            <ListItemIcon>
-              <PersonIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText primary={"Profile"} />
-          </ListItemButton>
 
           <ListItemButton onClick={() => handleClick(PATH_MAIN.advisor)}>
             <ListItemIcon>
               <PersonIcon color="primary" />
             </ListItemIcon>
             <ListItemText primary={"Advisor Information"} />
+          </ListItemButton>
+
+
+        </>
+      )}
+
+        {user?.memberType !== "ADMIN" && (
+        <>
+          <ListItemButton onClick={() => handleClick(PATH_MAIN.profile)}>
+            <ListItemIcon>
+              <PersonIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText primary={"Profile"} />
           </ListItemButton>
 
           <ListItemButton onClick={() => handleClick(PATH_MAIN.settings)}>
@@ -147,6 +154,7 @@ export default function Sidebar() {
           </ListItemButton>
         </>
       )}
+
 
     </List>
   )
