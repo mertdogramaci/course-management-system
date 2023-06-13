@@ -30,7 +30,7 @@ function EnrolledSections() {
         <div className='App'>
             <header className="App-header">
                 <div className="App-intro">
-                    <h2>Sections List for {sections[0].student.firstName} {sections[0].student.lastName}</h2>
+                    <h2>Sections List for {(sections[0]) ? sections[0].student.firstName : " "} {(sections[0]) ? sections[0].student.lastName : " "}</h2>
                     <EnrolledSectionsTable sections={sections} setSections={setSections}/>
                 </div>
             </header>
