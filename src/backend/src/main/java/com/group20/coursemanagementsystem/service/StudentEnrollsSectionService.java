@@ -36,4 +36,12 @@ public class StudentEnrollsSectionService {
         processingHistoryRepository.save(new ProcessingHistory(LocalDateTime.now(), student.getEmail(), "Student enrolled to a section with sectionID=%d".formatted(section_id)));
         return section;
     }
+
+    public StudentEnrollsSection drop(Long student_id, Long ses_id) {
+        Student student = memberService.getStudentById(student_id);
+        StudentEnrollsSection ses = studentEnrollsSectionRepository.findById(ses_id);
+        studentEnrollsSectionRepository.deleteById(ses_id);
+        processingHistoryRepository.save(new ProcessingHistory(LocalDateTime.now(), student.getEmail(), "Student dropped a section with sectionID=%d".formatted(ses.getSection().getId())));
+        return ses;
+    }
 }

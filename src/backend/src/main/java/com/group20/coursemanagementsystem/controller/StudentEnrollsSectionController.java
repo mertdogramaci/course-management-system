@@ -50,6 +50,13 @@ public class StudentEnrollsSectionController {
         return ResponseEntity.ok(studentEnrollsSectionService.enroll(student_id, section_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('STUDENT')")
+    @DeleteMapping("/dropCourse/{student_id}/{ses_id}")
+    public ResponseEntity<StudentEnrollsSection> dropSection(@PathVariable Long student_id,
+                                                   @PathVariable Long ses_id) {
+        return ResponseEntity.ok(studentEnrollsSectionService.drop(student_id, ses_id));
+    }
+
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/courseStatistics")
     public ResponseEntity<Object> getSectionStatistics() {
